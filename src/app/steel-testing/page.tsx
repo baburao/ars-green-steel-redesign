@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, Atom, CheckCircle2, FlaskConical, Phone, ShieldCheck } from "lucide-react";
+import { ArrowRight, CheckCircle2, FlaskConical, Phone, ShieldCheck } from "lucide-react";
 import { MotionSection } from "@/components/motion-section";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { createPageMetadata } from "@/lib/site-metadata";
 
@@ -32,16 +31,13 @@ export default function SteelTestingPage() {
           sizes="100vw"
           className="object-cover object-[60%_center]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(6,13,30,0.96),rgba(6,13,30,0.78)_52%,rgba(6,13,30,0.28))]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(6,13,30,0.92),transparent_58%)]" />
-        <div className="ars-container relative z-10 w-full pb-14 pt-32 md:pb-16">
-          <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.13] bg-white/[0.08] px-3 py-1.5">
-              <Atom aria-hidden="true" size={12} className="text-white/70" />
-              <span className="text-[11px] font-semibold tracking-[0.08em] text-white/75">FREE ON-SITE SPECTRO-METER TESTING</span>
-            </div>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,30,0.74)_0%,rgba(6,13,30,0.54)_48%,rgba(6,13,30,0.14)_100%)] md:bg-[linear-gradient(90deg,rgba(6,13,30,0.64)_0%,rgba(6,13,30,0.34)_48%,rgba(6,13,30,0.03)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-[58%] bg-[linear-gradient(0deg,rgba(6,13,30,0.38)_0%,rgba(6,13,30,0.08)_58%,transparent_100%)] md:h-[48%] md:bg-[linear-gradient(0deg,rgba(6,13,30,0.24)_0%,rgba(6,13,30,0.04)_58%,transparent_100%)]" />
+        <div className="ars-container relative z-10 w-full pb-14 pt-36 md:pb-20">
+          <div className="max-w-4xl">
+            <div className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70"><span className="h-px w-10 bg-brand-red" aria-hidden="true" />Free On-Site Spectrometer Testing</div>
             <h1 className="font-display text-[clamp(2.65rem,6vw,4.5rem)] font-extrabold leading-[1.04] tracking-[-0.025em] text-white">
-              Ensure Material Excellence: Benefit from On-Site Spectrometer Testing by ARS Steels
+              Ensure Material Excellence
             </h1>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/request-quote" className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full bg-brand-red px-6 py-3 text-[14px] font-bold text-white transition hover:opacity-90">
@@ -111,12 +107,12 @@ export default function SteelTestingPage() {
             </video>
           </div>
           <div>
-            <SectionKicker variant="brand">SPECTROMETER TESTING VIDEOS</SectionKicker>
-            <h2 className="font-display text-[clamp(2rem,3.4vw,2.5rem)] font-bold leading-[1.1] tracking-[-0.025em] text-ink-900">ARS 550D TMT Bars Certified by SGS</h2>
+            <SectionKicker variant="brand">Spectrometer Test Live</SectionKicker>
+            <h2 className="font-display text-[clamp(2rem,3.4vw,2.5rem)] font-bold leading-[1.1] tracking-[-0.025em] text-ink-900">ARS Fe 550D TMT Bars Certified by SGS</h2>
             <p className="mt-6 text-[15px] leading-[1.85] text-steel-700">Our team of experts is equipped with the latest technology and deep industry knowledge, ready to assist you on-site or at our labs with detailed analyses and reports. Don&apos;t compromise on safety and quality—contact ARS Steels today to schedule your free steel testing.</p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link href="/products/ars-550d" className="focus-ring inline-flex min-h-11 items-center gap-2 text-[14px] font-bold text-brand-blue">Explore ARS 550D TMT Bars <ArrowRight aria-hidden="true" size={16} /></Link>
-              <Link href="/certifications" className="focus-ring inline-flex min-h-11 items-center gap-2 text-[14px] font-bold text-brand-blue">View Certifications <ArrowRight aria-hidden="true" size={16} /></Link>
+              <Link href="/product-550d" className="focus-ring inline-flex min-h-11 items-center gap-2 text-[14px] font-bold text-brand-blue">Explore ARS Fe 550D TMT Bars <ArrowRight aria-hidden="true" size={16} /></Link>
+              <Link href="/our-certification" className="focus-ring inline-flex min-h-11 items-center gap-2 text-[14px] font-bold text-brand-blue">View Certifications <ArrowRight aria-hidden="true" size={16} /></Link>
             </div>
           </div>
         </div>
@@ -136,7 +132,6 @@ export default function SteelTestingPage() {
         </div>
       </MotionSection>
 
-      <SiteFooter />
     </main>
   );
 }

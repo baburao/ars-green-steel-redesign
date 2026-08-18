@@ -1,8 +1,7 @@
-import { ArrowRight, Play } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { createPageMetadata } from "@/lib/site-metadata";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 const videos = [
@@ -36,12 +35,7 @@ export default function VideoGalleryPage() {
 
         <div className="ars-container relative z-10 flex w-full items-end pb-16 pt-32 md:pb-20">
           <div className="max-w-3xl">
-            <div className="mb-7 flex items-center gap-3 text-sm font-bold uppercase tracking-[0.16em] text-white/72">
-              <span className="inline-flex size-11 items-center justify-center border border-white/20 bg-white/[0.08] text-brand-red">
-                <Play size={17} fill="currentColor" aria-hidden="true" />
-              </span>
-              Video Gallery
-            </div>
+            <div className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70"><span className="h-px w-10 bg-brand-red" aria-hidden="true" />Video Gallery</div>
             <h1 className="font-display text-[clamp(2.65rem,6vw,4.5rem)] font-extrabold uppercase leading-[0.96] tracking-[-0.025em] text-white">
               Video Gallery
             </h1>
@@ -91,7 +85,6 @@ export default function VideoGalleryPage() {
         </div>
       </section>
 
-      <SiteFooter />
     </main>
   );
 }

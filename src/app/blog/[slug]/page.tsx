@@ -4,7 +4,7 @@ import { BlogArticleTemplate } from "@/components/blog-article-template";
 import { getBlogArchiveArticle, getBlogExcerpt, cleanBlogTitle } from "@/lib/blog-content";
 import { getBlogMigrationEntry } from "@/lib/blog-migration";
 import { getLegacyBlogPages, getLegacyPage } from "@/lib/legacy-content";
-import { isProductionSite, productionDomain, toProductionUrl } from "@/lib/site-metadata";
+import { getSeoMetadata, isProductionSite, productionDomain, toProductionUrl } from "@/lib/site-metadata";
 
 function toProductionAssetUrl(value: string) {
   return toProductionUrl(value);
@@ -26,6 +26,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const registryEntry = getBlogMigrationEntry(slug);
   const title = registryEntry?.yoastSeoTitle || article?.title || cleanBlogTitle(page);
   const description = registryEntry?.yoastMetaDescription || article?.excerpt || getBlogExcerpt(page, title);
+  const seo = getSeoMetadata(`/blog/${slug}`);
+  const resolvedTitle = seo?.title ?? title;
+  const resolvedDescription = seo?.description ?? description;
   const image = registryEntry?.featuredImage?.url || article?.image;
   const imageAlt = registryEntry?.featuredImage?.alt || article?.imageAlt || title;
   const metadataImage = image ? toProductionAssetUrl(image) : undefined;
@@ -33,8 +36,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const finalUrl = `${productionDomain}/blog/${slug}`;
 
   return {
-    title,
-    description,
+    title: resolvedTitle,
+    description: resolvedDescription,
     robots: {
       index: isProductionSite,
       follow: isProductionSite,
@@ -43,16 +46,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       canonical: finalUrl,
     },
     openGraph: {
-      title,
-      description,
+      title: resolvedTitle,
+      description: resolvedDescription,
       url: finalUrl,
       type: "article",
       images: metadataImage ? [{ url: metadataImage, alt: imageAlt }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: resolvedTitle,
+      description: resolvedDescription,
       images: metadataImage ? [metadataImage] : undefined,
     },
   };

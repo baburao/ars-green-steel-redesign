@@ -15,7 +15,7 @@ import { ContactCta } from "@/components/contact-cta";
 import { MotionSection } from "@/components/motion-section";
 import { PageHero } from "@/components/page-sections";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
+import { FaqList } from "@/components/faq-list";
 import { SiteHeader } from "@/components/site-header";
 import { createPageMetadata } from "@/lib/site-metadata";
 
@@ -76,8 +76,7 @@ export default function SgpcPage() {
       <MotionSection className="bg-white py-20 lg:py-24">
         <div className="ars-container grid gap-12 lg:grid-cols-[0.92fr_1.08fr] lg:items-center">
           <div className="relative overflow-hidden rounded-[18px] bg-ink-950 shadow-[0_24px_60px_rgba(6,13,30,0.2)]">
-            <Image src="/ars-assets/homepage-manufacturing-detail.jpg" alt="ARS steel manufacturing detail" width={1080} height={1080} className="aspect-square h-full w-full object-cover transition duration-700 ease-out hover:scale-105" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,13,30,0.04),rgba(6,13,30,0.72))]" />
+            <Image src="/ars-assets/sgbc/UnderstandingSGBC.jpg" alt="ARS representative holding the SGBC Green Building Product certificate" width={1080} height={1080} className="aspect-square h-full w-full object-cover transition duration-700 ease-out hover:scale-105" />
             <div className="absolute inset-x-0 bottom-0 p-6 md:p-8"><span className="inline-flex size-12 items-center justify-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur"><Factory size={20} /></span></div>
           </div>
           <div>
@@ -115,10 +114,9 @@ export default function SgpcPage() {
 
       <MotionSection className="bg-white py-20 lg:py-24"><div className="ars-container max-w-4xl"><SectionKicker variant="brand">THE ARS ADVANTAGE</SectionKicker><h2 className="section-title">Why This Matters for Your Project</h2><div className="mt-6 space-y-5 text-base leading-8 text-steel-700 lg:text-lg"><p>Choosing SGBC-certified steel means selecting a product whose environmental performance has been independently assessed—not simply claimed.</p><p>Combined with ARS&apos;s Environmental Product Declaration (EPD), Green Steel manufacturing process, and internationally recognised certifications, it gives project teams greater confidence when specifying materials for sustainable construction.</p></div></div></MotionSection>
 
-      <MotionSection className="bg-surface-50 py-20 lg:py-24"><div className="ars-container max-w-4xl"><SectionKicker variant="brand">FAQs</SectionKicker><h2 className="section-title">FAQs</h2><div className="mt-10 divide-y divide-brand-blue/15 border-y border-brand-blue/15">{faqs.map(([question, answer]) => <details key={question} className="py-6"><summary className="focus-ring cursor-pointer font-display text-lg font-bold text-ink-900">{question}</summary><p className="mt-4 max-w-3xl text-sm leading-7 text-steel-700">{answer}</p></details>)}</div></div></MotionSection>
+      <MotionSection className="bg-surface-50 py-20 lg:py-24"><div className="ars-container max-w-4xl"><SectionKicker variant="brand">FAQs</SectionKicker><h2 className="section-title">FAQs</h2><FaqList className="mt-10" items={faqs.map(([question, answer]) => ({ question, answer }))} /></div></MotionSection>
 
       <ContactCta eyebrow="BUILD WITH CONFIDENCE" headline="Choose Steel Recognised for Sustainability" body="Select certified green steel backed by internationally recognised environmental standards and independently verified performance." primaryLabel="Choose Your Green Steel." primaryHref="/ars-green-steel" secondaryLabel="View SGBC Certificate" secondaryHref={certificate.file} />
-      <SiteFooter />
     </main>
   );
 }

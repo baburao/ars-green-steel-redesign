@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 import { MotionSection } from "@/components/motion-section";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata = createPageMetadata({
@@ -58,13 +57,13 @@ const proofCards = [
   {
     title: "Certification proof",
     text: "Keep quality, testing, SGS, ISO, and approval routes easy for procurement review.",
-    href: "/certifications",
+    href: "/our-certification",
     icon: BadgeCheck,
   },
   {
     title: "Dealer network",
     text: "Help contractors and procurement teams understand local support and enquiry routing.",
-    href: "/dealer-locator",
+    href: "/our-network",
     icon: Network,
   },
   {
@@ -108,7 +107,7 @@ export default function ProjectsPage() {
               </Link>
               <Link
                 className="focus-ring inline-flex h-13 items-center justify-center gap-3 rounded-full border border-brand-blue/20 bg-white px-7 text-base font-bold text-brand-blue shadow-[0_12px_34px_rgba(13,43,110,0.08)] transition hover:border-brand-blue hover:bg-[#edf5ff]"
-                href="/certifications"
+                href="/our-certification"
               >
                 View certifications
               </Link>
@@ -305,7 +304,6 @@ export default function ProjectsPage() {
         </div>
       </section>
 
-      <SiteFooter />
     </main>
   );
 }

@@ -8,8 +8,10 @@ Read this file first when continuing the ARS content migration in a new chat.
 /Users/baburao/Documents/Codex/2026-05-30/hey-act-as-an-experienced-ui/ars-redesign
 ```
 
-- Branch: `homepage-figma-refresh`
-- Current committed checkpoint: `ec655698feaf0cf7dc09d52e378bc258e962da45`
+- Branch: `codex/metadata-seo`
+- Current committed checkpoint: `79a3438`
+- Latest production deployment: `dpl_E1w66Nt94QfCwQsRqnvPU7jMTmaN` — Ready
+- Production preview alias: https://ars-green-steel.vercel.app/
 - Latest commits:
   - `ec65569 Refresh Home Owners guide`
   - `9c22607 Add Embodied Carbon page`
@@ -17,7 +19,27 @@ Read this file first when continuing the ARS content migration in a new chat.
   - `c74f77d feat: integrate vision and mission into about page`
   - `a80f4da feat: establish shared SEO and content migration foundation`
   - `e446c80 Use local banners for migrated blog articles`
-  - `a7f8375 Complete approved blog migration`
+- `a7f8375 Complete approved blog migration`
+
+## Latest release — 2026-08-07
+
+## Latest release — 2026-08-08
+
+- Commit: `871462f` — `Refresh solution page assets and content`.
+- Production deployment: `dpl_4sYbBETKM1uS632v8SMm8ymMSaDt` — Ready.
+- Refreshed solution-page copy, layouts, and local imagery for Road Projects, Bridges & Flyovers, Institutional Projects, Contractors, Engineers & Architects, Dealers & Distributors, and Home Owners.
+- Added local solution imagery and approved Binders/CRS brochure assets where available.
+- TypeScript, route/asset QA, and production build passed; 172 local assets and 154 routes were checked.
+
+## Previous release — 2026-08-07
+
+- Commit: `79a3438` — `Standardize FAQ presentation`
+- Preview was verified Ready before promotion; production deployment is Ready.
+- Added the shared `FaqList` component for consistent, keyboard-accessible FAQ disclosures.
+- Converted the current FAQ sections that had page-specific accordion styling, including product, project, sustainability, calculator, quality, audience, dealer, and informational experiences.
+- Standardized the visible product ordering as: ARS CRS 550D, ARS 550D, ARS BINDERS.
+- Reverted the recently added homepage CTA layer, preserving the original homepage CTA/navigation behavior requested by the product team.
+- Existing calculator editing, image inline-serving, Binders inclusion, and duplicate-footer fixes remain part of the released codebase.
 
 ## Deployment and SEO safety
 
@@ -27,6 +49,19 @@ Read this file first when continuing the ARS content migration in a new chat.
 - Preview/testing must remain `noindex, nofollow`.
 - Production indexing is enabled only when `NEXT_PUBLIC_SITE_URL=https://arsgroup.in` is available at build time in the Vercel Production environment.
 - Testing canonicals intentionally use the planned production domain while testing pages remain noindex.
+
+## Current Release Completion
+
+- Internal URL mapping release is complete: component/nav/CTA links now use canonical WordPress routes, 61 broken blog page links were repaired, and the redirected `/about` sitemap entry was removed.
+- `next.config.ts` redirect sources remain unchanged for external legacy traffic.
+- Metadata registry and original URL parity structure are live.
+- Privacy Policy and Terms of Use use the shared LegalPage component and preserve approved legal copy.
+- Dealer locator uses the latest region-wise workbook with 1,566 unique records.
+- Public filter order is Search, States, Cities, Reset; city options depend on state selection.
+- Dealer codes remain internal identifiers and are not displayed in public cards.
+- Mobile navigation is viewport-anchored below the header while open.
+- Duplicate React keys were removed from repeated Green Steel impact content.
+- Release checks passed: TypeScript, npm run qa:routes, and npm run build.
 
 ## Completed work
 

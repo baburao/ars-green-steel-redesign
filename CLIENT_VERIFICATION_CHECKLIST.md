@@ -38,7 +38,7 @@ Media assets are intentionally excluded from this pass and will be handled later
 | Calculator inputs | Front-end fields are ready | Confirm required inputs and final labels | `/tmt-calculator` |
 | Calculator formula | Not implemented to avoid invented engineering assumptions | Provide approved formula, units, assumptions, and disclaimer | `/tmt-calculator` |
 | Calculator output | Placeholder output area is ready | Confirm output format: kg, tons, bundles, rods, or estimate range | `/tmt-calculator` |
-| Dealer locator data | Locator structure is ready | Provide approved dealer list with city, area, contact, address, and product availability | `/dealer-locator` |
+| Dealer locator data | Updated region-wise workbook is integrated with 1,566 unique records; state filters city options | Confirm active dealer status, phone numbers, city naming, and product availability | `/our-network` |
 | Dealer enquiry routing | Form path is ready | Confirm recipient, CRM/email endpoint, and internal owner | `/become-a-dealer` |
 | Lead form submission | UI is ready but does not submit | Confirm final endpoint: email, CRM, WhatsApp, or API | `/request-quote`, `/contact`, `/become-a-dealer` |
 

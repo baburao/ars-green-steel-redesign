@@ -7,29 +7,28 @@ import { ContactCta } from "@/components/contact-cta";
 import { SectionKicker } from "@/components/section-kicker";
 import { SiteHeader } from "@/components/site-header";
 import { getBlogArchiveArticles, type BlogArchiveArticle } from "@/lib/blog-content";
-import { defaultSocialImage, isProductionSite, toProductionUrl } from "@/lib/site-metadata";
+import { defaultSocialImage, getSeoMetadata, isProductionSite, toProductionUrl } from "@/lib/site-metadata";
+
+const seo = getSeoMetadata("/blog.html");
 
 export const metadata: Metadata = {
-  title: "Steel and Construction Knowledge Center | ARS Green Steel",
-  description:
-    "Explore ARS guides on TMT steel, construction planning, product quality, green steel, manufacturing, and industry developments.",
+  title: seo?.title ?? "Steel and Construction Knowledge Center | ARS Green Steel",
+  description: seo?.description ?? "Explore ARS guides on TMT steel, construction planning, product quality, green steel, manufacturing, and industry developments.",
   robots: { index: isProductionSite, follow: isProductionSite },
   alternates: {
-    canonical: toProductionUrl("/blog"),
+    canonical: toProductionUrl("/blog.html"),
   },
   openGraph: {
-    title: "Steel and Construction Knowledge Center | ARS Green Steel",
-    description:
-      "Practical guidance for better steel selection, safer construction, and more confident project decisions.",
-    url: toProductionUrl("/blog"),
+    title: seo?.title ?? "Steel and Construction Knowledge Center | ARS Green Steel",
+    description: seo?.description ?? "Practical guidance for better steel selection, safer construction, and more confident project decisions.",
+    url: toProductionUrl("/blog.html"),
     type: "website",
     images: [{ url: toProductionUrl(defaultSocialImage) }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Steel and Construction Knowledge Center | ARS Green Steel",
-    description:
-      "Practical guidance for better steel selection, safer construction, and more confident project decisions.",
+    title: seo?.title ?? "Steel and Construction Knowledge Center | ARS Green Steel",
+    description: seo?.description ?? "Practical guidance for better steel selection, safer construction, and more confident project decisions.",
     images: [toProductionUrl(defaultSocialImage)],
   },
 };
@@ -64,7 +63,7 @@ export default function BlogPage() {
 
         <div className="ars-container relative z-10 grid gap-10 pb-14 pt-28 lg:grid-cols-[minmax(0,0.82fr)_minmax(300px,0.42fr)] lg:items-end lg:pb-16">
           <div className="max-w-4xl">
-            <SectionKicker variant="light">ARS knowledge center</SectionKicker>
+            <div className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70"><span className="h-px w-10 bg-brand-red" aria-hidden="true" />ARS Knowledge Center</div>
             <h1 className="mt-6 max-w-4xl font-display text-[clamp(2.65rem,6vw,4.5rem)] font-bold leading-[0.98] tracking-normal text-white">
               Knowledge for stronger building decisions.
             </h1>
@@ -130,7 +129,7 @@ export default function BlogPage() {
         primaryLabel="Talk to the ARS team"
         primaryHref="/request-quote"
         secondaryLabel="Find a dealer"
-        secondaryHref="/dealer-locator"
+        secondaryHref="/our-network"
       />
     </main>
   );

@@ -5,14 +5,14 @@ import { productionDomain } from "@/lib/site-metadata";
 
 const staticRoutes = [
   "",
-  "/about",
-  "/become-a-dealer",
+  "/about-us",
+  "/ars-binders",
+  "/become-a-steel-distributor",
   "/bridges-projects-tmt-steel-bars",
-  "/certifications",
   "/contact",
-  "/dealer-locator",
   "/embodied-carbon",
   "/green-steel",
+  "/green-certifications",
   "/industries",
   "/institutions-projects-tmt-steel-bars",
   "/manufacturing",
@@ -21,9 +21,12 @@ const staticRoutes = [
   "/vision-mission",
   "/privacy-policy",
   "/products",
-  "/products/ars-550d",
-  "/products/ars-binders",
-  "/products/ars-crs-550d",
+  "/metro-projects-tmt-steel-bars",
+  "/our-certification",
+  "/our-network",
+  "/product-550d",
+  "/product-crs-550d",
+  "/steel-distributors-dealers",
   "/8-mm-steel-rod",
   "/10-mm-steel-rod",
   "/12-mm-steel-rod",
@@ -32,13 +35,12 @@ const staticRoutes = [
   "/25-mm-steel-rod",
   "/32-mm-steel-rod",
   "/projects",
-  "/price-calculator",
   "/request-quote",
   "/sgbc",
   "/services",
   "/steel-testing",
-  "/steel-price-today",
-  "/tmt-calculator",
+  "/tmt-steel-price-today",
+  "/tmt-steel-calculator",
   "/terms-of-use",
 ];
 
@@ -52,9 +54,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes,
-    ...getLegacyTopLevelPages()
-      .filter((page) => page.path !== "/our-certification")
-      .map((page) => page.path),
+    ...getLegacyTopLevelPages().map((page) => page.path),
     ...approvedBlogRoutes,
   ]
     .filter((route) => {

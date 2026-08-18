@@ -56,7 +56,7 @@ Required Sections:
 
 URL:
 
-- `/about`
+- `/about-us`
 
 Goal:
 
@@ -452,4 +452,3 @@ The ARS sitemap should move users through a simple decision path:
 3. Choose product or application.
 4. Use buying tools.
 5. Contact, find a dealer, or submit an enquiry.
-

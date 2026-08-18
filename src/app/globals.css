@@ -38,6 +38,60 @@
   --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.2);
 }
 
+/* Keep product logo panels consistent across audience product comparisons. */
+div.relative.h-52.overflow-hidden {
+  background-color: #f4f7ff !important;
+}
+
+div.relative.h-52.overflow-hidden > img {
+  padding: 1.5rem !important;
+}
+
+article:nth-child(2) > div.relative.h-52.overflow-hidden > img {
+  transform: scale(1.05);
+}
+
+.homeowner-proof-marquee .marquee-card {
+  color: #060d1e !important;
+}
+
+.homeowner-proof-marquee .marquee-card svg {
+  color: #de121a !important;
+}
+
+@media (min-width: 1024px) {
+  section#calculator > .ars-container > .grid > div:first-child .mt-7 {
+    display: none;
+  }
+
+  section#calculator > .ars-container > .grid > .mt-7 {
+    display: grid;
+    grid-column: 2;
+    align-self: center;
+  }
+
+  [aria-labelledby="calculator-title"] > .ars-container > .grid > div:first-child > .mt-7 {
+    display: none;
+  }
+
+  [aria-labelledby="diameter-title"] > .ars-container > .mb-10 {
+    position: relative;
+    z-index: 10;
+    margin-right: 362px;
+  }
+
+  [aria-labelledby="diameter-title"] aside[aria-labelledby="summary-title"] {
+    align-self: start;
+    position: sticky;
+    top: 6rem;
+    margin-top: -300px;
+  }
+
+  [aria-labelledby="diameter-title"] aside[aria-labelledby="summary-title"] > p.text-xs.font-bold.uppercase {
+    display: none;
+  }
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -89,16 +143,24 @@ html {
   min-width: 0;
 }
 
-/*
- * Shared interior-page hero baseline.
- * HomeHero intentionally keeps its full-viewport treatment.
- */
+/* Shared page hero baseline, including the homepage video hero. */
 .ars-page-hero {
   min-height: 560px;
 }
 
 .ars-page-hero-content {
   height: 100%;
+}
+
+/* Global page-level H1 standard: preserve page-specific color while keeping scale and rhythm consistent. */
+main h1 {
+  font-family: var(--font-display);
+  font-size: clamp(2.65rem, 6vw, 4rem) !important;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  text-transform: capitalize !important;
+  max-width: 60rem;
 }
 
 @media (min-width: 768px) {
@@ -303,6 +365,11 @@ html {
 
 .section-copy-flush {
   margin-top: 0;
+}
+
+.site-header a,
+.site-header button {
+  cursor: pointer;
 }
 
 @media (min-width: 1280px) {
@@ -568,4 +635,62 @@ html {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+@media (min-width: 1024px) {
+  .manufacturing-process-row + .manufacturing-process-row {
+    margin-top: 76px;
+  }
+
+  .manufacturing-process-arrow {
+    position: absolute;
+    top: 50%;
+    right: -49px;
+    width: 42px;
+    border-top: 3px solid var(--brand-red);
+    transform: translateY(-50%);
+  }
+
+  .manufacturing-process-arrow::after {
+    position: absolute;
+    top: -8px;
+    right: -1px;
+    width: 15px;
+    height: 15px;
+    border-right: 3px solid var(--brand-red);
+    border-top: 3px solid var(--brand-red);
+    content: "";
+    transform: rotate(45deg);
+  }
+
+}
+
+@media (min-width: 640px) and (max-width: 1023px) {
+  .manufacturing-process-row + .manufacturing-process-row {
+    margin-top: 24px;
+  }
+}
+
+@media (max-width: 639px) {
+  .manufacturing-process-row + .manufacturing-process-row {
+    margin-top: 12px;
+  }
+
+  .manufacturing-process-step {
+    min-height: 104px;
+    gap: 12px;
+    padding: 20px 16px;
+  }
+
+  .manufacturing-process-step > span:first-child {
+    width: 42px;
+    height: 42px;
+    font-size: 16px;
+  }
+
+  .manufacturing-process-step > img {
+    width: 58px;
+    height: 58px;
+  }
+
 }

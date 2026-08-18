@@ -42,7 +42,10 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
   const [state, setState] = useState("");
   const [visibleCount, setVisibleCount] = useState(INITIAL_VISIBLE_COUNT);
 
-  const cities = useMemo(() => uniqueSorted(dealers.map((dealer) => dealer.city)), [dealers]);
+  const cities = useMemo(
+    () => uniqueSorted(dealers.filter((dealer) => !state || dealer.state === state).map((dealer) => dealer.city)),
+    [dealers, state],
+  );
   const states = useMemo(() => uniqueSorted(dealers.map((dealer) => dealer.state)), [dealers]);
 
   const filteredDealers = useMemo(() => {
@@ -82,8 +85,8 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
             <h2 className="section-title mt-5 max-w-3xl">Find ARS dealer records by location.</h2>
           </div>
           <p className="section-copy section-copy-flush max-w-2xl lg:justify-self-end">
-            Search by city, district, pincode, dealer name, or dealer code. The list is loaded from
-            the supplied ARS dealer sheet and can be updated as client data changes.
+            Search by city, district, pincode, or dealer name. The list is loaded from the updated
+            ARS dealer sheet and can be refreshed as client data changes.
           </p>
         </div>
 
@@ -105,6 +108,26 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
             </label>
 
             <label className="block">
+              <span className="sr-only">Filter by state</span>
+              <select
+                className="focus-ring h-14 w-full rounded-full border border-brand-blue/10 bg-white px-5 text-base font-bold text-brand-blue outline-none"
+                value={state}
+                onChange={(event) => {
+                  setState(event.target.value);
+                  setCity("");
+                  setVisibleCount(INITIAL_VISIBLE_COUNT);
+                }}
+              >
+                <option value="">All states</option>
+                {states.map((stateOption) => (
+                  <option key={stateOption} value={stateOption}>
+                    {stateOption}
+                  </option>
+                ))}
+              </select>
+            </label>
+
+            <label className="block">
               <span className="sr-only">Filter by city</span>
               <select
                 className="focus-ring h-14 w-full rounded-full border border-brand-blue/10 bg-white px-5 text-base font-bold text-brand-blue outline-none"
@@ -118,25 +141,6 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
                 {cities.map((cityOption) => (
                   <option key={cityOption} value={cityOption}>
                     {cityOption}
-                  </option>
-                ))}
-              </select>
-            </label>
-
-            <label className="block">
-              <span className="sr-only">Filter by state</span>
-              <select
-                className="focus-ring h-14 w-full rounded-full border border-brand-blue/10 bg-white px-5 text-base font-bold text-brand-blue outline-none"
-                value={state}
-                onChange={(event) => {
-                  setState(event.target.value);
-                  setVisibleCount(INITIAL_VISIBLE_COUNT);
-                }}
-              >
-                <option value="">All states</option>
-                {states.map((stateOption) => (
-                  <option key={stateOption} value={stateOption}>
-                    {stateOption}
                   </option>
                 ))}
               </select>
@@ -193,16 +197,7 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
                 className="flex min-h-[310px] flex-col rounded-[18px] border border-brand-blue/10 bg-white p-6 shadow-[var(--shadow-soft)] transition duration-300 hover:-translate-y-1 hover:border-brand-blue/30 hover:shadow-[0_24px_70px_rgba(13,43,110,0.13)]"
                 key={`${dealer.code}-${dealer.phone}-${dealer.pincode}`}
               >
-                <div className="flex items-start justify-between gap-4">
-                  <span className="rounded-full bg-[#edf5ff] px-3 py-1 text-xs font-black uppercase tracking-[0.12em] text-brand-blue">
-                    {dealer.code}
-                  </span>
-                  <span className="rounded-full bg-brand-red/10 px-3 py-1 text-xs font-bold text-brand-red">
-                    ARS dealer
-                  </span>
-                </div>
-
-                <h3 className="mt-6 font-display text-2xl font-bold leading-tight text-ink-900">{dealer.name}</h3>
+                <h3 className="font-display text-2xl font-bold leading-tight text-ink-900">{dealer.name}</h3>
                 <p className="mt-3 flex items-start gap-2 text-sm font-bold leading-6 text-brand-blue">
                   <MapPin className="mt-1 shrink-0" size={17} />
                   {dealerLocation(dealer) || "Location details available in dealer record"}

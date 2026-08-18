@@ -11,18 +11,17 @@ import {
   Droplets,
   FlaskConical,
   Gauge,
-  ShieldCheck,
 } from "lucide-react";
 import { MotionSection } from "@/components/motion-section";
+import { FaqList } from "@/components/faq-list";
 import { QualityDocumentGallery } from "@/components/quality-document-gallery";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata = createPageMetadata({
   title: "Our Quality | ARS Green Steel",
   description:
-    "ARS quality systems — SGS certification, in-house spectrometry and lab testing, bend/rebend, tensile, and spectro analysis behind ARS 550D TMT bars.",
+    "ARS quality systems — SGS certification, in-house spectrometry and lab testing, bend/rebend, tensile, and spectro analysis behind ARS Fe 550D TMT bars.",
   path: "/our-quality",
 });
 
@@ -172,37 +171,35 @@ export default function OurQualityPage() {
             sizes="100vw"
             className="object-cover object-[60%_center]"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(6,13,30,0.97)_0%,rgba(6,13,30,0.72)_45%,rgba(6,13,30,0.12)_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(6,13,30,0.9)_0%,transparent_58%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,30,0.74)_0%,rgba(6,13,30,0.54)_48%,rgba(6,13,30,0.14)_100%)] md:bg-[linear-gradient(90deg,rgba(6,13,30,0.64)_0%,rgba(6,13,30,0.34)_48%,rgba(6,13,30,0.03)_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-[58%] bg-[linear-gradient(0deg,rgba(6,13,30,0.38)_0%,rgba(6,13,30,0.08)_58%,transparent_100%)] md:h-[48%] md:bg-[linear-gradient(0deg,rgba(6,13,30,0.24)_0%,rgba(6,13,30,0.04)_58%,transparent_100%)]" />
         </div>
 
-        <div className="ars-container relative z-10 w-full pb-16">
-          <div className="max-w-2xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.13] bg-white/[0.08] px-3 py-1.5">
-              <ShieldCheck size={12} className="text-white/60" />
-              <span className="text-[11px] font-semibold tracking-[0.06em] text-white/70">
-                ARS Quality Policy
-              </span>
+        <div className="ars-container relative z-10 w-full pb-14 pt-36 md:pb-20">
+          <div className="max-w-4xl">
+            <div className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">
+              <span className="h-px w-10 bg-brand-red" aria-hidden="true" />
+              ARS Quality Policy
             </div>
             <h1 className="font-display text-[clamp(2.65rem,6vw,4.5rem)] font-extrabold uppercase leading-[1] tracking-[-0.025em] text-white">
               Quality that stands behind
               <br />
               <span className="italic text-brand-red">every structure.</span>
             </h1>
-            <p className="mt-5 max-w-[510px] text-[15px] leading-[1.75] text-white/75">
+            <p className="mt-7 max-w-2xl text-base leading-7 text-white/75 md:text-lg md:leading-8">
               Quality is built into everything we do. From production to final inspection, every ARS TMT
               bar is carefully tested to meet the standards your project deserves.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
-                href="/contact"
-                className="focus-ring inline-flex min-h-11 items-center gap-2.5 rounded-full bg-brand-red px-6 py-3 text-[14px] font-bold text-white transition hover:opacity-90"
+                href="/steel-testing"
+                className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-[6px] bg-brand-red px-6 py-3 text-[14px] font-bold text-white transition hover:opacity-90"
               >
-                Request test report <ArrowRight size={14} />
+                Explore ARS Steel Testing <ArrowRight size={14} />
               </Link>
               <Link
-                href="/certifications"
-                className="focus-ring inline-flex min-h-11 items-center gap-2.5 rounded-full border-[1.5px] border-white/30 px-6 py-3 text-[14px] font-semibold text-white/85 transition hover:bg-white/[0.12]"
+                href="/our-certification"
+                className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-[6px] border-[1.5px] border-white/30 px-6 py-3 text-[14px] font-semibold text-white/85 transition hover:bg-white/[0.12]"
               >
                 View certifications
               </Link>
@@ -394,24 +391,7 @@ export default function OurQualityPage() {
               <SectionKicker variant="brand">ARS Quality Policy</SectionKicker>
               <h2 className="section-title">Frequently Asked Questions</h2>
             </div>
-            <div className="divide-y divide-ink-900/10 border-y border-ink-900/10">
-              {faqs.map((faq) => (
-                <details key={faq.question} className="group py-6">
-                  <summary className="focus-ring flex min-h-11 cursor-pointer list-none items-center justify-between gap-5 font-display text-[1.05rem] font-bold text-ink-900">
-                    {faq.question}
-                    <span
-                      aria-hidden="true"
-                      className="flex size-8 shrink-0 items-center justify-center rounded-full border border-ink-900/15 text-brand-blue transition group-open:rotate-45"
-                    >
-                      +
-                    </span>
-                  </summary>
-                  <p className="max-w-3xl pb-2 pr-10 pt-4 text-[14px] leading-[1.8] text-steel-700">
-                    {faq.answer}
-                  </p>
-                </details>
-              ))}
-            </div>
+            <FaqList items={faqs.map(({ question, answer }) => ({ question, answer }))} />
           </div>
         </div>
       </MotionSection>
@@ -430,13 +410,13 @@ export default function OurQualityPage() {
             </div>
             <div className="flex shrink-0 flex-wrap gap-3">
               <Link
-                href="/contact"
+                href="/steel-testing"
                 className="focus-ring inline-flex min-h-11 items-center gap-2.5 rounded-full bg-brand-red px-6 py-3.5 text-[14px] font-bold text-white transition hover:opacity-90"
               >
-                Request Mill Test Certificate <ArrowRight size={15} />
+                Explore ARS Steel Testing <ArrowRight size={15} />
               </Link>
               <Link
-                href="/certifications"
+                href="/our-certification"
                 className="focus-ring inline-flex min-h-11 items-center gap-2.5 rounded-full border-[1.5px] border-white/30 px-6 py-3.5 text-[14px] font-semibold text-white/85 transition hover:bg-white/[0.15]"
               >
                 View certifications
@@ -446,7 +426,6 @@ export default function OurQualityPage() {
         </div>
       </MotionSection>
 
-      <SiteFooter />
     </main>
   );
 }

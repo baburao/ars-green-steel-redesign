@@ -10,7 +10,7 @@ import { createPageMetadata } from "@/lib/site-metadata";
 
 export const metadata: Metadata = createPageMetadata({
   title: "ARS Steel Andhra Buy Now | ARS Green Steel",
-  description: "Explore ARS 550D CRS corrosion-resistant TMT steel and connect with ARS for buying support in Andhra Pradesh.",
+  description: "Explore ARS CRS Fe 550D corrosion-resistant TMT steel and connect with ARS for buying support in Andhra Pradesh.",
   path: "/arssteel-andhra-buynow",
   image: "/ars-assets/products/ARS-CRS550D_hero-banner.jpg",
 });
@@ -18,21 +18,21 @@ export const metadata: Metadata = createPageMetadata({
 const informationSections = [
   {
     eyebrow: "CORROSION RESISTANCE",
-    title: "Join the Corrosion Resistance movement. ARS 550D CRS is here!",
+    title: "Join the Corrosion Resistance movement. ARS CRS Fe 550D is here!",
     body: "It is here. A TMT Bar that retains its ductility while being corrosion and earthquake resistant. All thanks to the micro alloys, Copper, Chromium, Nickel and Molybdenum, added to the steel at optimal quantities.",
     points: [
-      "ARS 550D CRS can increase the life of any structure. It is much more imperative under certain specific conditions.",
+      "ARS CRS Fe 550D can increase the life of any structure. It is much more imperative under certain specific conditions.",
       "550D CRS is highly recommended if the salt content in the ground water is >300 ppm.",
       "Seaside structures — reduces the diffusion of chloride ions in TMT bars.",
       "Suitable for super structures of all types of buildings where corrosion-related problems need to be reduced.",
     ],
     image: "/ars-assets/products/WhatAre_ARS-CRS-550D_TMTBars.jpg",
-    alt: "ARS CRS 550D TMT reinforcement bars",
+    alt: "ARS CRS Fe 550D TMT reinforcement bars",
   },
   {
     eyebrow: "SPECIFICATIONS",
     title: "Specifications that ensure truly strong structures!",
-    body: "ARS 550D CRS combines corrosion resistance, ductility, strength, concrete bonding, durability, and fire resistance in one reinforcement system.",
+    body: "ARS CRS Fe 550D combines corrosion resistance, ductility, strength, concrete bonding, durability, and fire resistance in one reinforcement system.",
     points: [
       "Highest Corrosion Resistance CRE — 0.5% minimum",
       "High earthquake resistance — ductility 16 to 18%",
@@ -46,7 +46,7 @@ const informationSections = [
   },
   {
     eyebrow: "STRUCTURAL BENEFITS",
-    title: "True benefits of ARS 550D CRS",
+    title: "True benefits of ARS CRS Fe 550D",
     body: "The micro-alloyed CRS composition is designed to support durable structures during construction and throughout their service life, when combined with optimal construction practices.",
     points: [
       "Higher Corrosion Resistant Equivalent (CRE), average 0.5% — 20% higher than IS 1786-2008.",
@@ -68,7 +68,7 @@ export default function ArsSteelAndhraBuyNowPage() {
         <div className="absolute inset-0">
           <Image
             src="/ars-assets/products/ARS-CRS550D_hero-banner.jpg"
-            alt="ARS CRS 550D corrosion-resistant TMT steel"
+            alt="ARS CRS Fe 550D corrosion-resistant TMT steel"
             fill
             priority
             sizes="100vw"
@@ -87,13 +87,13 @@ export default function ArsSteelAndhraBuyNowPage() {
               ARS Steel Andhra Buy Now
             </h1>
             <p className="mt-6 max-w-2xl text-[15px] leading-[1.8] text-white/75">
-              Explore corrosion-resistant ARS 550D CRS TMT reinforcement steel and connect with ARS for buying support in Andhra Pradesh.
+              Explore corrosion-resistant ARS CRS Fe 550D TMT reinforcement steel and connect with ARS for buying support in Andhra Pradesh.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/request-quote" className="focus-ring inline-flex min-h-12 items-center gap-2 rounded-full bg-brand-red px-6 py-3 text-sm font-bold text-white transition hover:opacity-90">
                 Request a quote <ArrowRight size={16} />
               </Link>
-              <Link href="/dealer-locator" className="focus-ring inline-flex min-h-12 items-center gap-2 rounded-full border border-white/35 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-ink-900">
+              <Link href="/our-network" className="focus-ring inline-flex min-h-12 items-center gap-2 rounded-full border border-white/35 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-ink-900">
                 Find a dealer <MapPin size={16} />
               </Link>
             </div>
@@ -104,7 +104,7 @@ export default function ArsSteelAndhraBuyNowPage() {
       <MotionSection className="border-b border-surface-100 bg-white py-9">
         <div className="ars-container grid gap-5 sm:grid-cols-3">
           {[
-            ["ARS 550D CRS", "Corrosion-resistant TMT steel"],
+            ["ARS CRS Fe 550D", "Corrosion-resistant TMT steel"],
             ["16–18%", "Ductility range stated in source"],
             ["CRE 0.5%", "Average corrosion resistance equivalent"],
           ].map(([value, label]) => (
@@ -153,7 +153,7 @@ export default function ArsSteelAndhraBuyNowPage() {
         </div>
       </MotionSection>
 
-      <ContactCta eyebrow="ANDHRA PRADESH ENQUIRIES" headline="Ready to source ARS steel?" body="Connect with ARS for product information, buying support, or a project enquiry." primaryLabel="Request a quote" primaryHref="/request-quote" secondaryLabel="Find a dealer" secondaryHref="/dealer-locator" />
+      <ContactCta eyebrow="ANDHRA PRADESH ENQUIRIES" headline="Ready to source ARS steel?" body="Connect with ARS for product information, buying support, or a project enquiry." primaryLabel="Request a quote" primaryHref="/request-quote" secondaryLabel="Find a dealer" secondaryHref="/our-network" />
     </main>
   );
 }

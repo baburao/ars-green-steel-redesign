@@ -33,6 +33,49 @@ The execution order prioritizes:
 - `Medium`: Improves quality, scalability, or content depth
 - `Low`: Optional cleanup or future enhancement
 
+## Latest Release Status — 2026-08-02
+
+- Branch: codex/metadata-seo
+- Production commit: 4d5c4fc
+- Privacy Policy and Terms of Use redesigned with the shared legal-page experience.
+- Dealer locator updated from the region-wise workbook with 1,566 records.
+- State selection filters city options; dealer codes and the public dealer pill are removed.
+- Mobile menu remains visible below the viewport header while the visitor is mid-page.
+- Duplicate React keys in Green Steel impact cards were resolved.
+- TypeScript, route QA, and production build passed before release.
+
+## Internal URL Mapping Release — 2026-08-05
+
+- Status: Done
+- Commit: `faa072f`
+- Production deployment: `dpl_3By4xPLn7zLdTKC4J7BSuksAkRxW`
+- Rewrote internal component, navigation, and CTA links to canonical WordPress routes.
+- Repaired 61 broken page links in `src/data/blog-migration-registry.json`.
+- Removed the redirected `/about` entry from the sitemap.
+- Preserved `next.config.ts` redirect sources for external legacy traffic.
+- Validation passed: TypeScript, route/asset QA, and production build.
+
+## FAQ and product consistency release — 2026-08-07
+
+- Status: Done
+- Commit: `79a3438`
+- Production deployment: `dpl_E1w66Nt94QfCwQsRqnvPU7jMTmaN`
+- Replaced inconsistent FAQ accordion implementations with the shared accessible `FaqList` pattern across the converted site sections.
+- Standardized FAQ question controls, answer panels, dividers, spacing, icon treatment, focus states, stable IDs, and multiple-open interaction.
+- Preserved page-owned FAQ copy and FAQ structured-data sources.
+- Confirmed visible product order everywhere the shared product lists are used: ARS CRS 550D, ARS 550D, ARS BINDERS.
+- Removed the temporary homepage CTA refresh while preserving the original homepage navigation and content paths.
+- Checks passed: `npx tsc --noEmit`, `npm run qa:routes`, and `npm run build`.
+
+## Solution content and asset release — 2026-08-08
+
+- Status: Done
+- Commit: `871462f`
+- Production deployment: `dpl_4sYbBETKM1uS632v8SMm8ymMSaDt`
+- Refreshed Roads, Bridges, Institutions, Contractors, Engineers & Architects, Dealers & Distributors, and Home Owners solution experiences.
+- Added local solution imagery and available brochure/download assets.
+- Checks passed: TypeScript, route/asset QA, and production build.
+
 ---
 
 ## Latest Implementation Status - 2026-06-28

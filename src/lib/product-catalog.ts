@@ -1,30 +1,30 @@
 export const productCatalog = [
   {
-    slug: "ars-550d",
-    name: "ARS 550D",
-    route: "/products/ars-550d",
-    homeEyebrow: "Earthquake Resistant Steel",
-    overviewTag: "Core TMT grade",
-    description: "High-ductility TMT bars designed for residential, commercial, and earthquake-resistant construction.",
-    homePoints: ["Earthquake-resistant performance", "Superior bendability & ductility", "High-strength TMT bars"],
-    overviewPoints: ["High ductility", "Strong bendability", "Fe-550D · IS 1786:2008"],
-    image: "/ars-assets/TMT-Bars.png",
-  },
-  {
     slug: "ars-crs-550d",
-    name: "ARS CRS 550D",
-    route: "/products/ars-crs-550d",
+    name: "ARS CRS Fe 550D",
+    route: "/product-crs-550d",
     homeEyebrow: "Corrosion-resistant TMT bars",
     overviewTag: "Corrosion-resistant grade",
-    description: "Engineered for high salinity, high humidity, and corrosion-prone environments where long-term durability matters.",
+    description: "Engineered for high salinity, high TDS, and corrosion-prone environments where long-term durability matters.",
     homePoints: ["Corrosion resistance", "High salinity protection", "Longer structural life"],
     overviewPoints: ["Corrosion resistance", "Durability focus", "Fe-550D · IS 1786:2008"],
     image: "/ars-assets/logos/ARSCRS550D.png",
   },
   {
+    slug: "ars-550d",
+    name: "ARS Fe 550D",
+    route: "/product-550d",
+    homeEyebrow: "Earthquake Resistant Steel",
+    overviewTag: "Core TMT grade",
+    description: "High-ductility TMT bars designed for residential, commercial, and earthquake-resistant construction.",
+    homePoints: ["Earthquake-resistant performance", "Superior bendability & ductility", "High-strength TMT bars"],
+    overviewPoints: ["High ductility", "Strong bendability", "Fe-550D · IS 1786:2008"],
+    image: "/ars-assets/logos/ARS550D.png",
+  },
+  {
     slug: "ars-binders",
     name: "ARS BINDERS",
-    route: "/products/ars-binders",
+    route: "/ars-binders",
     homeEyebrow: "Reinforcement accessories",
     overviewTag: "Factory-made reinforcement",
     description:
@@ -43,4 +43,4 @@ export const productComparisonRows = [
 ] as const;
 
 export const missingProductLeafletMessage =
-  "The approved ARS 550D CRS product leaflet is not yet available for download.";
+  "The approved ARS CRS Fe 550D product leaflet is not yet available for download.";

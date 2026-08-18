@@ -31,6 +31,16 @@ The website must not feel:
 - Generic template-based
 - Decorative without purpose
 
+## Current UI/UX Interaction Rules
+
+- Mobile navigation opens in the current viewport directly below the header, even when the user is mid-page.
+- While the mobile menu is open, the header is fixed and page scrolling is locked; closing the menu restores normal page behavior.
+- Mobile filters follow the task order Search, States, Cities, Reset. Dependent controls update immediately when a parent selection changes.
+- Legal and policy pages use a dark hero, section index, readable content column, visible focus states, and a restrained support CTA.
+- Repeated data-driven content must use stable unique React keys.
+- Internal dealer identifiers are retained for data integrity but are not displayed in public cards.
+- Every page-level H1 uses Title Case and the shared responsive scale `clamp(2.65rem, 6vw, 4rem)`. Background variants may change H1 color, but not the shared display typography, weight, line height, tracking, or wrapping behavior.
+
 ## Color System
 
 ### Primary Brand Blue / Royal Blue

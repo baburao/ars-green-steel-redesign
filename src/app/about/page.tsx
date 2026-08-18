@@ -5,23 +5,20 @@ import { ArrowRight, Building2, CheckCircle2, Factory, ShieldCheck, Users } from
 import { MotionSection } from "@/components/motion-section";
 import { AboutJourneyTimeline } from "@/components/about-journey-timeline";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata = createPageMetadata({
   title: "About ARS Group",
   description:
-    "ARS group is one of India's leading manufacturers of BIS-certified Fe550D and CRS 550D TMT bars, delivering high-strength, corrosion-resistant, and sustainable steel solutions for residential, commercial, industrial, and infrastructure projects.",
-  path: "/about",
+    "ARS group is one of India's leading manufacturers of BIS-certified Fe550D and CRS 550D TMT bars, delivering high-strength, high-ductility, corrosion-resistant, and sustainable steel solutions for residential, commercial, industrial, and infrastructure projects.",
+  path: "/about-us",
 });
 
 const storyPoints = [
-  "Integrated Steel Manufacturing Plant – Gummidipoondi, Tamil Nadu",
-  "2,50,000 MT Annual Steel Manufacturing Capacity",
-  "ISO 9001 & ISO 14001 Certified Manufacturing Facility",
-  "SGS Tested & Verified for Every Batch and Consignment",
+  "35+ Years of Manufacturing Excellence",
+  "Integrated Steel Manufacturing Facility",
   "BIS-Certified Fe550D & CRS 550D TMT Bars",
-  "Trusted Across Residential, Commercial & Infrastructure Projects",
+  "ISO 9001 & ISO 14001 Certified",
 ];
 
 const trustPillars = [
@@ -126,7 +123,7 @@ const audiences = [
     description:
       "Depend on consistent supply, certified quality, an extensive dealer network, and reliable performance for projects of every scale.",
     cta: "Find an Authorised Dealer",
-    href: "/dealer-locator",
+    href: "/our-network",
   },
 ] as const;
 
@@ -148,8 +145,8 @@ export default function AboutPage() {
             sizes="100vw"
             className="object-cover object-[58%_center]"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(6,13,30,0.9)_0%,rgba(6,13,30,0.58)_55%,rgba(6,13,30,0.18)_100%)]" />
-          <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(6,13,30,0.9)_0%,rgba(6,13,30,0.05)_60%,transparent_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,30,0.74)_0%,rgba(6,13,30,0.54)_48%,rgba(6,13,30,0.14)_100%)] md:bg-[linear-gradient(90deg,rgba(6,13,30,0.64)_0%,rgba(6,13,30,0.34)_48%,rgba(6,13,30,0.03)_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-[58%] bg-[linear-gradient(0deg,rgba(6,13,30,0.38)_0%,rgba(6,13,30,0.08)_58%,transparent_100%)] md:h-[48%] md:bg-[linear-gradient(0deg,rgba(6,13,30,0.24)_0%,rgba(6,13,30,0.04)_58%,transparent_100%)]" />
         </div>
 
         <div className="ars-container relative z-10 w-full pb-14 pt-36 md:pb-20">
@@ -162,7 +159,7 @@ export default function AboutPage() {
               Building Stronger Foundations with <span className="text-brand-red">Trusted Steel</span>
             </h1>
             <p className="mt-7 max-w-xl text-base leading-7 text-white/72 md:text-lg md:leading-8">
-              ARS group is one of India&apos;s leading manufacturers of BIS-certified Fe550D and CRS 550D TMT bars, delivering high-strength, corrosion-resistant, and sustainable steel solutions for residential, commercial, industrial, and infrastructure projects.
+              ARS group is one of India&apos;s leading manufacturers of BIS-certified Fe550D and CRS 550D TMT bars, delivering high-strength, high-ductility, corrosion-resistant, and sustainable steel solutions for residential, commercial, industrial, and infrastructure projects.
             </p>
           </div>
         </div>
@@ -174,10 +171,10 @@ export default function AboutPage() {
             <div>
               <SectionKicker variant="brand">WHO WE ARE</SectionKicker>
               <h2 className="font-display text-[clamp(2rem,3.4vw,2.25rem)] font-bold leading-[1.1] tracking-[-0.025em] text-ink-900">
-                More Than Steel. Built on Trust.
+                A Trusted Steel Manufacturer Since 1990.
               </h2>
               <p className="mb-8 mt-5 text-[15px] leading-[1.8] text-steel-700">
-                ARS Green Steel is one of India&apos;s leading integrated steel manufacturers, operating a state-of-the-art manufacturing facility at Gummidipoondi, Tamil Nadu. Since 1992, we have been producing BIS-certified Fe550D and CRS 550D TMT bars, combining advanced manufacturing, rigorous quality standards, and sustainable Green Steel practices to build stronger, safer, and longer-lasting structures.
+                ARS Green Steel is a trusted name in the Indian steel industry, built on more than three decades of manufacturing excellence, technical integrity, and continuous innovation. Founded in 1990 as ARS Metals Private Limited, we have remained committed to manufacturing high-quality steel that consistently meets specifications, delivers dependable performance, and earns the confidence of builders, engineers, contractors, and infrastructure developers. Today, our integrated manufacturing facility at Gummidipoondi, Tamil Nadu, produces BIS-certified Fe550D and CRS 550D TMT bars through precision manufacturing, rigorous quality standards, and responsible Green Steel practices.
               </p>
               <ul className="flex flex-col gap-3">
                 {storyPoints.map((point) => (
@@ -305,7 +302,6 @@ export default function AboutPage() {
         </div>
       </MotionSection>
 
-      <SiteFooter />
     </main>
   );
 }

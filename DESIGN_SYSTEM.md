@@ -19,6 +19,14 @@ Primary principle:
 - ARS must feel premium, industrial, editorial, trustworthy, and conversion-focused.
 - The site must not feel like a SaaS dashboard, startup landing page, or generic template.
 
+## Current Responsive and Content Patterns
+
+- SiteHeader uses a sticky desktop header and a viewport-fixed mobile menu while open, with body scroll locking and 44px-plus touch targets.
+- DealerLocatorExperience uses Search, State, City, Reset controls; city options are derived from the selected state.
+- LegalPage is the shared pattern for policy pages: dark industrial hero, sticky section index, long-form content column, semantic headings, and related support actions.
+- Data-driven lists use unique stable keys, including when visible labels repeat.
+- Interior pages favor readable editorial widths, restrained surfaces, generous whitespace, and blue-primary actions with red as a controlled accent.
+
 ## Homepage Pattern Audit
 
 Homepage V1 establishes these reusable patterns:
@@ -35,6 +43,30 @@ Homepage V1 establishes these reusable patterns:
 - Light CTA/footer system
 
 These patterns should become the foundation for product pages, tool pages, application pages, trust pages, and contact pages.
+
+### FAQ consistency
+
+- Use `src/components/faq-list.tsx` for FAQ presentation instead of creating page-specific accordion markup.
+- Keep question and answer content page-owned, but pass it to `FaqList` as `{ question, answer }` items.
+- The shared pattern provides keyboard-accessible buttons, visible focus states, stable answer IDs, multiple open answers, consistent dividers and spacing, and reduced-motion-safe icon transitions.
+- Preserve semantic FAQ headings and any page-specific FAQ JSON-LD separately from the visual component.
+
+### Product ordering
+
+When products are displayed as cards, rows, selectors, or related products, use this order:
+
+1. ARS CRS 550D
+2. ARS 550D
+3. ARS BINDERS
+
+Use canonical routes `/product-crs-550d`, `/product-550d`, and `/ars-binders`. Do not introduce a different visible order without product-owner approval.
+
+### Interior hero template
+
+- Default hero order: eyebrow line, H1, paragraph, then primary and secondary actions.
+- The eyebrow uses a restrained red horizontal rule and small technical label above the title.
+- The default content column uses `.ars-container`, a maximum H1 width of `max-w-4xl`, and a paragraph width of `max-w-2xl`.
+- Custom variants are allowed only for the homepage cinematic hero, contact/form heroes, legal pages, or proof-panel layouts where the user task requires them.
 
 ---
 

@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { ArrowRight, BadgeCheck, Calculator, ChevronDown, House, Menu, Search, ShieldCheck, X } from "lucide-react";
+import { ArrowRight, BadgeCheck, Calculator, Check, ChevronDown, House, MapPin, Menu, Search, ShieldCheck, X } from "lucide-react";
 
 type MenuLink = {
   label: string;
@@ -28,69 +28,66 @@ type MegaMenuDefinition = {
 
 type MenuKey = "about" | "products" | "sustainability" | "solutions" | "resources" | "pressMedia" | "contact";
 
-const routeLinks = [
-  { label: "About", href: "/about", menu: "about" },
+const routeLinks: { label: string; href: string; menu?: MenuKey }[] = [
+  { label: "About", href: "/about-us", menu: "about" },
   { label: "Products", href: "/products", menu: "products" },
   { label: "Sustainability", href: "/green-steel", menu: "sustainability" },
   { label: "Solutions", href: "/industries", menu: "solutions" },
   { label: "Resources", href: "/blog", menu: "resources" },
   { label: "Press Media", href: "/press-media", menu: "pressMedia" },
-  { label: "Contact Us", href: "/contact", menu: "contact" },
+  { label: "Careers", href: "/careers" },
 ];
 
 const megaMenus: Record<MenuKey, MegaMenuDefinition> = {
   about: {
     eyebrow: "Company trust",
-    title: "Understand ARS Group, leadership, manufacturing, quality, and client proof.",
+    title: "Everything You Need to Know About ARS Group",
     visual: "ARS Group",
-    visualSrc: "/ars-assets/right-about-us.png-compress.webp",
+    visualSrc: "/ars-assets/navmenu/about.jpg",
     links: [
-      { label: "ARS Group", href: "/about" },
+      { label: "ARS Group", href: "/about-us" },
       { label: "Vision & Mission", href: "/vision-mission" },
       { label: "Leadership", href: "/our-team" },
       { label: "Manufacturing", href: "/manufacturing" },
       { label: "Quality Policy", href: "/our-quality" },
-      { label: "Certifications", href: "/certifications" },
+      { label: "Certifications", href: "/our-certification" },
       { label: "Clients", href: "/clients" },
     ],
     proof: ["Since 1992", "Leadership proof", "Manufacturing strength"],
   },
   products: {
     eyebrow: "Product proof",
-    title: "Choose ARS steel by grade, application, specification, and project need.",
+    title: "Explore ARS Products by Grade and Application",
     visual: "Products",
-    visualSrc: "/ars-assets/products-all.png",
+    visualSrc: "/ars-assets/navmenu/products.jpg",
     links: [
-      { label: "ARS 550D TMT Bar", href: "/products/ars-550d" },
-      { label: "ARS CRS 550D", href: "/products/ars-crs-550d" },
-      { label: "ARS Binders", href: "/products/ars-binders" },
+      { label: "ARS CRS Fe 550D", href: "/product-crs-550d" },
+      { label: "ARS Fe 550D", href: "/product-550d" },
+      { label: "ARS Binders", href: "/ars-binders" },
+      { label: "550D Vs CRS 550D", href: "/products#comparison" },
       { label: "Steel Testing", href: "/steel-testing" },
-      { label: "Product Comparison", href: "/products#comparison" },
-      { label: "Technical Specifications", href: "/products/ars-550d" },
-      { label: "Download Product Brochure", href: "/download-product-brochure" },
     ],
     proof: ["550D ductility", "CRS corrosion resistance", "Residential to infrastructure use"],
   },
   sustainability: {
     eyebrow: "Sustainability",
-    title: "Show green steel, embodied carbon, certifications, and reports clearly.",
+    title: "Understand ARS Green Steel, Carbon & Certifications",
     visual: "Green steel",
-    visualSrc: "/ars-assets/our-quality-1.png",
+    visualSrc: "/ars-assets/navmenu/sustainability.jpg",
     links: [
-      { label: "What is Green Steel", href: "/green-steel#what-is-green-steel" },
       { label: "ARS Green Steel", href: "/ars-green-steel" },
       { label: "Embodied Carbon", href: "/embodied-carbon" },
+      { label: "Green Certifications", href: "/green-certifications" },
+      { label: "Green Guide", href: "/green-steel#what-is-green-steel" },
       { label: "SGBC", href: "/sgbc" },
-      { label: "Certifications & Recognitions", href: "/certifications" },
-      { label: "Reports & Downloads", href: "/reports-downloads" },
     ],
     proof: ["Green steel story", "EPD / GRIHA / LEED readiness", "Downloadable proof"],
   },
   solutions: {
     eyebrow: "Solutions",
-    title: "Guide each audience to the proof, product, and next action they need.",
+    title: "Find the Right Solution for Your Construction Project",
     visual: "Audience paths",
-    visualSrc: "/ars-assets/home-owner-banner-1.png",
+    visualSrc: "/ars-assets/navmenu/Solutions.jpg",
     links: [
       { label: "For Home Owners", href: "/tmt-steel-bar-guide-homeowners" },
       { label: "For Engineers & Architects", href: "/tmt-steel-bar-guide-engineers-architects" },
@@ -123,27 +120,23 @@ const megaMenus: Record<MenuKey, MegaMenuDefinition> = {
   },
   resources: {
     eyebrow: "Resources",
-    title: "Help buyers estimate, compare, learn, and move toward enquiry.",
+    title: "Everything You Need to Choose, Compare & Buy Steel",
     visual: "Knowledge center",
-    visualSrc: "/ars-assets/awards-certificates-img3.png",
+    visualSrc: "/ars-assets/navmenu/resources.jpg",
     links: [
-      { label: "Steel Price Today", href: "/steel-price-today" },
-      { label: "Price Calculator", href: "/price-calculator" },
-      { label: "Construction Estimation", href: "/construction-estimation" },
-      { label: "Blog / Knowledge Center", href: "/blog" },
-      { label: "Guides & Articles", href: "/guides-articles" },
-      { label: "TMT Bar Calculator", href: "/tmt-calculator" },
-      { label: "Construction Cost Estimator", href: "/construction-cost-estimator" },
-      { label: "Career", href: "/careers" },
-      { label: "FAQs", href: "/faqs" },
+      { label: "Steel Price Today", href: "/tmt-steel-price-today" },
+      { label: "TMT Bar Calculator", href: "/tmt-steel-calculator" },
+      { label: "Become A Dealer", href: "/become-a-steel-distributor" },
+      { label: "Blogs", href: "/blog" },
+      { label: "Downloads", href: "/download-product-brochure" },
     ],
     proof: ["Price clarity", "Calculator journey", "Construction education"],
   },
   pressMedia: {
     eyebrow: "Press Media",
-    title: "Press Media",
+    title: "Latest News, Updates & Stories from ARS Steel",
     visual: "Press Media",
-    visualSrc: "/ars-assets/ARSHOME4.jpg",
+    visualSrc: "/ars-assets/navmenu/pressandmedia.jpg",
     links: [
       { label: "TV Commercials", href: "/tv-commercials" },
       { label: "News & Press Releases", href: "/news-press-releases" },
@@ -162,14 +155,14 @@ const megaMenus: Record<MenuKey, MegaMenuDefinition> = {
     links: [
       { label: "Contact ARS", href: "/contact" },
       { label: "Request Quote", href: "/request-quote" },
-      { label: "Become a Dealer", href: "/become-a-dealer" },
+      { label: "Become a Dealer", href: "/steel-distributors-dealers" },
     ],
     proof: ["Customer helpline", "Project enquiry", "Office and plant"],
   },
 };
 
 const menuPaths: Record<MenuKey, string[]> = {
-  about: ["/about", "/vision-mission", "/our-team", "/manufacturing", "/our-quality", "/certifications"],
+  about: ["/about-us", "/vision-mission", "/our-team", "/manufacturing", "/our-quality", "/our-certification"],
   products: ["/products", "/steel-testing"],
   solutions: [
     "/industries",
@@ -182,20 +175,16 @@ const menuPaths: Record<MenuKey, string[]> = {
     "/bridges-projects-tmt-steel-bars",
     "/institutions-projects-tmt-steel-bars",
   ],
-  sustainability: ["/green-steel", "/ars-green-steel"],
+  sustainability: ["/green-steel", "/ars-green-steel", "/green-certifications"],
   resources: [
     "/blog",
-    "/steel-price-today",
-    "/price-calculator",
-    "/construction-estimation",
+    "/tmt-steel-price-today",
     "/guides-articles",
-    "/tmt-calculator",
-    "/construction-cost-estimator",
-    "/careers",
+    "/tmt-steel-calculator",
     "/faqs",
   ],
   pressMedia: ["/press-media", "/tv-commercials", "/news-press-releases", "/events", "/gallery", "/video", "/success-stories"],
-  contact: ["/contact", "/request-quote", "/become-a-dealer"],
+  contact: ["/contact", "/request-quote", "/steel-distributors-dealers"],
 };
 
 function pathMatches(pathname: string, route: string) {
@@ -261,12 +250,12 @@ export function SiteHeader() {
   return (
     <header
       ref={headerRef}
-      className="site-header sticky inset-x-0 top-0 z-50 bg-white text-ink-900"
+      className={`site-header inset-x-0 top-0 z-50 w-full bg-white text-ink-900 ${mobileOpen ? "fixed" : "sticky"}`}
       data-menu-open={openMenu ? "true" : "false"}
     >
       <div className="site-header-shell border-b border-ink-900/10 bg-white shadow-[0_8px_28px_rgba(13,43,110,0.08)]">
       <div className="ars-container flex h-[76px] items-center justify-between">
-        <Link href="/" className="focus-ring flex items-center gap-3">
+        <Link href="/" className="focus-ring flex cursor-pointer items-center gap-3">
           <span className="flex h-[55px] w-[117px] items-center justify-center">
             <Image src="/ars-green-steel.svg" alt="ARS Green Steel" width={117} height={55} priority />
           </span>
@@ -277,7 +266,7 @@ export function SiteHeader() {
             href="/"
             aria-label="Home"
             aria-current={pathname === "/" ? "page" : undefined}
-            className={`focus-ring relative inline-flex h-[76px] w-10 items-center justify-center bg-transparent text-brand-blue transition hover:text-ink-900 before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:origin-left before:bg-brand-red before:transition-transform before:duration-300 focus-visible:text-ink-900 focus-visible:before:scale-x-100 ${
+            className={`focus-ring relative inline-flex h-[76px] w-10 cursor-pointer items-center justify-center bg-transparent text-brand-blue transition hover:text-ink-900 before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:origin-left before:bg-brand-red before:transition-transform before:duration-300 focus-visible:text-ink-900 focus-visible:before:scale-x-100 ${
               pathname === "/"
                 ? "text-ink-900 before:scale-x-100"
                 : "before:scale-x-0 hover:before:scale-x-100"
@@ -288,8 +277,11 @@ export function SiteHeader() {
           {links.map((link) => {
             const menuKey = link.menu as keyof typeof megaMenus | undefined;
             const menu = menuKey ? megaMenus[menuKey] : null;
-            const isActive = menuKey ? menuPaths[menuKey].some((route) => pathMatches(pathname, route)) : pathname === link.href;
+            const isActive = menuKey ? menuPaths[menuKey].some((route) => pathMatches(pathname, route)) : pathMatches(pathname, link.href);
             const menuId = menuKey ? `desktop-${menuKey}-menu` : undefined;
+            const navigationClassName = `focus-ring relative inline-flex h-[76px] cursor-pointer items-center gap-1.5 bg-transparent transition hover:text-ink-900 before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:origin-left before:bg-brand-red before:transition-transform before:duration-300 focus-visible:text-ink-900 focus-visible:before:scale-x-100 ${
+              isActive ? "text-ink-900 before:scale-x-100" : "before:scale-x-0 hover:before:scale-x-100"
+            }`;
 
             return (
               <div
@@ -298,26 +290,32 @@ export function SiteHeader() {
                 onPointerEnter={() => menuKey && setOpenMenu(menuKey)}
                 onPointerLeave={() => menuKey && setOpenMenu((current) => current === menuKey ? null : current)}
               >
-                <button
-                  ref={(node) => {
-                    if (menuKey) {
+                {menuKey && menu ? (
+                  <button
+                    ref={(node) => {
                       triggerRefs.current[menuKey] = node;
-                    }
-                  }}
-                  type="button"
-                  className={`relative inline-flex h-[76px] items-center gap-1.5 bg-transparent transition hover:text-ink-900 before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-full before:origin-left before:bg-brand-red before:transition-transform before:duration-300 focus-visible:text-ink-900 focus-visible:before:scale-x-100 ${
-                    isActive ? "text-ink-900 before:scale-x-100" : "before:scale-x-0 hover:before:scale-x-100"
-                  }`}
-                  aria-haspopup={menu ? "true" : undefined}
-                  aria-expanded={menuKey ? openMenu === menuKey : undefined}
-                  aria-controls={menuId}
-                  aria-current={isActive ? "page" : undefined}
-                  onClick={() => menuKey && setOpenMenu(menuKey)}
-                  onFocus={() => menuKey && setOpenMenu(menuKey)}
-                >
-                  {link.label}
-                  {menu ? <ChevronDown size={14} className="text-brand-blue transition group-hover/menu:rotate-180 group-focus-within/menu:rotate-180" /> : null}
-                </button>
+                    }}
+                    type="button"
+                    className={navigationClassName}
+                    aria-haspopup="true"
+                    aria-expanded={openMenu === menuKey}
+                    aria-controls={menuId}
+                    aria-current={isActive ? "page" : undefined}
+                    onClick={() => setOpenMenu(menuKey)}
+                    onFocus={() => setOpenMenu(menuKey)}
+                  >
+                    {link.label}
+                    <ChevronDown size={14} className="text-brand-blue transition group-hover/menu:rotate-180 group-focus-within/menu:rotate-180" />
+                  </button>
+                ) : (
+                  <Link
+                    href={link.href}
+                    className={navigationClassName}
+                    aria-current={isActive ? "page" : undefined}
+                  >
+                    {link.label}
+                  </Link>
+                )}
                 {menu ? (
                   <div
                     id={menuId}
@@ -337,32 +335,35 @@ export function SiteHeader() {
 
         <div className="flex items-center gap-3">
           <Link
-            className="focus-ring hidden h-11 items-center gap-2 rounded-full border border-ink-900/12 bg-white/60 px-5 text-sm font-bold text-ink-900 transition hover:border-brand-blue hover:text-brand-blue md:inline-flex"
-            href="/steel-price-today"
+            className="focus-ring hidden h-11 cursor-pointer items-center gap-2 rounded-full bg-brand-red px-5 text-sm font-bold text-white shadow-[0_12px_30px_rgba(222,18,26,0.24)] transition hover:bg-brand-red-dark md:inline-flex"
+            href="/our-network"
           >
-            <Search size={16} /> Steel price
+            <MapPin size={16} /> Find Dealer
           </Link>
-          <Link className="focus-ring inline-flex h-11 items-center gap-2 rounded-full bg-brand-red px-5 text-sm font-bold text-white shadow-[0_12px_30px_rgba(222,18,26,0.24)] transition hover:bg-brand-red-dark" href="/request-quote">
+          <Link className="focus-ring inline-flex h-11 cursor-pointer items-center gap-2 rounded-full border border-ink-900/12 bg-white/60 px-5 text-sm font-bold text-ink-900 transition hover:border-brand-blue hover:text-brand-blue" href="/request-quote">
             Get quote <ArrowRight size={16} />
           </Link>
-          <div className="xl:hidden">
+          <div className="relative z-[110] xl:hidden">
             <button
               type="button"
               className="focus-ring inline-flex size-11 cursor-pointer items-center justify-center rounded-full border border-ink-900/12 bg-white/60 text-ink-900"
               aria-label={mobileOpen ? "Close navigation" : "Open navigation"}
               aria-expanded={mobileOpen}
               aria-controls={mobileMenuId}
-              onClick={() => setMobileOpen((current) => !current)}
+              onClick={() => {
+                setOpenMenu(null);
+                setMobileOpen((current) => !current);
+              }}
             >
               {mobileOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
-            {mobileOpen ? <div id={mobileMenuId} className="absolute left-0 right-0 top-full max-h-[calc(100vh-76px)] overflow-y-auto border-t border-ink-900/10 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.16)]">
+            {mobileOpen ? <div id={mobileMenuId} className="fixed inset-x-0 top-[76px] z-[100] max-h-[calc(100dvh-76px)] overflow-y-auto border-t border-ink-900/10 bg-white shadow-[0_24px_60px_rgba(15,23,42,0.16)]">
               <div className="ars-container grid gap-5 py-5">
                 <div className="grid gap-3 sm:grid-cols-3">
                   {[
-                    { label: "Steel Price", href: "/steel-price-today", icon: Search },
-                    { label: "Calculator", href: "/tmt-calculator", icon: Calculator },
-                    { label: "Dealer Locator", href: "/dealer-locator", icon: ShieldCheck },
+                    { label: "Steel Price", href: "/tmt-steel-price-today", icon: Search },
+                    { label: "Calculator", href: "/tmt-steel-calculator", icon: Calculator },
+                    { label: "Dealer Locator", href: "/our-network", icon: ShieldCheck },
                   ].map((item) => {
                     const Icon = item.icon;
                     return (
@@ -379,6 +380,13 @@ export function SiteHeader() {
                     <ArrowRight size={16} className="text-brand-blue" />
                   </Link>
                   {routeLinks.map((link) => {
+                    if (!link.menu) {
+                      return <Link key={link.label} className="flex cursor-pointer items-center justify-between border-t border-ink-900/10 py-3 text-base font-bold text-ink-900" href={link.href} aria-current={pathMatches(pathname, link.href) ? "page" : undefined} onClick={() => setMobileOpen(false)}>
+                        {link.label}
+                        <ArrowRight size={16} className="text-brand-blue" />
+                      </Link>;
+                    }
+
                     const menuKey = link.menu as keyof typeof megaMenus;
                     const isExpanded = mobileSection === menuKey;
                     const isActive = menuPaths[menuKey].some((route) => pathMatches(pathname, route));
@@ -440,7 +448,7 @@ type MegaMenu = (typeof megaMenus)[keyof typeof megaMenus];
 function MegaMenuContent({ menu }: { menu: MegaMenu }) {
   return (
     <div className="ars-container grid gap-12 py-9 lg:grid-cols-[360px_1fr_280px] lg:items-center">
-      <Link className="group relative min-h-[190px] overflow-hidden rounded-[22px] bg-ink-900 p-6 text-white shadow-[0_20px_55px_rgba(15,23,42,0.18)]" href={menu.links[0]?.href ?? "/products"}>
+      <Link className="group relative min-h-[190px] overflow-hidden rounded-[22px] bg-ink-900 p-6 text-white shadow-[0_20px_55px_rgba(15,23,42,0.18)] lg:self-stretch" href={menu.links[0]?.href ?? "/products"}>
         <Image
           src={menu.visualSrc}
           alt={`${menu.visual} ARS`}
@@ -453,19 +461,19 @@ function MegaMenuContent({ menu }: { menu: MegaMenu }) {
         <div className="absolute bottom-5 right-5 inline-flex size-12 items-center justify-center rounded-full bg-white text-brand-blue transition group-hover:translate-x-1">
           <ArrowRight size={20} />
         </div>
-        <div className="relative mt-20">
+        <div className="absolute bottom-5 left-6 right-20">
           <p className="font-technical text-xs font-bold uppercase tracking-[0.28em] text-white/70">{menu.eyebrow}</p>
-          <p className="mt-2 font-display text-3xl font-black uppercase leading-tight">{menu.visual}</p>
+          <p className="mt-2 font-display text-2xl font-black uppercase leading-tight">{menu.visual}</p>
         </div>
       </Link>
 
       <div>
         <p className="font-technical text-xs font-bold uppercase tracking-[0.28em] text-brand-blue">{menu.eyebrow}</p>
-        <p className="mt-4 max-w-2xl font-display text-4xl font-black uppercase leading-tight text-ink-900">
+        <p className="mt-2 max-w-2xl font-display text-lg font-normal leading-relaxed text-steel-600">
           {menu.title}
         </p>
         {menu.groups ? (
-          <div className="mt-8 grid gap-8 sm:grid-cols-2">
+          <div className="mt-6 grid gap-8 sm:grid-cols-2">
             {menu.groups.map((group) => (
               <div key={group.label} className="border-l border-brand-blue/20 pl-5">
                 <p className="mb-4 font-technical text-[11px] font-black uppercase tracking-[0.18em] text-brand-red">
@@ -485,11 +493,11 @@ function MegaMenuContent({ menu }: { menu: MegaMenu }) {
             ))}
           </div>
         ) : (
-          <div className="mt-8 grid gap-x-12 gap-y-5 sm:grid-cols-2">
+          <div className="mt-6 grid gap-x-12 gap-y-5 sm:grid-cols-2">
             {menu.links.map((item) => (
-              <a key={item.label} className="focus-ring group flex items-center gap-4 text-lg font-semibold text-steel-700 transition hover:text-brand-blue" href={item.href}>
-                <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full bg-white text-brand-blue ring-1 ring-ink-900/10 transition group-hover:bg-brand-blue group-hover:text-white">
-                  <ArrowRight size={17} />
+              <a key={item.label} className={`focus-ring group flex items-center gap-4 text-lg font-semibold transition ${menu.eyebrow === "Sustainability" && item.label === "ARS Green Steel" ? "text-green-steel hover:text-green-steel" : "text-steel-700 hover:text-brand-blue"}`} href={item.href}>
+                <span className={`inline-flex size-10 aspect-square shrink-0 items-center justify-center rounded-full bg-white ring-1 transition ${menu.eyebrow === "Sustainability" && item.label === "ARS Green Steel" ? "text-green-steel ring-green-steel group-hover:bg-green-steel group-hover:text-white" : "text-brand-blue ring-ink-900/10 group-hover:bg-brand-blue group-hover:text-white"}`}>
+                  {menu.eyebrow === "Sustainability" && item.label === "ARS Green Steel" ? <><ArrowRight size={17} className="group-hover:hidden" /><Check size={17} className="hidden group-hover:block" /></> : <ArrowRight size={17} />}
                 </span>
                 {item.label}
               </a>

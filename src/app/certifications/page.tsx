@@ -13,14 +13,13 @@ import {
 import { CertificationDocumentPreview } from "@/components/certification-document-preview";
 import { MotionSection } from "@/components/motion-section";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata = createPageMetadata({
   title: "Certifications & Awards | ARS Green Steel",
   description:
     "Review ARS Green Steel certifications, approvals, sustainability documentation, management systems, and awards.",
-  path: "/certifications",
+  path: "/our-certification",
 });
 
 type CertificationDocument = {
@@ -136,13 +135,6 @@ const certificationGroups: CertificationGroup[] = [
   },
 ];
 
-const libraryLinks = [
-  ["Sustainability", "sustainability-documentation"],
-  ["Approvals", "product-statutory-approvals"],
-  ["Management systems", "management-systems"],
-  ["Awards", "awards-recognitions"],
-];
-
 function toAnchor(value: string) {
   return value
     .toLowerCase()
@@ -158,49 +150,33 @@ export default function CertificationsPage() {
 
       <section className="ars-page-hero relative flex min-h-[520px] items-end overflow-hidden bg-ink-950 md:min-h-[580px] lg:h-[640px] lg:min-h-[640px]">
         <div className="soft-noise absolute inset-0" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_25%,rgba(13,43,110,0.62),transparent_36%),linear-gradient(to_top,rgba(6,13,30,0.94),rgba(6,13,30,0.5))]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_82%_25%,rgba(13,43,110,0.5),transparent_38%),linear-gradient(0deg,rgba(6,13,30,0.78),rgba(6,13,30,0.38))] md:bg-[radial-gradient(circle_at_82%_25%,rgba(13,43,110,0.42),transparent_40%),linear-gradient(0deg,rgba(6,13,30,0.68),rgba(6,13,30,0.28))]" />
 
         <div className="ars-container relative z-10 w-full pb-14 md:pb-16">
-          <nav aria-label="Breadcrumb" className="mb-7">
-            <ol className="flex flex-wrap items-center gap-2 text-xs font-semibold text-white/60">
-              <li>
-                <Link className="focus-ring rounded-sm transition hover:text-white" href="/">
-                  Home
-                </Link>
-              </li>
-              <li aria-hidden="true">/</li>
-              <li aria-current="page" className="text-white">
-                Certifications & Awards
-              </li>
-            </ol>
-          </nav>
-
-          <div className="max-w-2xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.13] bg-white/[0.08] px-3 py-1.5">
-              <ShieldCheck size={12} className="text-white/60" />
-              <span className="text-[11px] font-semibold tracking-[0.06em] text-white/70">
-                ARS Certifications
-              </span>
+          <div className="max-w-4xl">
+            <div className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">
+              <span className="h-px w-10 bg-brand-red" aria-hidden="true" />
+              ARS Certifications
             </div>
             <h1 className="font-display text-[clamp(2.65rem,6vw,4.5rem)] font-extrabold uppercase leading-[1] tracking-[-0.025em] text-white">
               Proof before
               <br />
               <span className="italic text-brand-red">purchase.</span>
             </h1>
-            <p className="mt-5 max-w-[500px] text-[15px] leading-[1.75] text-white/70">
+            <p className="mt-7 max-w-2xl text-base leading-7 text-white/75 md:text-lg md:leading-8">
               Certifications turn ARS claims into usable trust for engineers, contractors,
               institutions, dealers, and project buyers.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
                 href="#certification-library"
-                className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full bg-brand-red px-6 py-3 text-sm font-bold text-white transition hover:bg-brand-red-dark"
+                className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-[6px] bg-brand-red px-6 py-3 text-sm font-bold text-white transition hover:bg-brand-red-dark"
               >
                 View documents <ArrowRight size={14} />
               </Link>
               <Link
                 href="/contact"
-                className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full border-[1.5px] border-white/30 px-6 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/[0.12]"
+                className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-[6px] border-[1.5px] border-white/30 px-6 py-3 text-sm font-semibold text-white/80 transition hover:bg-white/[0.12]"
               >
                 Request certificate
               </Link>
@@ -208,28 +184,6 @@ export default function CertificationsPage() {
           </div>
         </div>
       </section>
-
-      <MotionSection
-        className="border-b border-brand-blue/10 bg-white py-6"
-        aria-label="Certification categories"
-      >
-        <div className="ars-container">
-          <nav aria-label="Certification categories">
-            <ul className="flex snap-x gap-2 overflow-x-auto pb-2 sm:flex-wrap sm:overflow-visible sm:pb-0">
-              {libraryLinks.map(([label, anchor]) => (
-                <li key={anchor} className="shrink-0 snap-start">
-                  <Link
-                    href={`#${anchor}`}
-                    className="focus-ring inline-flex min-h-11 items-center rounded-full border border-brand-blue/15 bg-surface-50 px-5 text-sm font-bold text-brand-blue transition hover:border-brand-blue/35 hover:bg-brand-blue hover:text-white"
-                  >
-                    {label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-      </MotionSection>
 
       <MotionSection className="bg-surface-50 py-20 lg:py-24" id="certification-library">
         <div className="ars-container">
@@ -381,7 +335,6 @@ export default function CertificationsPage() {
         </div>
       </section>
 
-      <SiteFooter />
     </main>
   );
 }

@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import pageMetadata from "@/data/seo-metadata.json";
+import blogMetadata from "@/data/seo-blog-metadata.json";
 
 export const productionDomain = "https://arsgroup.in";
 export const defaultSocialImage = "/ars-assets/ARS-green-bg.png";
@@ -18,6 +20,20 @@ type PageMetadataInput = {
   type?: "website" | "article";
 };
 
+type SeoMetadataEntry = {
+  path: string;
+  title: string;
+  description: string;
+  focusKeyword: string;
+};
+
+const pageSeoMetadata = pageMetadata as SeoMetadataEntry[];
+const blogSeoMetadata = blogMetadata as SeoMetadataEntry[];
+
+export function getSeoMetadata(path: string) {
+  return [...pageSeoMetadata, ...blogSeoMetadata].find((entry) => entry.path === path);
+}
+
 /**
  * Shared metadata for public pages. Canonicals and social URLs always identify
  * the intended production URL; preview environments remain noindex, nofollow.
@@ -29,12 +45,15 @@ export function createPageMetadata({
   image = defaultSocialImage,
   type = "website",
 }: PageMetadataInput): Metadata {
+  const seo = getSeoMetadata(path);
+  const resolvedTitle = seo?.title ?? title;
+  const resolvedDescription = seo?.description ?? description;
   const url = toProductionUrl(path);
   const socialImage = toProductionUrl(image);
 
   return {
-    title,
-    description,
+    title: resolvedTitle,
+    description: resolvedDescription,
     robots: {
       index: isProductionSite,
       follow: isProductionSite,
@@ -43,8 +62,8 @@ export function createPageMetadata({
       canonical: url,
     },
     openGraph: {
-      title,
-      description,
+      title: resolvedTitle,
+      description: resolvedDescription,
       url,
       siteName: "ARS Green Steel",
       type,
@@ -52,8 +71,8 @@ export function createPageMetadata({
     },
     twitter: {
       card: "summary_large_image",
-      title,
-      description,
+      title: resolvedTitle,
+      description: resolvedDescription,
       images: [socialImage],
     },
   };

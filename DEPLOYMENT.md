@@ -10,25 +10,72 @@ This is the deployment source of truth for the ARS Green Steel redesign.
 - Vercel team/account: `baburaos-projects-1c568830`
 - Main branch: `main`
 - Active working branch for current redesign work: `homepage-figma-refresh`
+- Current release branch: `codex/metadata-seo`
 - Deployment method: GitHub push plus Vercel production deploy when a reviewed branch needs to go live immediately.
+
+## Latest Internal-Link Release — 2026-08-05
+
+- Commit: `faa072f`
+- Production deployment: `dpl_3By4xPLn7zLdTKC4J7BSuksAkRxW`
+- Status: `READY`
+- Internal links now point directly to canonical WordPress routes, avoiding internal 301 hops.
+- 61 broken page links in `src/data/blog-migration-registry.json` were corrected.
+- `/about` was removed from the sitemap; redirect sources in `next.config.ts` remain unchanged.
+- TypeScript, internal route/asset QA, production build, calculator routes, sitemap, favicon, and logo checks passed.
 
 ## Latest Production Deployment
 
 Latest confirmed live update:
 
-- Date: 2026-06-26
-- Commit: `d9b871c` - `Build dealer locator from ARS dealer data`
+- Date: 2026-08-08
+- Commit: `871462f` — `Refresh solution page assets and content`
+- Vercel deployment: `dpl_4sYbBETKM1uS632v8SMm8ymMSaDt`
+- Status: `READY`
+- Verified routes: `/`, `/road-projects-tmt-steel-bars`, `/bridges-projects-tmt-steel-bars`, `/institutions-projects-tmt-steel-bars`, `/steel-distributors-dealers`, `/tmt-steel-bar-guide-homeowners`
+- All verified routes returned HTTP 200.
+
+What went live:
+
+- Refreshed solution-page content and local ARS imagery.
+- Added local solution assets for Roads, Bridges, Contractors, Dealers, Engineers & Architects, and related page sections.
+- Added available local Binders and CRS brochure assets.
+
+## Previous Production Deployment
+
+Latest confirmed live update:
+
+- Date: 2026-08-07
+- Commit: `79a3438` — `Standardize FAQ presentation`
+- Vercel deployment: `dpl_E1w66Nt94QfCwQsRqnvPU7jMTmaN`
+- Status: `READY`
+- Verified routes: `/`, `/products`, `/our-quality`, `/ars-green-steel`, `/10-mm-steel-rod`, `/tmt-steel-calculator`
+- All verified routes returned HTTP 200.
+
+What went live:
+
+- Shared accessible FAQ presentation and interaction pattern.
+- Consistent FAQ spacing, dividers, typography, focus states, open/closed icon states, and multi-answer behavior.
+- Canonical product ordering: ARS CRS 550D → ARS 550D → ARS BINDERS.
+- Homepage CTA refresh rollback, preserving the original homepage CTA layer.
+
+## Previous Production Deployment
+
+Latest confirmed live update:
+
+- Date: 2026-08-02
+- Commit: `4d5c4fc` - `Refine legal pages and dealer locator`
 - Production URL: https://ars-green-steel.vercel.app/
-- Dealer locator URL: https://ars-green-steel.vercel.app/dealer-locator
-- Vercel deployment: `dpl_BuLCLbpBEAvGJV1NB8PJ8G9Zkgvt`
+- Dealer locator URL: https://ars-green-steel.vercel.app/our-network
+- Vercel deployment: `dpl_4AfuvJQX2BCCENKX5ds8HxHuEw5Q`
 - Status: `READY`
 
 What went live:
 
-- Dealer locator rebuilt using the supplied ARS dealer CSV.
-- Search by location, pincode, dealer code, dealer name, phone, city, and state.
+- Dealer locator updated from the supplied region-wise workbook with 1,566 unique records.
+- State selection filters the city options; dealer codes remain internal only.
 - Dealer cards include call and map direction actions.
-- Dealer intro cards were removed per client feedback.
+- Privacy Policy and Terms of Use use the shared legal-page system.
+- Mobile menu viewport positioning and duplicate React keys were fixed.
 
 ## Current Recommended Deployment Flow
 

@@ -1,10 +1,51 @@
 # Final QA Report
 
-Date: 2026-06-01
+Date: 2026-08-05
 
 This pass covers visual polish, SEO readiness, accessibility basics, performance readiness, and deployment checks for the current ARS Green Steel redesign.
 
+## Solution Content and Asset Release — 2026-08-08
+
+- Release commit: `871462f`.
+- Production deployment: `dpl_4sYbBETKM1uS632v8SMm8ymMSaDt` (`READY`).
+- Updated solution-page content and local imagery across project, audience, and dealer/distributor experiences.
+- Added available local brochure/download assets.
+- TypeScript passed.
+- Internal route and asset QA passed: 154 routes and 172 local assets checked.
+- Production build passed.
+- Verified solution routes returned HTTP 200.
+
+## FAQ and Product Consistency Release — 2026-08-07
+
+- Release commit: `79a3438`.
+- Production deployment: `dpl_E1w66Nt94QfCwQsRqnvPU7jMTmaN` (`READY`).
+- Added and documented the shared `FaqList` component.
+- Standardized FAQ accordion behavior, typography, dividers, spacing, controls, visible focus, stable IDs, and reduced-motion-safe transitions across the converted FAQ sections.
+- Preserved page-owned FAQ content and FAQ structured-data sources on steel-size pages.
+- Confirmed canonical product order: ARS CRS 550D, ARS 550D, ARS BINDERS.
+- Removed the homepage-only CTA refresh requested for rollback; original navigation and homepage pathways remain intact.
+- TypeScript, route/asset QA, and production build passed.
+
 Client-confirmed business data and missing old-site media assets are intentionally excluded from this pass and can be added later.
+
+## Internal-Link QA — 2026-08-05
+
+- Repointed internal links from redirecting modern routes to canonical WordPress routes.
+- Corrected 61 broken page links in the migrated blog registry.
+- Removed the redirected `/about` entry from the sitemap.
+- Kept `next.config.ts` redirect sources unchanged for external legacy URLs.
+- Release commit: `faa072f`.
+- Production deployment: `dpl_3By4xPLn7zLdTKC4J7BSuksAkRxW` (`READY`).
+
+| Check | Result |
+|---|---|
+| TypeScript | Passed |
+| Internal route and asset QA | Passed; 154 routes checked |
+| Production build | Passed |
+| `/tmt-steel-calculator` | HTTP 200 |
+| `/tmt-calculator` | HTTP 200 |
+| `/sitemap.xml` | HTTP 200 |
+| Favicon and ARS550D logo | HTTP 200 |
 
 ## Visual Polish Completed
 

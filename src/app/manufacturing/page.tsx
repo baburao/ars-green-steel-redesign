@@ -1,9 +1,9 @@
-import { ArrowRight, BadgeCheck, Factory, Leaf, Recycle, Zap } from "lucide-react";
+import { ArrowRight, BadgeCheck, Leaf, Recycle, Zap } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { ManufacturingProcessFlow } from "@/components/manufacturing-process-flow";
 import { createPageMetadata } from "@/lib/site-metadata";
 
 export const metadata = createPageMetadata({
@@ -32,7 +32,7 @@ const facilityCapabilities = [
   },
   {
     title: "Product Range",
-    text: "Manufacturing Fe500, Fe550, Fe550D, and CRS 550D TMT bars in multiple diameters to suit diverse construction needs.",
+    text: "Manufacturing ARS Fe 550D and ARS CRS Fe 550D TMT bars in multiple diameters to suit diverse construction needs.",
   },
   {
     title: "Process Excellence",
@@ -127,17 +127,15 @@ export default function ManufacturingPage() {
             sizes="100vw"
             className="object-cover object-[60%_center]"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(6,13,30,0.92)_0%,rgba(6,13,30,0.68)_50%,rgba(6,13,30,0.2)_100%)]" />
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[#060D1E]/80 to-transparent" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,30,0.74)_0%,rgba(6,13,30,0.54)_48%,rgba(6,13,30,0.14)_100%)] md:bg-[linear-gradient(90deg,rgba(6,13,30,0.64)_0%,rgba(6,13,30,0.34)_48%,rgba(6,13,30,0.03)_100%)]" />
+          <div className="absolute inset-x-0 bottom-0 h-[58%] bg-[linear-gradient(0deg,rgba(6,13,30,0.38)_0%,rgba(6,13,30,0.08)_58%,transparent_100%)] md:h-[48%] md:bg-[linear-gradient(0deg,rgba(6,13,30,0.24)_0%,rgba(6,13,30,0.04)_58%,transparent_100%)]" />
         </div>
 
         <div className="ars-container relative z-10 w-full pb-16 md:pb-20">
-          <div className="max-w-3xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.13] bg-white/[0.08] px-3 py-1.5">
-              <Factory aria-hidden="true" size={12} className="text-white/60" />
-              <span className="text-[11px] font-semibold tracking-[0.06em] text-white/70">
-                ARS Manufacturing
-              </span>
+          <div className="max-w-4xl">
+            <div className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">
+              <span className="h-px w-10 bg-brand-red" aria-hidden="true" />
+              ARS Manufacturing
             </div>
             <h1 className="font-display text-[clamp(2.65rem,6vw,4.5rem)] font-extrabold uppercase leading-[1] tracking-[-0.025em] text-white">
               Built with
@@ -232,24 +230,7 @@ export default function ManufacturingPage() {
             </figure>
           </div>
 
-          <ol className="relative mt-4 grid list-none gap-px overflow-hidden rounded-[20px] border border-brand-blue/12 bg-brand-blue/12 sm:grid-cols-2 lg:grid-cols-3">
-            {processStages.map((stage, index) => (
-              <li
-                key={stage}
-                className="relative flex min-h-36 items-start gap-5 overflow-hidden bg-white p-6 md:min-h-40 md:p-8"
-              >
-                <span
-                  aria-hidden="true"
-                  className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-brand-blue font-technical text-xs font-black tracking-[0.12em] text-white"
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <h3 className="min-w-0 pt-1.5 font-display text-xl font-bold leading-tight text-ink-900 md:text-2xl">
-                  {stage}
-                </h3>
-              </li>
-            ))}
-          </ol>
+          <ManufacturingProcessFlow stages={processStages} />
         </div>
       </section>
 
@@ -294,7 +275,7 @@ export default function ManufacturingPage() {
             href="/green-steel"
             className="focus-ring mt-6 inline-flex min-h-12 items-center gap-3 rounded-full bg-brand-red px-6 py-3.5 text-sm font-bold text-white transition hover:bg-brand-red-dark"
           >
-            <span>Explore responsible Green Steel</span>
+            <span>Explore ARS Green Steel</span>
             <ArrowRight aria-hidden="true" className="shrink-0" size={20} />
           </Link>
         </div>
@@ -343,7 +324,7 @@ export default function ManufacturingPage() {
           </div>
 
           <div className="mt-10 flex justify-end">
-            <Link href="/certifications" className="focus-ring inline-flex min-h-12 items-center gap-3 rounded-full bg-brand-blue px-6 py-3.5 text-sm font-bold text-white transition hover:bg-brand-blue-dark">
+            <Link href="/our-certification" className="focus-ring inline-flex min-h-12 items-center gap-3 rounded-full bg-brand-blue px-6 py-3.5 text-sm font-bold text-white transition hover:bg-brand-blue-dark">
               View certifications and awards <ArrowRight aria-hidden="true" size={18} />
             </Link>
           </div>
@@ -366,10 +347,10 @@ export default function ManufacturingPage() {
 
           <div className="flex flex-col gap-4 sm:flex-row lg:flex-col">
             <Link
-              href="/contact?enquiry=plant-visit#enquiry"
+              href="/products"
               className="focus-ring inline-flex min-h-14 items-center justify-center gap-3 rounded-full bg-brand-red px-8 text-base font-bold text-white transition hover:-translate-y-0.5 hover:bg-brand-red-dark"
             >
-              Schedule a Plant Visit <ArrowRight aria-hidden="true" size={18} />
+              Explore Products <ArrowRight aria-hidden="true" size={18} />
             </Link>
             <Link
               href="/contact#enquiry"
@@ -381,7 +362,6 @@ export default function ManufacturingPage() {
         </div>
       </section>
 
-      <SiteFooter />
     </main>
   );
 }

@@ -4,7 +4,6 @@ import Link from "next/link";
 import { ArrowRight, MapPin, Phone } from "lucide-react";
 import { DealerLocatorExperience } from "@/components/dealer-locator-experience";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { clientVerificationSummary, verifiedContactDetails } from "@/data/business-verification";
 import { dealers } from "@/data/dealers";
@@ -12,7 +11,7 @@ import { dealers } from "@/data/dealers";
 export const metadata = createPageMetadata({
   title: "Dealer Locator | ARS Green Steel",
   description: "Search ARS Green Steel dealer records by city, district, pincode, or dealer name.",
-  path: "/dealer-locator",
+  path: "/our-network",
 });
 
 const dealerStats = [
@@ -138,7 +137,6 @@ export default function DealerLocatorPage() {
         </div>
       </section>
 
-      <SiteFooter />
     </main>
   );
 }

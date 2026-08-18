@@ -54,7 +54,7 @@ export function HomeHero() {
     <section
       aria-label="ARS Green Steel hero"
       data-active-word={active.word}
-      className="relative flex min-h-[calc(100svh-76px)] w-full items-center overflow-hidden bg-bg-dark text-white"
+      className="ars-page-hero relative flex w-full items-center overflow-hidden bg-bg-dark text-white"
     >
       <div className="absolute inset-0 h-full w-full bg-bg-dark">
         <div className="hero-video-placeholder absolute inset-0 h-full w-full" />
@@ -69,18 +69,18 @@ export function HomeHero() {
         >
           <source src="/ars-assets/home/ARS_Hero_video.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-r from-bg-dark/72 via-bg-dark/46 to-bg-dark/10" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,13,30,0.02),rgba(6,13,30,0.68))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,30,0.74)_0%,rgba(6,13,30,0.52)_48%,rgba(6,13,30,0.12)_100%)] md:bg-[linear-gradient(90deg,rgba(6,13,30,0.6)_0%,rgba(6,13,30,0.3)_48%,rgba(6,13,30,0.02)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-[62%] bg-[linear-gradient(0deg,rgba(6,13,30,0.42)_0%,rgba(6,13,30,0.08)_58%,transparent_100%)] md:h-[52%] md:bg-[linear-gradient(0deg,rgba(6,13,30,0.28)_0%,rgba(6,13,30,0.04)_58%,transparent_100%)]" />
       </div>
 
-      <div className="ars-container relative z-10 flex min-h-[calc(100svh-76px)] flex-col justify-center py-20 sm:py-24 lg:justify-end lg:pb-14 lg:pt-24">
+      <div className="ars-container ars-page-hero-content relative z-10 flex min-h-[560px] flex-col justify-center py-20 sm:py-24 md:min-h-[600px] lg:min-h-[680px] lg:justify-end lg:pb-14 lg:pt-24">
         <div className="min-w-0">
           <div className="min-w-0">
             <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-2 text-sm text-grey-300 backdrop-blur sm:mb-7">
               <span className="size-2 rounded-full bg-brand-blue" />
               Since 1992 · Trusted TMT Steel Manufacturer
             </div>
-            <h1 className="max-w-[760px] font-display text-[clamp(2.65rem,6vw,4.5rem)] font-extrabold uppercase leading-[0.95] tracking-normal text-white">
+          <h1 className="max-w-[760px] font-display text-white">
               <span className="sr-only" aria-live="polite">
                 {active.titlePrefix} {active.word}. {active.copy}
               </span>
@@ -96,18 +96,17 @@ export function HomeHero() {
                       exit={reduceMotion ? { opacity: 0 } : { y: "-82%", opacity: 0, rotateX: 18 }}
                       transition={{ duration: 0.72, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      {active.word}
+                {active.word}
                     </motion.span>
                   </AnimatePresence>
                 </span>
-                Structures.
               </span>
             </h1>
             <p className="mt-5 max-w-[590px] text-base leading-7 text-grey-200 sm:mt-6 sm:text-lg sm:leading-9">
               {active.copy}
             </p>
             <div className="mt-6 flex flex-col gap-3 sm:mt-7 sm:flex-row">
-              <Link className="focus-ring inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-[6px] bg-brand-red px-5 text-sm font-semibold text-white shadow-[0_16px_42px_rgba(222,18,26,0.26)] transition hover:bg-brand-red-dark" href="/tmt-calculator">
+              <Link className="focus-ring inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-[6px] bg-brand-red px-5 text-sm font-semibold text-white shadow-[0_16px_42px_rgba(222,18,26,0.26)] transition hover:bg-brand-red-dark" href="/tmt-steel-calculator">
                 Calculate Steel <ArrowRight size={18} />
               </Link>
               <Link className="focus-ring inline-flex h-12 items-center justify-center gap-2 whitespace-nowrap rounded-[6px] border border-white/28 bg-white/8 px-5 text-sm font-semibold text-white backdrop-blur transition hover:bg-white hover:text-ink-900" href="#products">

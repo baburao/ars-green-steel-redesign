@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 import "./globals.css";
+import { AnalyticsInteractions } from "@/components/analytics-interactions";
 import { defaultSocialImage, isProductionSite, productionDomain, toProductionUrl } from "@/lib/site-metadata";
+import { SiteFooter } from "@/components/site-footer";
+
+const gaId = process.env.NEXT_PUBLIC_GA_ID;
+const analyticsEnabled = process.env.NEXT_PUBLIC_ANALYTICS_ENABLED === "true" && Boolean(gaId);
 
 export const metadata: Metadata = {
   metadataBase: new URL(productionDomain),
@@ -41,7 +47,10 @@ export default function RootLayout({
       <body className="min-h-full">
         <a className="skip-link" href="#main-content">Skip to content</a>
         <div id="main-content">{children}</div>
+        <SiteFooter />
+        {analyticsEnabled ? <AnalyticsInteractions /> : null}
       </body>
+      {analyticsEnabled && gaId ? <GoogleAnalytics gaId={gaId} /> : null}
     </html>
   );
 }

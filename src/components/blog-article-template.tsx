@@ -36,19 +36,19 @@ const topicIcon = {
 const topicCta = {
   "TMT products": {
     eyebrow: "Choose the right steel",
-    title: "Compare ARS 550D and CRS 550D before you buy.",
+    title: "Compare ARS Fe 550D and CRS 550D before you buy.",
     body: "Move from article research to product selection, steel quantity planning, or a quote from the ARS team.",
     primaryLabel: "View products",
     primaryHref: "/products",
     secondaryLabel: "Calculate TMT quantity",
-    secondaryHref: "/tmt-calculator",
+    secondaryHref: "/tmt-steel-calculator",
   },
   "Construction knowledge": {
     eyebrow: "Plan your project",
     title: "Turn construction guidance into a steel estimate.",
     body: "Use the calculator, check current buying routes, or connect with ARS for project-specific support.",
     primaryLabel: "Use TMT calculator",
-    primaryHref: "/tmt-calculator",
+    primaryHref: "/tmt-steel-calculator",
     secondaryLabel: "Request quote",
     secondaryHref: "/request-quote",
   },
@@ -59,7 +59,7 @@ const topicCta = {
     primaryLabel: "Explore green steel",
     primaryHref: "/ars-green-steel",
     secondaryLabel: "View CRS 550D",
-    secondaryHref: "/products/ars-crs-550d",
+    secondaryHref: "/product-crs-550d",
   },
   "Manufacturing & quality": {
     eyebrow: "Verify the steel",
@@ -75,9 +75,9 @@ const topicCta = {
     title: "Need today’s rate or dealer support for your next purchase?",
     body: "Move from market context to current price guidance, nearby dealer discovery, or a direct quote.",
     primaryLabel: "Check steel price",
-    primaryHref: "/steel-price-today",
+    primaryHref: "/tmt-steel-price-today",
     secondaryLabel: "Find a dealer",
-    secondaryHref: "/dealer-locator",
+    secondaryHref: "/our-network",
   },
 } satisfies Record<BlogArchiveArticle["category"], {
   eyebrow: string;
@@ -391,7 +391,7 @@ export function BlogArticleTemplate({
         primaryLabel="Request quote"
         primaryHref="/request-quote"
         secondaryLabel="Find a dealer"
-        secondaryHref="/dealer-locator"
+        secondaryHref="/our-network"
       />
     </main>
   );

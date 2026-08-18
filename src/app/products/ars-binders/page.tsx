@@ -8,20 +8,22 @@ import {
   FileText,
   Gauge,
   MapPin,
+  Phone,
   Ruler,
   ShieldCheck,
   Timer,
 } from "lucide-react";
 import { MotionSection } from "@/components/motion-section";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { ProductLeadCaptureForm } from "@/components/product-lead-capture-form";
+import { FaqList } from "@/components/faq-list";
 
 export const metadata = createPageMetadata({
   title: "ARS Binders | ARS Green Steel",
   description:
-    "Manufactured from premium ARS CRS 550D TMT Bars, ARS Binders are precision-made stirrups that reduce manual bending, minimise steel wastage, and help deliver faster, more consistent reinforcement on site.",
-  path: "/products/ars-binders",
+    "Manufactured from premium ARS CRS Fe 550D TMT Bars, ARS Binders are precision-made stirrups that reduce manual bending, minimise steel wastage, and help deliver faster, more consistent reinforcement on site.",
+  path: "/ars-binders",
 });
 
 const trustItems = [
@@ -33,7 +35,7 @@ const trustItems = [
 
 const technicalOverview = [
   { label: "Product", value: "Factory-Made TMT Binders" },
-  { label: "Material", value: "ARS CRS 550D TMT Bars" },
+  { label: "Material", value: "ARS CRS Fe 550D TMT Bars" },
   { label: "Available Sizes", value: "8 mm • 10 mm" },
   { label: "Manufacturing", value: "Machine Bent • Factory Precision" },
   { label: "Compliance", value: "IS 1786 Compliant Steel" },
@@ -58,7 +60,7 @@ const reasons = [
   },
   {
     title: "Superior Ductility",
-    description: "Manufactured using ARS CRS 550D TMT Bars for dependable strength and flexibility.",
+    description: "Manufactured using ARS CRS Fe 550D TMT Bars for dependable strength and flexibility.",
     icon: Gauge,
   },
   {
@@ -108,7 +110,7 @@ const benefits = [
 const faqs = [
   [
     "What are ARS Binders?",
-    "ARS Binders are factory-made TMT stirrups manufactured from premium ARS CRS 550D TMT Bars. Designed for reinforced concrete construction, they provide consistent dimensions, reduce on-site bending, and help improve construction speed and quality.",
+    "ARS Binders are factory-made TMT stirrups manufactured from premium ARS CRS Fe 550D TMT Bars. Designed for reinforced concrete construction, they provide consistent dimensions, reduce on-site bending, and help improve construction speed and quality.",
   ],
   [
     "How are ARS Binders different from manually bent stirrups?",
@@ -120,7 +122,7 @@ const faqs = [
   ],
   [
     "What steel is used to manufacture ARS Binders?",
-    "ARS Binders are manufactured using premium ARS CRS 550D TMT Bars. This provides high strength, superior ductility, and enhanced corrosion resistance for long-lasting reinforced concrete structures.",
+    "ARS Binders are manufactured using premium ARS CRS Fe 550D TMT Bars. This provides high strength, superior ductility, and enhanced corrosion resistance for long-lasting reinforced concrete structures.",
   ],
   [
     "Where can ARS Binders be used?",
@@ -132,7 +134,7 @@ const faqs = [
   ],
   [
     "Are ARS Binders corrosion resistant?",
-    "Yes. ARS Binders are manufactured from ARS CRS 550D TMT Bars, which are engineered to provide enhanced corrosion resistance, making them suitable for structures exposed to humid and high-salinity environments.",
+    "Yes. ARS Binders are manufactured from ARS CRS Fe 550D TMT Bars, which are engineered to provide enhanced corrosion resistance, making them suitable for structures exposed to humid and high-salinity environments.",
   ],
 ] as const;
 
@@ -159,32 +161,31 @@ export default function ArsBindersPage() {
 
       <section className="ars-page-hero relative flex items-end overflow-hidden bg-ink-950 text-white">
         <Image
-          src="/ars-assets/products/ARSBinders_herobanner.jpg"
+          src="/ars-assets/products/ARSBinders.jpg"
           alt="ARS Binders with campaign spokesperson"
           fill
           priority
           sizes="100vw"
           className="object-cover object-[60%_center]"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(6,13,30,0.96),rgba(6,13,30,0.78)_54%,rgba(6,13,30,0.36))]" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_top,rgba(6,13,30,0.9),transparent_58%)]" />
-        <div className="ars-container relative z-10 w-full pb-14 pt-32 md:pb-16">
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,30,0.74)_0%,rgba(6,13,30,0.54)_48%,rgba(6,13,30,0.14)_100%)] md:bg-[linear-gradient(90deg,rgba(6,13,30,0.64)_0%,rgba(6,13,30,0.34)_48%,rgba(6,13,30,0.03)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-[58%] bg-[linear-gradient(0deg,rgba(6,13,30,0.38)_0%,rgba(6,13,30,0.08)_58%,transparent_100%)] md:h-[48%] md:bg-[linear-gradient(0deg,rgba(6,13,30,0.24)_0%,rgba(6,13,30,0.04)_58%,transparent_100%)]" />
+        <div className="ars-container relative z-10 w-full pb-14 pt-36 md:pb-20">
           <div className="max-w-4xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.13] bg-white/[0.08] px-3 py-1.5">
-              <span className="size-1.5 rounded-full bg-brand-red" aria-hidden="true" />
-              <span className="text-[11px] font-semibold tracking-[0.08em] text-white/75">ARS CONSTRUCTION BINDERS</span>
-            </div>
+            <div className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70"><span className="h-px w-10 bg-brand-red" aria-hidden="true" />ARS BINDERS</div>
             <h1 className="font-display text-[clamp(2.65rem,6vw,4.5rem)] font-extrabold leading-[1.04] tracking-[-0.025em] text-white">
               Factory-Made TMT Binders for Faster, Smarter Construction
             </h1>
-            <p className="mt-5 max-w-2xl text-[16px] leading-[1.75] text-white/75">
-              Manufactured from premium ARS CRS 550D TMT Bars, ARS Binders are precision-made stirrups that reduce manual bending, minimise steel wastage, and help deliver faster, more consistent reinforcement on site.
+            <p className="mt-7 max-w-2xl text-base leading-7 text-white/75 md:text-lg md:leading-8">
+              Manufactured from premium ARS CRS Fe 550D TMT Bars, ARS Binders are precision-made stirrups that reduce manual bending, minimise steel wastage, and help deliver faster, more consistent reinforcement on site.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/request-quote" className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full bg-brand-red px-6 py-3 text-[14px] font-bold text-white transition hover:opacity-90">
                 Request Quote <ArrowRight size={15} />
               </Link>
-              <DisabledBrochureAction dark />
+              <a href="tel:+919710411111" className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full border border-white/30 px-6 py-3 text-[14px] font-bold text-white transition hover:bg-white hover:text-brand-blue">
+                <Phone size={15} aria-hidden="true" /> Talk to Experts
+              </a>
             </div>
           </div>
         </div>
@@ -215,7 +216,7 @@ export default function ArsBindersPage() {
             <div className="relative z-10 mt-auto max-w-xl">
               <SectionKicker variant="light">PRODUCT OVERVIEW</SectionKicker>
               <h2 className="font-display text-[clamp(2rem,3.4vw,2.25rem)] font-bold leading-[1.1] tracking-[-0.025em] text-white">What Are ARS Binders?</h2>
-              <p className="mt-5 max-w-2xl text-[16px] leading-[1.8] text-white/80">ARS Binders are factory-manufactured TMT stirrups made from premium ARS CRS 550D TMT Bars. Designed for consistent quality and precision, they eliminate on-site bending, reduce steel wastage, improve construction speed, and deliver reliable reinforcement for reinforced concrete structures.</p>
+              <p className="mt-5 max-w-2xl text-[16px] leading-[1.8] text-white/80">ARS Binders are factory-manufactured TMT stirrups made from premium ARS CRS Fe 550D TMT Bars. Designed for consistent quality and precision, they eliminate on-site bending, reduce steel wastage, improve construction speed, and deliver reliable reinforcement for reinforced concrete structures.</p>
             </div>
           </div>
           <div className="overflow-hidden rounded-[8px] border-[1.5px] border-surface-100 bg-white">
@@ -262,10 +263,9 @@ export default function ArsBindersPage() {
             <p className="mt-5 max-w-xl text-[16px] leading-[1.8] text-steel-700">Suitable for reinforced concrete structures where speed, accuracy, and consistent reinforcement are essential.</p>
             <div className="relative mt-10 min-h-72 overflow-hidden rounded-[8px] bg-ink-950 lg:min-h-[420px]">
               <Image
-                src="/ars-assets/placeholders/binders-rcc-construction-placeholder.png"
-                alt="Temporary placeholder showing a reinforced concrete construction site with a rebar column cage"
+                src="/ars-assets/products/Binders_ModernRCC.jpg"
+                alt="ARS Binders used in modern reinforced concrete construction"
                 fill
-                unoptimized
                 sizes="(max-width: 1024px) 100vw, 38vw"
                 className="object-cover"
               />
@@ -273,11 +273,10 @@ export default function ArsBindersPage() {
             </div>
           </div>
           <ul className="grid gap-3 sm:grid-cols-2 lg:content-center">
-            {applications.map(({ label, icon: Icon }, index) => (
+            {applications.map(({ label, icon: Icon }) => (
               <li key={label} className="group relative flex min-h-36 flex-col justify-between overflow-hidden rounded-[8px] border border-ink-900/10 bg-white p-5 transition hover:-translate-y-0.5 hover:border-brand-blue/30 hover:shadow-[0_14px_35px_rgba(13,43,110,0.08)]">
                 <div className="flex items-start justify-between gap-4">
                   <span className="flex size-10 items-center justify-center rounded-[6px] bg-brand-blue/[0.06] text-brand-blue"><Icon size={19} aria-hidden="true" /></span>
-                  <span className="font-display text-[13px] font-extrabold tracking-[-0.02em] text-brand-red">{String(index + 1).padStart(2, "0")}</span>
                 </div>
                 <span className="mt-8 max-w-[12rem] text-[16px] font-bold leading-[1.3] text-ink-900">{label}</span>
               </li>
@@ -306,11 +305,10 @@ export default function ArsBindersPage() {
             </div>
           </div>
           <ul className="mt-10 grid gap-px overflow-hidden rounded-[8px] border border-ink-900/10 bg-ink-900/10 sm:grid-cols-2 lg:grid-cols-4">
-            {benefits.map(({ label, icon: Icon }, index) => (
+            {benefits.map(({ label, icon: Icon }) => (
               <li key={label} className="group relative flex min-h-48 flex-col justify-between bg-white p-6 transition hover:bg-surface-50">
                 <div className="flex items-start justify-between gap-4">
                   <span className="flex size-11 items-center justify-center rounded-[6px] bg-brand-blue text-white"><Icon size={19} aria-hidden="true" /></span>
-                  <span className="font-display text-[13px] font-extrabold tracking-[-0.02em] text-brand-red">{String(index + 1).padStart(2, "0")}</span>
                 </div>
                 <span className="mt-8 max-w-[14rem] text-[16px] font-bold leading-[1.35] text-ink-900">{label}</span>
               </li>
@@ -319,51 +317,24 @@ export default function ArsBindersPage() {
         </div>
       </MotionSection>
 
+      <ProductLeadCaptureForm product="ARS Binders" trustItems={["Factory-made precision", "CRS 550D steel", "IS 1786 compliant", "Consistent quality"]} />
+
       <MotionSection className="bg-surface-50 py-20 md:py-24">
         <div className="ars-container max-w-5xl">
           <h2 className="text-center font-display text-[clamp(2rem,3.4vw,2.25rem)] font-bold leading-[1.1] tracking-[-0.025em] text-ink-900">FAQs</h2>
-          <div className="mt-10 divide-y divide-surface-100 rounded-[8px] border border-surface-100 bg-white">
-            {faqs.map(([question, answer]) => (
-              <details key={question} className="group">
-                <summary className="focus-ring flex min-h-14 cursor-pointer list-none items-center justify-between gap-5 px-6 py-5 font-display text-[16px] font-bold text-ink-900 [&::-webkit-details-marker]:hidden">
-                  <span>{question}</span><ArrowRight size={18} className="shrink-0 text-brand-red transition group-open:rotate-90" aria-hidden="true" />
-                </summary>
-                <p className="px-6 pb-6 text-[15px] leading-[1.8] text-steel-700">{answer}</p>
-              </details>
-            ))}
-          </div>
-        </div>
-      </MotionSection>
-
-      <MotionSection className="bg-white py-20 md:py-24">
-        <div className="ars-container">
-          <div className="mb-12 grid items-end gap-8 lg:grid-cols-2">
-            <div><SectionKicker variant="brand">NEXT STEP</SectionKicker><h2 className="font-display text-[clamp(2rem,3.4vw,2.25rem)] font-bold leading-[1.1] tracking-[-0.025em] text-ink-900">Ready to Build Faster with ARS Binders?</h2></div>
-          </div>
-          <div className="grid gap-5 md:grid-cols-3">
-            <Link href="/request-quote" className="focus-ring group flex min-h-56 flex-col justify-between rounded-[8px] border-[1.5px] border-surface-100 bg-white p-7 transition hover:-translate-y-0.5 hover:shadow-lg"><FileText size={21} className="text-brand-blue" aria-hidden="true" /><h3 className="font-display text-[20px] font-bold text-ink-900">Request Quote</h3><ArrowRight size={16} className="text-brand-red" aria-hidden="true" /></Link>
-            <Link href="/dealer-locator" className="focus-ring group flex min-h-56 flex-col justify-between rounded-[8px] border-[1.5px] border-surface-100 bg-white p-7 transition hover:-translate-y-0.5 hover:shadow-lg"><MapPin size={21} className="text-brand-blue" aria-hidden="true" /><h3 className="font-display text-[20px] font-bold text-ink-900">Find Dealer</h3><ArrowRight size={16} className="text-brand-red" aria-hidden="true" /></Link>
-            <div className="flex min-h-56 flex-col justify-between rounded-[8px] border-[1.5px] border-surface-100 bg-surface-50 p-7"><FileText size={21} className="text-brand-blue/55" aria-hidden="true" /><h3 className="font-display text-[20px] font-bold text-ink-900">Download Brochure</h3><DisabledBrochureAction /></div>
-          </div>
+          <FaqList className="mt-10 rounded-[8px] border border-surface-100 bg-white px-6" items={faqs.map(([question, answer]) => ({ question, answer }))} />
         </div>
       </MotionSection>
 
       <MotionSection className="relative overflow-hidden bg-brand-blue py-20">
         <div className="absolute inset-0 opacity-10" style={{ backgroundImage: "radial-gradient(circle at 15% 50%, rgba(222,18,26,0.7) 0%, transparent 55%)" }} />
-        <div className="ars-container relative z-10 flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
-          <div>
-            <SectionKicker variant="light">READY TO BUILD</SectionKicker>
-            <h2 className="font-display text-[clamp(2rem,3.4vw,2.25rem)] font-bold leading-[1.12] tracking-[-0.02em] text-white">Simplify Reinforcement. Build with Precision.</h2>
-            <p className="mt-3 max-w-[620px] text-[15px] leading-[1.7] text-white/75">Talk to our team to learn how ARS Binders can help reduce construction time, improve reinforcement accuracy, and deliver consistent quality across every project.</p>
-          </div>
-          <div className="flex flex-wrap gap-3">
-            <Link href="/contact" className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full bg-brand-red px-6 py-3.5 text-[14px] font-bold text-white"><FileText size={15} /> Talk to Sales</Link>
-            <Link href="/request-quote" className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full border-[1.5px] border-white/30 px-6 py-3.5 text-[14px] font-semibold text-white"><FileText size={15} /> Request Quote</Link>
-          </div>
+        <div className="ars-container relative z-10">
+          <SectionKicker variant="light">READY TO BUILD</SectionKicker>
+          <h2 className="mt-5 font-display text-[clamp(2rem,3.4vw,2.25rem)] font-bold leading-[1.12] tracking-[-0.02em] text-white">Simplify Reinforcement. Build with Precision.</h2>
+          <p className="mt-3 max-w-[620px] text-[15px] leading-[1.7] text-white/75">Get a Quote for ARS Binders</p>
         </div>
       </MotionSection>
 
-      <SiteFooter />
     </main>
   );
 }

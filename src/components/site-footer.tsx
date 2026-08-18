@@ -7,13 +7,13 @@ const footerGroups = [
   {
     title: "Company & Connect",
     links: [
-      { label: "About ARS Group", href: "/about" },
+      { label: "About ARS Group", href: "/about-us" },
       { label: "Vision & Mission", href: "/vision-mission" },
       { label: "Leadership", href: "/our-team" },
       { label: "Manufacturing", href: "/manufacturing" },
       { label: "Quality", href: "/our-quality" },
       { label: "Steel Testing", href: "/steel-testing" },
-      { label: "Certifications & Awards", href: "/certifications" },
+      { label: "Certifications & Awards", href: "/our-certification" },
       { label: "CSR", href: "/csr" },
       { label: "Careers", href: "/careers" },
     ],
@@ -22,9 +22,9 @@ const footerGroups = [
     title: "Products",
     links: [
       { label: "All Products", href: "/products" },
-      { label: "ARS 550D TMT Bar", href: "/products/ars-550d" },
-      { label: "ARS CRS 550D", href: "/products/ars-crs-550d" },
-      { label: "ARS Binders", href: "/products/ars-binders" },
+      { label: "ARS CRS Fe 550D", href: "/product-crs-550d" },
+      { label: "ARS Fe 550D TMT Bar", href: "/product-550d" },
+      { label: "ARS Binders", href: "/ars-binders" },
       { label: "Product Comparison", href: "/products#comparison" },
     ],
   },
@@ -46,16 +46,17 @@ const footerGroups = [
       { label: "Green Steel Explained", href: "/green-steel" },
       { label: "ARS Green Steel", href: "/ars-green-steel" },
       { label: "Embodied Carbon", href: "/embodied-carbon" },
-      { label: "Environmental Certifications", href: "/certifications" },
-      { label: "Reports & Downloads", href: "/certifications#downloads" },
+      { label: "Environmental Certifications", href: "/green-certifications" },
+      { label: "Reports & Downloads", href: "/our-certification#downloads" },
     ],
   },
   {
     title: "Resources",
     links: [
-      { label: "Steel Price Today", href: "/steel-price-today" },
-      { label: "TMT Calculator", href: "/tmt-calculator" },
-      { label: "Dealer Locator", href: "/dealer-locator" },
+      { label: "Steel Price Today", href: "/tmt-steel-price-today" },
+      { label: "TMT Calculator", href: "/tmt-steel-calculator" },
+      { label: "Dealer Locator", href: "/our-network" },
+      { label: "Become a Distributor", href: "/become-a-steel-distributor" },
       { label: "Blog & Articles", href: "/blog" },
       { label: "Videos", href: "/video" },
     ],
@@ -126,16 +127,6 @@ export function SiteFooter() {
                 className="h-auto w-[168px] md:w-[186px]"
               />
             </Link>
-            <p className="mt-7 max-w-md text-sm leading-7 text-slate-300">
-              ARS Green Steel is India&apos;s leading manufacturer of BIS-certified TMT bars, delivering high-strength,
-              corrosion-resistant, and sustainable steel solutions for residential, commercial, and infrastructure projects.
-            </p>
-            <Link
-              className="focus-ring mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-white transition hover:text-slate-200"
-              href="/certifications"
-            >
-              Certifications <ArrowRight size={15} />
-            </Link>
           </div>
 
           <div className="rounded-[18px] border border-white/12 bg-white/[0.035] p-6 md:p-8">
@@ -146,7 +137,7 @@ export function SiteFooter() {
                 href="tel:+919710411111"
               >
                 <Phone size={18} className="mt-0.5 shrink-0 text-white" />
-                <span><strong className="block text-white">Sales helpline</strong>{verifiedContactDetails.mobile}</span>
+                <span><strong className="block text-white">Customer Care</strong>{verifiedContactDetails.mobile}</span>
               </a>
               <Link
                 className="focus-ring flex min-h-11 items-start gap-3 text-sm text-slate-300 transition hover:text-white"
@@ -177,9 +168,15 @@ export function SiteFooter() {
               </Link>
               <Link
                 className="focus-ring inline-flex min-h-11 items-center rounded-full border border-white/20 px-5 text-sm font-bold text-white transition hover:border-white/40"
-                href="/become-a-dealer"
+                href="/steel-distributors-dealers"
               >
                 Become a dealer
+              </Link>
+              <Link
+                className="focus-ring inline-flex min-h-11 items-center rounded-full border border-white/20 px-5 text-sm font-bold text-white transition hover:border-white/40"
+                href="/contact"
+              >
+                Contact Us
               </Link>
               <div className="flex items-center gap-2 sm:ml-auto">
                 {socialLinks.map((item) => {

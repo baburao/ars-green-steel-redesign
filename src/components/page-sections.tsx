@@ -17,6 +17,7 @@ type HeroProps = {
   secondaryLabel?: string;
   secondaryHref?: string;
   showActions?: boolean;
+  /** Retained for compatibility with source-led callers; global H1 casing is now standardized. */
   preserveTitleCase?: boolean;
   backgroundImageSrc?: string;
   backgroundImageAlt?: string;
@@ -44,7 +45,6 @@ export function PageHero({
   secondaryLabel = "Talk to sales",
   secondaryHref = "/contact",
   showActions = true,
-  preserveTitleCase = false,
   backgroundImageSrc,
   backgroundImageAlt = "",
   backgroundImagePosition = "center",
@@ -65,42 +65,36 @@ export function PageHero({
         ) : (
           <>
             <div className="hero-video-placeholder absolute inset-0 h-full w-full" />
-            <video className="absolute inset-0 h-full w-full object-cover opacity-58" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
+            <video className="absolute inset-0 h-full w-full object-cover opacity-85" autoPlay muted loop playsInline preload="metadata" aria-hidden="true">
               <source src="/videos/ars-intro.mp4" type="video/mp4" />
             </video>
           </>
         )}
-        <div className="absolute inset-0 bg-gradient-to-r from-ink-950 via-ink-950/78 to-ink-950/28" />
-        <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(11,13,14,0.1),rgba(11,13,14,0.88))]" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,30,0.74)_0%,rgba(6,13,30,0.54)_48%,rgba(6,13,30,0.14)_100%)] md:bg-[linear-gradient(90deg,rgba(6,13,30,0.64)_0%,rgba(6,13,30,0.34)_48%,rgba(6,13,30,0.03)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 h-[58%] bg-[linear-gradient(0deg,rgba(6,13,30,0.38)_0%,rgba(6,13,30,0.08)_58%,transparent_100%)] md:h-[48%] md:bg-[linear-gradient(0deg,rgba(6,13,30,0.24)_0%,rgba(6,13,30,0.04)_58%,transparent_100%)]" />
       </div>
 
-      <div className="ars-container relative z-10 pb-16 pt-32">
-        <div className="grid gap-10 lg:grid-cols-[0.74fr_0.26fr] lg:items-end">
-          <div>
-            <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-3 py-2 text-sm text-grey-300 backdrop-blur">
-              <span className="size-2 rounded-full bg-brand-blue" />
-              {eyebrow}
+      <div className="ars-container relative z-10 w-full pb-14 pt-36 md:pb-20">
+        <div className="max-w-4xl">
+          <div className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70">
+            <span className="h-px w-10 bg-brand-red" aria-hidden="true" />
+            {eyebrow}
+          </div>
+          <h1 className="max-w-4xl break-words font-display text-white">
+            {title}
+            {accent ? <span className="block font-serif italic text-[var(--text-accent-dark)]">{accent}</span> : null}
+          </h1>
+          <p className="mt-7 max-w-2xl text-base leading-7 text-white/75 md:text-lg md:leading-8">{body}</p>
+          {showActions ? (
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-[6px] bg-brand-blue px-5 py-3 text-sm font-semibold text-white transition hover:bg-brand-blue-dark" href={primaryHref}>
+                {primaryLabel} <ArrowRight size={18} aria-hidden="true" />
+              </a>
+              <a className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-[6px] border border-white/35 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white hover:text-ink-900" href={secondaryHref}>
+                {secondaryLabel} <ArrowRight size={18} aria-hidden="true" />
+              </a>
             </div>
-            <h1 className={`max-w-6xl break-words font-display text-[clamp(2.65rem,6vw,4.5rem)] font-black ${preserveTitleCase ? "" : "uppercase"} leading-[0.92] tracking-normal text-white`}>
-              {title}
-              {accent ? (
-                <span className="block font-serif italic text-brand-red">{accent}</span>
-              ) : null}
-            </h1>
-          </div>
-          <div className="max-w-md lg:justify-self-end">
-            <p className="text-base leading-8 text-grey-300">{body}</p>
-            {showActions ? (
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row lg:flex-col">
-                <a className="focus-ring inline-flex h-12 items-center justify-center gap-2 rounded-[6px] bg-brand-blue px-5 text-sm font-semibold text-white transition hover:bg-brand-blue-dark" href={primaryHref}>
-                  {primaryLabel} <ArrowRight size={18} />
-                </a>
-                <a className="focus-ring inline-flex h-12 items-center justify-center gap-2 rounded-[6px] border border-white/35 px-5 text-sm font-semibold text-white transition hover:bg-white hover:text-ink-900" href={secondaryHref}>
-                  {secondaryLabel}
-                </a>
-              </div>
-            ) : null}
-          </div>
+          ) : null}
         </div>
       </div>
     </section>

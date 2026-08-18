@@ -1,10 +1,11 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, ChevronRight, CircleGauge, ShieldCheck, Waves } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { ContactCta } from "@/components/contact-cta";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
+import { FaqList } from "@/components/faq-list";
 
 type ProjectTypePageProps = {
   eyebrow: string;
@@ -136,6 +137,20 @@ export function ProjectTypePage({
             <p className="section-copy section-copy-light max-w-2xl">{relatedSection.body}</p>
           </div>
           <div className="grid gap-3">
+            {relatedSection.eyebrow === "ARS Products" ? (
+              <div className="mb-3 grid gap-3 sm:grid-cols-3">
+                {[
+                  ["ARS CRS Fe 550D", "/ars-assets/logos/ARSCRS550D.png", "/product-crs-550d"],
+                  ["ARS Fe 550D", "/ars-assets/logos/ARS550D.png", "/product-550d"],
+                  ["ARS Binders", "/ars-assets/logos/BinderLogo.png", "/ars-binders"],
+                ].map(([label, image, href]) => (
+                  <Link key={label} href={href} className="focus-ring overflow-hidden rounded-[6px] border border-brand-blue/15 bg-white transition hover:border-brand-blue/40">
+                    <div className="relative h-24 bg-[#F4F7FF]"><Image src={image} alt={`${label} product logo`} fill sizes="(min-width: 640px) 20vw, 33vw" className="object-contain p-4" /></div>
+                    <span className="block border-t border-brand-blue/10 px-3 py-3 text-xs font-bold text-ink-900">{label}</span>
+                  </Link>
+                ))}
+              </div>
+            ) : null}
             {relatedLinks.map((link) => (
               <Link key={link.href} href={link.href} className="focus-ring flex min-h-16 items-center justify-between border border-white/20 bg-white/6 px-5 text-sm font-bold transition hover:bg-white hover:text-ink-900">
                 {link.label} <ArrowRight size={18} />
@@ -151,22 +166,11 @@ export function ProjectTypePage({
             <SectionKicker>{faqSection.eyebrow}</SectionKicker>
             <h2 className="section-title">{faqSection.title}</h2>
           </div>
-          <div className="divide-y divide-ink-900/10 border-y border-ink-900/10">
-            {faq.map((item) => (
-              <details key={item.question} className="group py-6">
-                <summary className="focus-ring cursor-pointer list-none pr-10 text-lg font-bold leading-7 text-ink-900 marker:content-none">
-                  {item.question}
-                  <span className="float-right -mr-8 text-brand-blue transition group-open:rotate-45" aria-hidden="true">+</span>
-                </summary>
-                <p className="mt-4 max-w-3xl text-base leading-7 text-steel-700">{item.answer}</p>
-              </details>
-            ))}
-          </div>
+          <FaqList items={faq} />
         </div>
       </section>
 
       <ContactCta />
-      <SiteFooter />
     </main>
   );
 }
@@ -174,9 +178,9 @@ export function ProjectTypePage({
 export const roadProjectPage = {
   eyebrow: "Road Projects",
   title: "Because Every Journey Deserves a Strong Beginning.",
-  description: "Designed for highways, expressways, and urban road projects, ARS Fe550D CRS TMT Bars combine strength, durability, and engineering excellence for infrastructure that lasts.",
-  primaryCta: { label: "Request project quote", href: "/request-quote" },
-  secondaryCta: { label: "View CRS 550D", href: "/products/ars-crs-550d" },
+  description: "Designed for highways, expressways, and urban road projects, ARS CRS Fe 550D TMT Bars combine strength, durability, and engineering excellence for infrastructure that lasts.",
+  primaryCta: { label: "Calculate Steel", href: "/tmt-steel-calculator" },
+  secondaryCta: { label: "View CRS 550D", href: "/product-crs-550d" },
   rationale: {
     title: "Every Road Is Only as Strong as What Lies Beneath.",
     body: "Roads are more than asphalt. Beneath every highway, expressway, and urban road network lies a system of reinforced concrete structures that carry traffic, withstand environmental conditions, and support decades of continuous use. Choosing high-quality TMT bars is essential to building road infrastructure that delivers lasting strength, durability, and safety.",
@@ -202,11 +206,11 @@ export const roadProjectPage = {
   relatedSection: {
     eyebrow: "Product and quality review",
     title: "Bring the right product information into the project conversation.",
-    body: "Review ARS CRS 550D product information alongside the project’s design, environmental, and specification requirements.",
+    body: "Review ARS CRS Fe 550D product information alongside the project’s design, environmental, and specification requirements.",
   },
   relatedLinks: [
-    { label: "View CRS 550D", href: "/products/ars-crs-550d" },
-    { label: "Explore quality information", href: "/certifications" },
+    { label: "View CRS 550D", href: "/product-crs-550d" },
+    { label: "Explore quality information", href: "/our-certification" },
     { label: "Explore bridges and flyovers", href: "/bridges-projects-tmt-steel-bars" },
     { label: "Explore institutional projects", href: "/institutions-projects-tmt-steel-bars" },
   ],
@@ -215,7 +219,7 @@ export const roadProjectPage = {
     title: "Road-project questions, answered.",
   },
   faq: [
-    { question: "Which TMT bar is suitable for road construction?", answer: "Road projects generally require high-strength, high-ductility TMT bars capable of reinforcing bridges, culverts, retaining walls, and other reinforced concrete structures. ARS Fe550D and CRS 550D TMT Bars are designed for such demanding applications." },
+    { question: "Which TMT bar is suitable for road construction?", answer: "Road projects generally require high-strength, high-ductility TMT bars capable of reinforcing bridges, culverts, retaining walls, and other reinforced concrete structures. ARS Fe 550D and CRS 550D TMT Bars are designed for such demanding applications." },
     { question: "Why is ductility important in road infrastructure?", answer: "Ductility enables reinforced concrete structures to absorb stresses and distribute loads more effectively, helping improve structural resilience under dynamic traffic conditions." },
     { question: "Is corrosion resistance important in road projects?", answer: "Yes. Infrastructure exposed to water, humidity, coastal air, or de-icing environments benefits from corrosion-resistant reinforcement that helps improve long-term durability." },
   ],
@@ -226,7 +230,7 @@ export const bridgesFlyoversProjectPage = {
   title: "Building Infrastructure That Connects Generations",
   description: "ARS TMT Bars are engineered for bridge construction and flyover projects, delivering reliable strength, corrosion resistance, seismic performance, and lasting durability for critical infrastructure.",
   primaryCta: { label: "Request project quote", href: "/request-quote" },
-  secondaryCta: { label: "View CRS 550D", href: "/products/ars-crs-550d" },
+  secondaryCta: { label: "View CRS 550D", href: "/product-crs-550d" },
   rationale: {
     title: "What Makes Steel Critical in Bridge & Flyover Construction",
     body: "Bridge and flyover construction demands reinforcement that can withstand heavy loads, continuous traffic, changing weather conditions, and decades of service. Choosing the right TMT bars plays a vital role in achieving structural integrity, long-term durability, and reliable performance throughout the life of the structure.",
@@ -255,8 +259,8 @@ export const bridgesFlyoversProjectPage = {
     body: "Use the product, quality, and manufacturing pages to support a project-specific discussion with the ARS team; final grade selection depends on the project requirements.",
   },
   relatedLinks: [
-    { label: "View CRS 550D", href: "/products/ars-crs-550d" },
-    { label: "Explore quality information", href: "/certifications" },
+    { label: "View CRS 550D", href: "/product-crs-550d" },
+    { label: "Explore quality information", href: "/our-certification" },
     { label: "Explore manufacturing", href: "/manufacturing" },
     { label: "Explore road projects", href: "/road-projects-tmt-steel-bars" },
     { label: "Explore institutional projects", href: "/institutions-projects-tmt-steel-bars" },
@@ -301,14 +305,14 @@ export const institutionalProjectPage = {
     { title: "Environmental conditions", body: "Include local environmental stresses and expected use in the project-specific specification review.", icon: Waves },
   ],
   relatedSection: {
-    eyebrow: "Product, quality, and manufacturing review",
+    eyebrow: "ARS Products",
     title: "Bring the relevant ARS information into the project conversation.",
     body: "Review product specifications, quality information, and manufacturing context with ARS before finalising a project-specific selection.",
   },
   relatedLinks: [
-    { label: "View ARS 550D specifications", href: "/products/ars-550d#specifications" },
+    { label: "View ARS Fe 550D specifications", href: "/products/ars-550d#specifications" },
     { label: "Compare ARS products", href: "/products" },
-    { label: "Explore quality information", href: "/certifications" },
+    { label: "Explore quality information", href: "/our-certification" },
     { label: "Explore manufacturing", href: "/manufacturing" },
     { label: "Explore road projects", href: "/road-projects-tmt-steel-bars" },
     { label: "Explore bridges and flyovers", href: "/bridges-projects-tmt-steel-bars" },

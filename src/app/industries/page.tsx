@@ -15,7 +15,6 @@ import {
 } from "lucide-react";
 import { MotionSection } from "@/components/motion-section";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
 export const metadata = createPageMetadata({
@@ -296,7 +295,6 @@ export default function IndustriesPage() {
         </div>
       </section>
 
-      <SiteFooter />
     </main>
   );
 }

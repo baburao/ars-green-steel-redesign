@@ -4,44 +4,43 @@ import {
   ArrowRight,
   Calculator,
   ClipboardList,
-  IndianRupee,
   MapPin,
   ShieldCheck,
 } from "lucide-react";
 import { MotionSection } from "@/components/motion-section";
 import { SectionKicker } from "@/components/section-kicker";
-import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
-import { clientVerificationSummary, steelPriceRows } from "@/data/business-verification";
+import { SteelPriceLookup } from "@/components/steel-price-lookup";
+import { clientVerificationSummary } from "@/data/business-verification";
 
 export const metadata = createPageMetadata({
   title: "Steel Price Today | ARS Green Steel",
   description:
     "ARS Green Steel TMT bar price context by size, with calculator, dealer, and quote paths for current pricing.",
-  path: "/steel-price-today",
+  path: "/tmt-steel-price-today",
 });
 
 const stats = [
-  { value: "8–32", label: "Rod range", sub: "Price context prepared for common ARS TMT bar sizes." },
-  { value: "Today", label: "Pricing", sub: "Rates move with size, quantity, location, and market." },
-  { value: "Dealer", label: "Route", sub: "Dealer locator is a natural next step after price review." },
-  { value: "Quote", label: "Next step", sub: "Price interest converts into a quote request quickly." },
+  { value: "Step 01", label: "Select Region", sub: "Choose the region for your price lookup." },
+  { value: "Step 02", label: "Check Price", sub: "Review current ARS TMT price guidance." },
+  { value: "Step 03", label: "Estimate Quantity", sub: "Calculate the quantity your project needs." },
+  { value: "Step 04", label: "Request Quote", sub: "Share your requirement for an accurate quotation." },
 ];
 
 const nextSteps = [
   {
-    icon: <Calculator size={20} />,
-    title: "Calculate steel",
-    desc: "Estimate requirement before asking sales for a final price.",
-    cta: "Open calculator",
-    href: "/tmt-calculator",
+    icon: <ClipboardList size={20} />,
+    title: "Explore Products",
+    desc: "Compare ARS TMT products and find the right grade for your project.",
+    cta: "View products",
+    href: "/products",
   },
   {
     icon: <MapPin size={20} />,
     title: "Find dealer",
     desc: "Use your location to discover nearby ARS supply support.",
     cta: "Find a dealer",
-    href: "/dealer-locator",
+    href: "/our-network",
   },
   {
     icon: <ClipboardList size={20} />,
@@ -55,7 +54,7 @@ const nextSteps = [
     title: "Verify quality",
     desc: "Review product proof before making price the only factor.",
     cta: "View proof",
-    href: "/certifications",
+    href: "/our-certification",
   },
 ];
 
@@ -68,7 +67,7 @@ export default function SteelPriceTodayPage() {
       <section className="ars-page-hero min-h-[560px] md:min-h-[600px] lg:h-[680px] lg:min-h-[680px] lg:max-h-[680px] relative flex items-end overflow-hidden bg-ink-950">
         <div className="absolute inset-0">
           <Image
-            src="/ars-assets/products-all.png"
+            src="/ars-assets/SteelPriceHeroBanner.jpg"
             alt="ARS TMT steel bars"
             fill
             priority
@@ -88,31 +87,28 @@ export default function SteelPriceTodayPage() {
 
         <div className="ars-container relative z-10 w-full pb-16">
           <div className="max-w-2xl">
-            <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/[0.13] bg-white/[0.08] px-3 py-1.5">
-              <IndianRupee size={12} className="text-white/60" />
-              <span className="text-[11px] font-semibold tracking-[0.06em] text-white/70">Steel Price Today</span>
-            </div>
-            <h1 className="font-display text-[clamp(2.65rem,6vw,4.5rem)] font-extrabold uppercase leading-[1.0] tracking-[-0.025em] text-white">
-              Price clarity,
+            <div className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/70"><span className="h-px w-10 bg-brand-red" aria-hidden="true" />TMT Steel Price Today</div>
+            <h1 className="font-display text-[clamp(2.65rem,6vw,4.5rem)] font-extrabold leading-[1.0] tracking-[-0.025em] text-white">
+              Know Today&apos;s Price.
               <br />
-              <span className="italic text-brand-red">before calls.</span>
+              <span className="italic text-brand-red">Build with Confidence.</span>
             </h1>
             <p className="mt-5 max-w-[460px] text-[15px] leading-[1.75] text-white/70">
-              Review common TMT bar sizes and applications, then move straight into a quote request for
-              current ARS pricing.
+              Stay updated with the latest ARS TMT steel prices, compare available bar sizes, estimate your
+              project requirements, and request an accurate quotation—all in one place.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
                 href="/request-quote"
                 className="focus-ring inline-flex items-center gap-2.5 rounded-full bg-brand-red px-6 py-3 text-[14px] font-bold text-white transition hover:opacity-90"
               >
-                Request current quote <ArrowRight size={14} />
+                Get Today&apos;s Price <ArrowRight size={14} />
               </a>
               <a
-                href="/tmt-calculator"
+                href="/tmt-steel-calculator"
                 className="focus-ring inline-flex items-center gap-2.5 rounded-full border-[1.5px] border-white/30 px-6 py-3 text-[14px] font-semibold text-white/80 transition hover:bg-white/[0.12]"
               >
-                <Calculator size={14} /> Calculate need
+                <Calculator size={14} /> Steel Calculator
               </a>
             </div>
           </div>
@@ -153,29 +149,7 @@ export default function SteelPriceTodayPage() {
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border-[1.5px] border-surface-100">
-            <div className="grid grid-cols-[0.7fr_1.3fr_1fr] bg-brand-blue px-6 py-3">
-              <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/70">Size</span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/70">Typical use</span>
-              <span className="text-[10px] font-bold uppercase tracking-[0.12em] text-white/70">Status</span>
-            </div>
-            {steelPriceRows.map(([size, use, status], i) => (
-              <div
-                key={size}
-                className={`grid grid-cols-[0.7fr_1.3fr_1fr] items-center px-6 py-4 ${
-                  i < steelPriceRows.length - 1 ? "border-b border-grey-100" : ""
-                } ${i % 2 === 0 ? "bg-white" : "bg-surface-50"}`}
-              >
-                <span className="font-display text-[15px] font-extrabold text-brand-blue">{size}</span>
-                <span className="text-[13px] leading-[1.5] text-steel-700">{use}</span>
-                <span className="text-[12px] font-semibold text-grey-600">{status}</span>
-              </div>
-            ))}
-          </div>
-          <p className="mt-4 text-[12px] leading-[1.6] text-grey-600">
-            Rates shown as &quot;contact for current rate&quot; until ARS confirms published pricing — request a
-            quote for today&apos;s figure.
-          </p>
+          <SteelPriceLookup />
         </div>
       </MotionSection>
 
@@ -217,43 +191,6 @@ export default function SteelPriceTodayPage() {
         </div>
       </MotionSection>
 
-      {/* ── CTA banner ── */}
-      <MotionSection className="relative overflow-hidden bg-brand-blue py-20">
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{ backgroundImage: "radial-gradient(circle at 15% 50%, rgba(222,18,26,0.7) 0%, transparent 55%)" }}
-        />
-        <div className="ars-container relative z-10">
-          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-center">
-            <div>
-              <SectionKicker variant="light">Get today&apos;s rate</SectionKicker>
-              <h2 className="mb-3 font-display text-[clamp(2rem,3.4vw,2.25rem)] font-bold leading-[1.12] tracking-[-0.02em] text-white">
-                Ready for a current ARS quote?
-              </h2>
-              <p className="max-w-[420px] text-[14px] leading-[1.7] text-white/70">
-                Share your size, quantity, and site location and ARS sales will respond with current
-                pricing.
-              </p>
-            </div>
-            <div className="flex flex-shrink-0 flex-wrap gap-3">
-              <a
-                href="/request-quote"
-                className="focus-ring inline-flex items-center gap-2.5 rounded-full bg-brand-red px-6 py-3.5 text-[14px] font-bold text-white transition hover:opacity-90"
-              >
-                Request quote <ArrowRight size={15} />
-              </a>
-              <a
-                href="/dealer-locator"
-                className="focus-ring inline-flex items-center gap-2.5 rounded-full border-[1.5px] border-white/30 px-6 py-3.5 text-[14px] font-semibold text-white/85 transition hover:bg-white/[0.15]"
-              >
-                <MapPin size={15} /> Find a dealer
-              </a>
-            </div>
-          </div>
-        </div>
-      </MotionSection>
-
-      <SiteFooter />
     </main>
   );
 }
