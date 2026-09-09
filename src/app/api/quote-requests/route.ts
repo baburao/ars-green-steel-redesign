@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { sendMetaLeadEvent } from "@/lib/meta-conversions";
 import { appendQuoteRequestToGoogleSheets, validateQuoteRequest } from "@/lib/quote-requests";
+import { createSalesforceWebsiteEnquiry } from "@/lib/salesforce";
 
 export const runtime = "nodejs";
 
@@ -48,6 +49,17 @@ export async function POST(request: Request) {
   recentSubmissions.set(submissionKey, now + duplicateWindowMs);
 
   try {
+    await createSalesforceWebsiteEnquiry({
+      Full_Name__c: validation.quoteRequest.fullName,
+      Phone__c: validation.quoteRequest.phone,
+      Email__c: validation.quoteRequest.email,
+      State__c: validation.quoteRequest.state,
+      City__c: validation.quoteRequest.city,
+      Project_Type__c: validation.quoteRequest.projectType,
+      Product_Type__c: validation.quoteRequest.productType,
+      Requirement__c: validation.quoteRequest.requirement,
+      Type__c: "Request a Quote",
+    });
     await appendQuoteRequestToGoogleSheets(validation.quoteRequest);
     await sendMetaLeadEvent(request, {
       eventId: validation.submissionId,
@@ -59,10 +71,10 @@ export async function POST(request: Request) {
     return response({ ok: true, message: "Thank you. Your quote request has been sent to the ARS sales team." }, 201);
   } catch (error) {
     recentSubmissions.delete(submissionKey);
-    console.error("Quote request Google Sheets submission failed", {
+    console.error("Quote request delivery failed", {
       reason: error instanceof Error ? error.message : "UNKNOWN_ERROR",
     });
-    const isConfigurationError = error instanceof Error && error.message === "GOOGLE_SHEETS_NOT_CONFIGURED";
+    const isConfigurationError = error instanceof Error && ["GOOGLE_SHEETS_NOT_CONFIGURED", "SALESFORCE_NOT_CONFIGURED"].includes(error.message);
     return response({
       ok: false,
       message: isConfigurationError

@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { sendMetaLeadEvent } from "@/lib/meta-conversions";
 import { appendSteelTestingEnquiryToGoogleSheets, validateSteelTestingEnquiry } from "@/lib/steel-testing-enquiries";
+import { createSalesforceWebsiteEnquiry } from "@/lib/salesforce";
 
 export const runtime = "nodejs";
 
@@ -42,6 +43,16 @@ export async function POST(request: Request) {
   recentSubmissions.set(submissionKey, now + duplicateWindowMs);
 
   try {
+    await createSalesforceWebsiteEnquiry({
+      Full_Name__c: validation.enquiry.fullName,
+      Phone__c: validation.enquiry.phone,
+      Project_Type__c: validation.enquiry.projectType,
+      Area__c: validation.enquiry.area,
+      City__c: validation.enquiry.city,
+      State__c: validation.enquiry.state,
+      Description__c: validation.enquiry.description,
+      Type__c: "Steel Testing Enquiry",
+    });
     await appendSteelTestingEnquiryToGoogleSheets(validation.enquiry);
     await sendMetaLeadEvent(request, {
       eventId: validation.submissionId,
@@ -52,7 +63,7 @@ export async function POST(request: Request) {
     return response({ ok: true, message: "Thank you. Your steel testing enquiry has been sent to the ARS team." }, 201);
   } catch (error) {
     recentSubmissions.delete(submissionKey);
-    const isConfigurationError = error instanceof Error && error.message === "GOOGLE_SHEETS_NOT_CONFIGURED";
+    const isConfigurationError = error instanceof Error && ["GOOGLE_SHEETS_NOT_CONFIGURED", "SALESFORCE_NOT_CONFIGURED"].includes(error.message);
     return response({
       ok: false,
       message: isConfigurationError

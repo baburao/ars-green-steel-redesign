@@ -2,6 +2,34 @@
 
 Read this file first when continuing the ARS content migration in a new chat.
 
+## Salesforce UAT integration — 2026-09-08
+
+- The five server-owned website lead endpoints have a server-only Salesforce delivery path alongside their established Google Sheets delivery. This implementation is committed to primary `main`; the next Vercel deployment will make it available for UAT.
+- Salesforce delivery is disabled unless `SALESFORCE_ENABLED=true` and all required non-public UAT settings are installed. Google Sheets remains the digital-marketing reporting destination.
+- When enabled, each validated lead is created in Salesforce `Website_Enquiry__c` first and then appended to Google Sheets. Visitor success requires both deliveries. No Salesforce external ID is required for UAT; Salesforce record IDs, form type, source route, and submission time will be used for reconciliation.
+- Do not use credentials present in the Salesforce requirement PDF. They were exposed in the source document and must be rotated before secure UAT configuration. Never write Salesforce credentials into source, Markdown, Git, or browser code.
+- Build and diff checks pass. Salesforce UAT settings are configured securely in Vercel's Production environment; no external UAT submission has been sent. Next step: confirm the Vercel deployment from this commit, verify field permissions/picklist values, and explicitly authorise five labelled UAT submissions.
+
+## Latest primary-repository update — 2026-09-05
+
+- Commit `ff74ff0` — **Update workbook-backed TMT calculator pricing** — is pushed to Baburao's primary `main` branch. It is not yet a Hostinger production release.
+- The approved source workbook is `Price - Formula workbook (Regionwise Vs Dia Vs Product) - New.xlsx`. It now drives supported 550 D and CRS pricing for Tamil Nadu, Andhra Pradesh, Kerala, and Karnataka across 8, 10, 12, 16, 20, 25, and 32 mm.
+- `/tmt-steel-calculator` supports workbook-faithful rods, bundles, and weight-in-kg inputs. Its detailed results show rods, full bundles, loose rods, calculated weight, GST-inclusive rate/kg, and GST-inclusive total.
+- The shared rate data also updates `/tmt-steel-price-today` without redesigning that page. Prices unavailable for an unsupported selection are deliberately withheld rather than presented as a valid zero-value quote.
+- The workbook terms now cover GST-inclusive pricing, 12 m pieces, BIS tolerances, and delivery/transport/loading/unloading exclusions. City/town remains optional quote context only and does not change the state-level rate.
+- Validation passed: all 56 supported state × product × diameter rate combinations matched the workbook formula; `npm run build` and `git diff --check` passed. A source-level responsive/accessibility review passed, including an accessible polite unavailable-price status. A normal browser rendering review remains recommended before Hostinger release.
+- Next release steps: sync Srikanth's fork `main`, wait for Hostinger to deploy `ff74ff0`, then verify `/tmt-steel-calculator`, `/tmt-calculator`, and `/tmt-steel-price-today` live. Do not describe this change as live until those checks pass.
+
+## Latest Hostinger release — 2026-09-01
+
+- Production is confirmed on Hostinger from `main` at commit `724ae550b2cb5242efc0b575ace17e4d5fbdc386` (`724ae55`) — **Add leadership, brochure, and media updates**.
+- `/our-team` now uses the approved portrait-led Core Team hierarchy: equal MD and ED entries, smaller centred supporting profiles, a red divider, and name/designation text outside the portrait surface. The two original leadership biographies are no longer clipped.
+- `/download-product-brochure` is a public brochure library with ARS 550D, CRS 550D English, CRS 550D Tamil, and the ARS Corporate Booklet. Each available brochure has a direct download action and matching product/corporate logo.
+- `/press-media` now contains the supplied product-film links and published press-coverage links. The ARS 550D product page download actions now point to its available brochure.
+- `/price-calculator` then presented only Total Steel and Indicative Cost; it was superseded in primary `main` by the workbook-backed calculator update recorded above and remains pending Hostinger release.
+- Production checks confirmed the above public routes after the Hostinger deployment completed.
+- Intentionally pending client inputs: approved Quality-page technical claims, an approved Binders brochure, and a verified complete client-logo set/list for the Clients page. Do not infer or publish any of these without those inputs.
+
 ## Homepage mobile performance and redirect update — 2026-08-27
 
 - `/about.html` now has a one-hop permanent redirect to `/about-us`; verify the 308 response after deployment.

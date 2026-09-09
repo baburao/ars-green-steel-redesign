@@ -24,6 +24,23 @@ Secondary Vercel preview:
 
 See `DEPLOYMENT.md` for the authoritative repository, Hostinger, Vercel, GA4, GTM, and Meta Pixel workflow.
 
+## Latest primary-repository update — 2026-09-05
+
+- Primary `main` commit `ff74ff0` updates the TMT calculator from the approved `Price - Formula workbook (Regionwise Vs Dia Vs Product) - New.xlsx`. This is pushed to the primary repository but is **not yet live on Hostinger**.
+- `/tmt-steel-calculator` now calculates supported 550 D and CRS orders by state, diameter, and rods/bundles/weight-in-kg input. It returns rods, full bundles, loose rods, calculated weight, GST-inclusive rate/kg, and GST-inclusive cost.
+- `/tmt-steel-price-today` shares the workbook-backed state/product/diameter rate data without a design change.
+- Unsupported prices show an accessible unavailable-price state, never a valid-looking ₹0 rate or total. The calculator includes the supplied GST, 12 m length, BIS tolerance, and delivery/loading exclusion terms.
+- Hostinger release remains pending: sync `SrikanthCh960/ars-green-steel` from primary `main`, wait for Hostinger to deploy `ff74ff0`, then verify the calculator and price routes live.
+
+## Latest live update — 2026-09-01
+
+- Hostinger production is running `main` commit `724ae550b2cb5242efc0b575ace17e4d5fbdc386` (`724ae55`).
+- `/our-team` now presents the approved centred, portrait-led Core Team hierarchy and preserves the full MD and ED biographies.
+- `/download-product-brochure` now offers the available ARS 550D, CRS 550D English, CRS 550D Tamil, and Corporate Booklet PDFs with matching logos.
+- `/press-media` now publishes the supplied product-film and press-coverage links; the ARS 550D page also has working brochure downloads.
+- At this live checkpoint, the price calculator intentionally showed only Total Steel and Indicative Cost, without the per-diameter result table. The later workbook-backed calculator update above is pending Hostinger release.
+- Quality-page updates, a Binders brochure, and the Clients logo expansion remain pending approved client material.
+
 ## Latest performance update — 2026-08-27
 
 - `/tmt-steel-price-today` and `/tmt-steel-calculator` now serve responsive WebP hero images: 26/81 KB for Steel Price and 46/132 KB for Calculator (mobile/desktop), with JPG fallbacks.
@@ -132,6 +149,9 @@ If the port is already busy, stop the old Next.js process or choose a new port.
   - Civil contractors
   - Dealers and distributors
 - Contact and quote flows
+- Core Team hierarchy
+- Download product brochure library
+- Press and media page
 - Restored legacy routes and blog/article coverage
 
 ## Latest Live Update
@@ -155,8 +175,8 @@ Live dealer locator:
 
 These should be confirmed before final domain launch:
 
-- Final steel prices
-- TMT calculator formula and assumptions
+- Future approved steel-price workbook and release cadence
+- Future approved TMT calculator workbook updates
 - WhatsApp number
 - Final dealer active status and phone number verification
 - PDFs, brochures, certificates, and downloadable technical documents
@@ -206,6 +226,20 @@ Full Name | Phone | Email | State | City / Project Location | Requirement | Prod
 ```
 
 Do not prefix these variables with `NEXT_PUBLIC_` or commit their values. The lead payload and provider integration are separated so a Salesforce destination can be added later without changing the product forms.
+
+## Salesforce UAT lead delivery
+
+The five live form endpoints can deliver every validated lead to both Salesforce and Google Sheets. Keep Google Sheets enabled for digital-marketing reporting. Enable the Salesforce delivery only with rotated, server-only UAT credentials configured in Vercel, Hostinger, or the secure local environment:
+
+```txt
+SALESFORCE_ENABLED=true
+SALESFORCE_INSTANCE_URL=
+SALESFORCE_CLIENT_ID=
+SALESFORCE_CLIENT_SECRET=
+SALESFORCE_API_VERSION=v64.0
+```
+
+When Salesforce is disabled or not configured, the existing Google Sheets workflow continues. When enabled, the form success response requires both the Salesforce record and Google Sheets row to complete. Do not place Salesforce credentials in browser code, public environment variables, Markdown files, or Git.
 
 Request Quote submissions use a separate `Quote Requests` worksheet in the same spreadsheet. Share the spreadsheet with the same service-account email and add this header row to that worksheet:
 

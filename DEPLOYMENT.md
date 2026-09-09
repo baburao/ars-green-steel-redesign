@@ -16,6 +16,41 @@ This is the deployment source of truth for the ARS Green Steel redesign.
 
 Hostinger and `arsgroup.in` are the production source of truth. A Vercel deployment can remain available for preview and comparison, but it does not prove that the production website has been updated. Do not disconnect or reconfigure Vercel without explicit approval.
 
+## Latest Hostinger Production Verification — 2026-09-01
+
+- Production commit: `724ae550b2cb5242efc0b575ace17e4d5fbdc386` (`724ae55`) — `Add leadership, brochure, and media updates`.
+- Source branch: `main`, after the primary-repository change was synced to the production-connected fork.
+- Hostinger deployment state: **Completed / Current**.
+- Live route verification: `/our-team`, `/download-product-brochure`, and `/press-media` show the released leadership, brochure-library, and press-media content.
+- The abbreviated seven-character Git SHA (`724ae55`) and the eight-character SHA shown by Hostinger (`724ae550`) identify the same commit.
+- Release scope excludes the Quality page, Binders brochure, and Clients logo expansion because the required approved source material has not yet been supplied.
+
+## Pending Hostinger release — workbook-backed TMT calculator
+
+- Primary-repository commit: `ff74ff0` — **Update workbook-backed TMT calculator pricing** — is pushed to Baburao's `main`; it has not yet been synced to the Hostinger-connected fork or verified in production.
+- Before declaring it live, use **Sync fork → Update branch** in `SrikanthCh960/ars-green-steel`, confirm Hostinger reports `ff74ff0` as **Completed / Current**, then verify `/tmt-steel-calculator`, `/tmt-calculator`, and `/tmt-steel-price-today` on `https://arsgroup.in`.
+- Confirm a supported calculator selection shows its workbook-backed results and an unsupported/unavailable selection shows an unavailable-price message without a displayed ₹0 rate or ₹0 total.
+- The update uses the approved `Price - Formula workbook (Regionwise Vs Dia Vs Product) - New.xlsx` source for the supported state/product/diameter prices, rods/bundles/weight calculations, GST treatment, and order disclaimers. Do not update values manually without a newer approved workbook.
+
+## Salesforce UAT configuration
+
+The five server-owned enquiry endpoints can send each validated lead to Salesforce and Google Sheets. Google Sheets remains the digital-marketing reporting destination; Salesforce is the client-operated lead system.
+
+Set these **server-only** values in the UAT environment only after Salesforce has rotated the credentials previously exposed in a document. Never commit them, add a `NEXT_PUBLIC_` prefix, or send them from browser code:
+
+```txt
+SALESFORCE_ENABLED=true
+SALESFORCE_INSTANCE_URL=https://your-salesforce-uat-instance
+SALESFORCE_CLIENT_ID=
+SALESFORCE_CLIENT_SECRET=
+SALESFORCE_API_VERSION=v64.0
+```
+
+- When `SALESFORCE_ENABLED` is not exactly `true`, Salesforce is skipped and the existing Google Sheets delivery remains unchanged.
+- When enabled, a form must create its Salesforce `Website_Enquiry__c` record before its Google Sheets row is appended. The visitor sees success only after both destination calls complete.
+- The website does not currently rely on a Salesforce external ID. For UAT, reconcile the two destinations by form type, source route, submission time, and the Salesforce record created. Request a unique external ID before production if Salesforce wants retry-safe duplicate handling.
+- Do not use the OAuth access-token request in a URL query string. The server posts credentials to Salesforce's token endpoint and sends the returned access token only in the server-side Authorization header.
+
 ## Search Indexing Policy
 
 Indexing is controlled by one explicit build-time variable:

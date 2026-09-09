@@ -33,6 +33,31 @@ The execution order prioritizes:
 - `Medium`: Improves quality, scalability, or content depth
 - `Low`: Optional cleanup or future enhancement
 
+## Latest primary-repository update — 2026-09-05
+
+- Status: **Done locally and pushed; pending Hostinger fork sync and production verification.**
+- Commit `ff74ff0` updates the TMT calculator from the approved `Price - Formula workbook (Regionwise Vs Dia Vs Product) - New.xlsx`.
+- The calculator now supports rods, bundles, and weight-in-kg modes for 8, 10, 12, 16, 20, 25, and 32 mm. It produces detailed per-diameter rods, bundle, loose-rod, weight, GST-inclusive rate/kg, and total outputs.
+- Shared state/product/diameter price data was updated for `/tmt-steel-price-today`; no price-page redesign was made.
+- The calculator suppresses any unavailable rate and presents an accessible unavailable-price message instead of a misleading ₹0 result. Workbook terms for GST, 12 m pieces, BIS tolerances, and delivery/loading exclusions are included.
+- Validation: all 56 supported workbook rate combinations matched; representative rods, bundles, and weight calculations matched; `npm run build` and `git diff --check` passed.
+
+## Salesforce UAT integration — 2026-09-08
+
+- Status: **Implemented in primary `main`; Vercel UAT configuration is in place, pending deployment verification and sample-submission authorisation.**
+- All five server-owned lead endpoints can deliver validated enquiries to Salesforce `Website_Enquiry__c` and Google Sheets. Google Sheets remains the digital-marketing reporting destination.
+- Salesforce is opt-in through server-only UAT configuration. The form UI, validation, anti-spam checks, duplicate window, Meta lead tracking, and Google Sheets fields remain unchanged.
+- UAT does not depend on a Salesforce external ID. Reconcile UAT by Salesforce record ID, form type, source route, and time. Before production, request a unique external ID if Salesforce wants retry-safe duplicate handling.
+- Do not use the credentials from the source PDF. Salesforce must rotate them and provide replacement sandbox credentials through a secure channel before production is enabled.
+
+## Latest Hostinger release — 2026-09-01
+
+- Status: **Done and live**
+- Production commit: `724ae550b2cb5242efc0b575ace17e4d5fbdc386` (`724ae55`) — `Add leadership, brochure, and media updates`.
+- Completed: portrait-led Core Team layout and unclipped leadership biographies on `/our-team`; brochure library at `/download-product-brochure`; product-film and press-coverage page at `/press-media`; Fe 550D brochure download links; and, at that production checkpoint, the simplified price calculator output (Total Steel and Indicative Cost only). The later workbook-backed calculator update is pending production release.
+- Verified after Hostinger deployment: `/our-team`, `/download-product-brochure`, and `/press-media` are serving the approved update on `https://arsgroup.in`.
+- Held pending client confirmation: Quality-page content/claims, Binders brochure, and the full approved Clients logo set. These are not defects in the release and must not be filled with assumptions.
+
 ## Latest Release Status — 2026-08-02
 
 - Branch: codex/metadata-seo
@@ -237,9 +262,9 @@ Current caveats:
 | Task | Priority | Status | Dependencies | Expected Outcome |
 |---|---|---|---|---|
 | Create `/steel-price-today` page | Critical | Done | Pricing content/source | Visitors can check the prepared steel price path without calling first. |
-| Define pricing display model and update process | Critical | Partially done | Client/business input | Price rows and confirmation requirements are centralized; final rates, update frequency, region logic, and disclaimer still need ARS input. |
-| Create `/tmt-calculator` page | Critical | Done | Calculator logic | Users can see the calculator flow; final formula remains blocked by client input. |
-| Define TMT calculator formula and assumptions | Critical | Partially done | Engineering/business input | Calculator input fields and formula requirements are centralized; final formula, units, output format, assumptions, and disclaimer still need ARS input. |
+| Define pricing display model and update process | Critical | Partially done | Client/business input | The approved 2026-09-05 workbook now supplies supported state/product/diameter rates and terms. ARS still needs to define the update owner, update frequency, and approval process for future workbooks. |
+| Create `/tmt-calculator` page | Critical | Done | Calculator logic | `/tmt-calculator` redirects to the workbook-backed `/tmt-steel-calculator` experience. |
+| Define TMT calculator formula and assumptions | Critical | Done | Approved workbook | `ff74ff0` implements the approved rods, bundles, and weight-in-kg calculations, supported prices, GST, bundle/mean-weight data, and customer-facing terms from the supplied workbook. Future workbook updates still require ARS approval and controlled release. |
 | Create `/dealer-locator` page | Critical | Done | Supplied ARS dealer CSV | Users can search ARS dealers by location, pincode, dealer name, dealer code, city, and state. |
 | Define dealer data format and source | Critical | Done | `Dealer locator (website).xlsx - Sheet2.csv` | Dealer data is normalized into `src/data/dealers.ts`; ARS should verify active dealer status before final launch. |
 | Create service/tool cards for homepage and navigation reuse | High | Done | Services page routes | Price, calculator, and dealer tools feel connected across the site. |
@@ -321,7 +346,7 @@ Current caveats:
 | Restore dedicated steel testing page route | Critical | Done | Original Steel Testing content | `/steel-testing` preserves on-site spectrometer testing and quality verification flow. |
 | Restore core team route | High | Done | Original Our Team content and asset audit rules | `/our-team` preserves leadership structure without inventing people photos. |
 | Restore CSR route | Medium | Done | Original CSR content | `/csr` preserves health, infrastructure, and sports responsibility areas. |
-| Restore careers route | Medium | Done | Original Careers content | `/careers` preserves why-work-with-ARS, benefits, culture, and apply flow. |
+| Restore careers route | Medium | Done | Approved careers copy and openings | `/careers` prioritizes current approved openings while retaining previous role profiles as non-open career-path reference content. |
 | Restore blog and article routes | High | Done | Original Blog content map | `/blog` and all preserved article URLs resolve without disappearing. |
 | Restore video/media route | Medium | Done | Original Video Gallery content | `/video` preserves future media-gallery structure. |
 | Restore segment routes | Critical | Done | Original Homeowner, Engineers, Contractors, Dealer pages | Buyer journeys now exist for home owners, engineers/architects, civil contractors, and dealers/distributors. |

@@ -1,6 +1,7 @@
 import { createHash } from "node:crypto";
 import { sendMetaLeadEvent } from "@/lib/meta-conversions";
 import { appendContactEnquiryToGoogleSheets, validateContactEnquiry } from "@/lib/contact-enquiries";
+import { createSalesforceWebsiteEnquiry } from "@/lib/salesforce";
 
 export const runtime = "nodejs";
 
@@ -48,6 +49,15 @@ export async function POST(request: Request) {
   recentSubmissions.set(submissionKey, now + duplicateWindowMs);
 
   try {
+    await createSalesforceWebsiteEnquiry({
+      Full_Name__c: validation.enquiry.fullName,
+      Phone__c: validation.enquiry.phone,
+      Email__c: validation.enquiry.email,
+      Enquiry_Type__c: validation.enquiry.enquiryType,
+      City__c: validation.enquiry.city,
+      Requirement__c: validation.enquiry.requirement,
+      Type__c: "Contact ARS Enquiry",
+    });
     await appendContactEnquiryToGoogleSheets(validation.enquiry);
     await sendMetaLeadEvent(request, {
       eventId: validation.submissionId,
@@ -59,7 +69,7 @@ export async function POST(request: Request) {
     return response({ ok: true, message: "Thank you. Your enquiry has been sent to the ARS team." }, 201);
   } catch (error) {
     recentSubmissions.delete(submissionKey);
-    const isConfigurationError = error instanceof Error && error.message === "GOOGLE_SHEETS_NOT_CONFIGURED";
+    const isConfigurationError = error instanceof Error && ["GOOGLE_SHEETS_NOT_CONFIGURED", "SALESFORCE_NOT_CONFIGURED"].includes(error.message);
     return response({
       ok: false,
       message: isConfigurationError
