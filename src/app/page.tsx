@@ -432,20 +432,26 @@ export default function Home() {
                 </Link>
               </div>
             </HomepageReveal>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
-              {clientLogos.map((client, index) => (
-                <HomepageReveal key={client.name} delay={0.72 + index * 0.04}>
-                  <article className="flex h-32 items-center justify-center rounded-[12px] border border-ink-900/8 bg-white p-5 text-center">
-                    <Image
-                      src={client.src}
-                      alt={`${client.name} logo`}
-                      width={client.width}
-                      height={client.height}
-                      className="max-h-24 max-w-full object-contain"
-                    />
-                  </article>
-                </HomepageReveal>
-              ))}
+            <div className="homepage-client-marquee" aria-label="ARS clients">
+              <div className="marquee-frame">
+                <div className="marquee-track marquee-right">
+                  {[0, 1].map((run) => (
+                    <ul key={run} className="homepage-client-marquee-group" aria-hidden={run === 1 ? true : undefined}>
+                      {clientLogos.map((client) => (
+                        <li key={client.name} className="flex h-20 w-44 shrink-0 items-center justify-center rounded-[10px] border border-ink-900/8 bg-white p-3">
+                          <Image
+                            src={client.src}
+                            alt={run === 1 ? "" : `${client.name} logo`}
+                            width={client.width}
+                            height={client.height}
+                            className="max-h-12 max-w-32 object-contain"
+                          />
+                        </li>
+                      ))}
+                    </ul>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
