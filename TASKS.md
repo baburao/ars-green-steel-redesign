@@ -33,30 +33,43 @@ The execution order prioritizes:
 - `Medium`: Improves quality, scalability, or content depth
 - `Low`: Optional cleanup or future enhancement
 
-## Latest primary-repository update — 2026-09-05
+## Client corrections — 2026-09-23
 
-- Status: **Done locally and pushed; pending Hostinger fork sync and production verification.**
-- Commit `ff74ff0` updates the TMT calculator from the approved `Price - Formula workbook (Regionwise Vs Dia Vs Product) - New.xlsx`.
-- The calculator now supports rods, bundles, and weight-in-kg modes for 8, 10, 12, 16, 20, 25, and 32 mm. It produces detailed per-diameter rods, bundle, loose-rod, weight, GST-inclusive rate/kg, and total outputs.
-- Shared state/product/diameter price data was updated for `/tmt-steel-price-today`; no price-page redesign was made.
-- The calculator suppresses any unavailable rate and presents an accessible unavailable-price message instead of a misleading ₹0 result. Workbook terms for GST, 12 m pieces, BIS tolerances, and delivery/loading exclusions are included.
-- Validation: all 56 supported workbook rate combinations matched; representative rods, bundles, and weight calculations matched; `npm run build` and `git diff --check` passed.
+- Nine client-supplied high-resolution logos now power the homepage and the new `/clients` page.
+- Dealer results stay hidden until a visitor searches or selects a location; Quality wording and Binders brochure access reflect the client corrections.
+- Steel Price Today now collects quantity, unit, name, and phone for a confirmed-price enquiry through the existing Salesforce and Google Sheets delivery pattern.
+- Lint, route/asset checks, build, and desktop/mobile Clients-page review passed. Hostinger release verification remains separate from the primary repository merge.
 
-## Salesforce UAT integration — 2026-09-08
+## Mobile Core Web Vitals implementation — 2026-09-20
 
-- Status: **Implemented in primary `main`; Vercel UAT configuration is in place, pending deployment verification and sample-submission authorisation.**
-- All five server-owned lead endpoints can deliver validated enquiries to Salesforce `Website_Enquiry__c` and Google Sheets. Google Sheets remains the digital-marketing reporting destination.
-- Salesforce is opt-in through server-only UAT configuration. The form UI, validation, anti-spam checks, duplicate window, Meta lead tracking, and Google Sheets fields remain unchanged.
-- UAT does not depend on a Salesforce external ID. Reconcile UAT by Salesforce record ID, form type, source route, and time. Before production, request a unique external ID if Salesforce wants retry-safe duplicate handling.
-- Do not use the credentials from the source PDF. Salesforce must rotate them and provide replacement sandbox credentials through a secure channel before production is enabled.
+- Status: **Implemented, verified, committed, and pushed to Baburao `main`; production deployment pending.**
+- Commit: `e2a5014` — `Optimize mobile Core Web Vitals delivery`.
+- Generated 88 mobile WebP heroes for the shared blog article template and 34 responsive hero variants for corporate, product, rod-size, dealer, quality, and sustainability routes.
+- Prevented desktop-only interior and ARS Green Steel hero videos from loading below 768 px.
+- Deferred dealer-locator query/city/state filtering to reduce main-thread interaction pressure across the 1,566-record dataset.
+- Validation passed: targeted ESLint, TypeScript, 160-route/229-asset QA, all 88 migrated blog routes, 180-page production build, 390 px and 1440 px browser QA, no horizontal overflow, and no console errors.
+- Pending release tasks: sync Srikanth's fork, confirm Hostinger **Completed / Current**, clear the CDN cache, and complete representative live mobile/desktop verification.
+- Pending SEO evidence: the four-sheet workbook exposes 46 unique example/representative URLs. Request the remaining 73 LCP URLs and 11 INP examples, plus first-detected dates, current p75 values, and URL-level/origin-level CrUX classification.
+- After the production checks pass, ask the SEO team to start Search Console validation and monitor the rolling field-data window.
 
-## Latest Hostinger release — 2026-09-01
+## Latest production release — 2026-09-17
 
-- Status: **Done and live**
-- Production commit: `724ae550b2cb5242efc0b575ace17e4d5fbdc386` (`724ae55`) — `Add leadership, brochure, and media updates`.
-- Completed: portrait-led Core Team layout and unclipped leadership biographies on `/our-team`; brochure library at `/download-product-brochure`; product-film and press-coverage page at `/press-media`; Fe 550D brochure download links; and, at that production checkpoint, the simplified price calculator output (Total Steel and Indicative Cost only). The later workbook-backed calculator update is pending production release.
-- Verified after Hostinger deployment: `/our-team`, `/download-product-brochure`, and `/press-media` are serving the approved update on `https://arsgroup.in`.
-- Held pending client confirmation: Quality-page content/claims, Binders brochure, and the full approved Clients logo set. These are not defects in the release and must not be filled with assumptions.
+- Status: **Done, deployed, cache-cleared, and live-verified.**
+- Production commit: `0dd5964` — `Fix blog section navigation`.
+- Baburao `main` was synced to Srikanth's production fork and deployed by Hostinger.
+- Blog “On this page” links work on desktop and mobile, including direct fragment URLs.
+- The homepage Knowledge Center card “How Green Steel is Produced” opens the correct migrated blog article.
+- The deployed history includes the mobile form improvements (`a4b14da`) and workbook-backed calculator update (`ff74ff0`).
+
+## Salesforce production integration — 2026-09-17
+
+- Status: **Production delivery confirmed in Salesforce and Google Sheets.**
+- Commit `609e901` is included in the current Hostinger production deployment. All five server-owned lead endpoints can deliver validated enquiries to Salesforce `Website_Enquiry__c` and Google Sheets.
+- Sandbox UAT passed on 2026-09-16. Separate production credentials were entered directly in Hostinger without exposing them in source or documentation.
+- Live production enquiries reached the Thank You page and Google Sheets, and the Salesforce team confirmed the records in the production dashboard.
+- Salesforce remains first in the delivery sequence, followed by Google Sheets; visitor success requires both destinations.
+- A unique external ID remains optional future duplicate/retry protection, not a production blocker.
+- Do not conduct another production form test unless the user explicitly approves that exact submission immediately before it is sent.
 
 ## Latest Release Status — 2026-08-02
 
@@ -313,8 +326,8 @@ Current caveats:
 | Create SEO structure for steel price, calculator, dealer, product, and application pages | High | Done | Page content | High-intent search traffic has dedicated landing pages. |
 | Add FAQ sections to high-intent pages | Medium | Not started | Customer questions and content | Pages answer common objections and support long-tail SEO. |
 | Add internal linking strategy | High | Done | Core pages created | Users and search engines can move through the site logically. |
-| Optimize hero video loading and fallback | High | Done | Existing video implementation | Background videos now use lighter metadata preload while preserving the premium hero direction. |
-| Audit image and media performance | High | Partially done | Media assets | Current video/image loading has been improved; final optimization depends on the remaining authentic assets. |
+| Optimize hero video loading and fallback | High | Done | Existing video implementation | Homepage and shared interior heroes use mobile stills; desktop-only hero videos are breakpoint-gated, including the ARS Green Steel hero in `e2a5014`. |
+| Audit image and media performance | High | Partially done | Media assets and Search Console evidence | `e2a5014` adds 122 responsive WebP assets and shared mobile hero delivery. Production verification, the missing affected URLs, and the next Search Console field-data window remain. |
 | Review unused 3D code and remove or defer if not needed | Medium | Not started | 3D decision | Project stays focused and avoids unnecessary weight. |
 | Run lint and production build after code changes | Critical | Done | Any implementation work | Final implementation is technically stable before review. |
 
@@ -368,7 +381,7 @@ Current caveats:
 | Restore available original ARS contact/network image | High | Done | Local `Contact_banner.png` | `/contact` and `/our-network` now use the existing ARS contact/network source asset. |
 | Preserve old-site blog/topic coverage on homepage | Medium | Done | Existing content audit | Homepage includes a compact blog/topic preview linked to the modern archive. |
 | Validate implementation after parity updates | Critical | Done | Lint and production build | ESLint passes and production build generates all 56 routes successfully. |
-| Add missing original PDFs, brochures, certificates, client logos, and remaining team photos | Critical | Blocked | Source files not available locally | These assets must be added only when authentic client/source files are provided. |
+| Add missing original PDFs, brochures, certificates, client logos, and remaining team photos | Critical | Partially done | Remaining authentic source files | The approved Binders brochure and nine client logos are included; add any other missing assets only when authentic client/source files are provided. |
 
 ## Content and Asset Parity Pass - Round 2
 
@@ -399,7 +412,7 @@ Current caveats:
 | Rewrite legacy intros and section text for readability | High | Done | Cleaned source copy | Restored pages now use clearer intros and cleaner section summaries while preserving original business meaning. |
 | Improve restored blog article layout | High | Done | Blog route and cleaned article sections | Blog pages now render as readable article pages with a section index instead of raw migration cards. |
 | Build native Next.js blog archive | High | Done | Preserved article dataset and approved design system | `/blog` now provides featured content, topic filters, search, progressive loading, and links to all 88 preserved posts without a third-party CMS. |
-| Replace the migrated article renderer with a reusable editorial template | High | Pending | Native blog archive | Every article uses a polished shared hero, body, contents, related-content, and conversion pattern while retaining its existing URL. Recommended first test article: `/blog/corrosion-resistance-steel.html`. |
+| Replace the migrated article renderer with a reusable editorial template | High | Done | Native blog archive | Every article uses the shared hero, article body, heading-derived contents navigation, related-content, and conversion pattern while retaining its existing URL. Fragment navigation was verified live on desktop and mobile in release `0dd5964`. |
 | Improve restored legacy page layout | High | Done | Legacy renderer | Non-blog legacy pages now use cleaner two-column restored section layouts and supporting copy blocks. |
 | Prevent broken remote image display | High | Done | Legacy asset manifest | Original image references are shown as mapped source assets until local downloads are available, avoiding broken image blocks. |
 | Replace available source asset references with local project files | High | Done | Local asset reconciliation | Legacy pages now render local ARS images where available and link downloads to local files when present. |
@@ -413,8 +426,9 @@ Current caveats:
 
 ## Immediate Next Actions
 
-1. Commit and push the native `/blog` archive work after review, excluding unintentional package-manager files.
-2. Build the reusable blog article template and start with `/blog/corrosion-resistance-steel.html`.
-3. Continue migrating the remaining 88 blog articles into the polished editorial template.
-4. Review `/ars-green-steel`, `/green-steel`, and `/dealer-locator` with the client for content accuracy.
-5. Confirm live dealer data, phone numbers, active locations, pricing data, calculator formulas, WhatsApp number, PDFs, brochures, and certificate downloads with ARS before final domain launch.
+1. Sync Srikanth's fork to `e2a5014`, wait for Hostinger **Completed / Current**, and clear the Hostinger CDN cache.
+2. Live-verify representative homepage, blog, PCC/RCC, product, rod-size, corporate, dealer, Green Steel, and Careers routes on mobile and desktop; no production form submission is needed.
+3. Send the prepared evidence request to the SEO team for the remaining 73 LCP URLs and 11 INP examples, first-detected dates, latest p75 values, CrUX scope, and the five Good mobile control URLs.
+4. After live verification, ask the SEO team to start Search Console validation and monitor the next rolling field-data window before judging the result.
+5. Keep Salesforce and Google Sheets production delivery under normal operational monitoring; do not send another production test without explicit approval immediately before submission.
+6. Confirm future dealer-data, price-workbook, brochure, certificate, logo, and downloadable-document updates only from approved ARS sources.

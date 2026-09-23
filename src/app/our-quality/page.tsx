@@ -294,7 +294,7 @@ export default function OurQualityPage() {
                 <div className="border-l-2 border-brand-red pl-4">
                   <dt className="text-[11px] font-bold uppercase tracking-[0.1em] text-grey-600">Analysis</dt>
                   <dd className="mt-1 font-display text-[1.05rem] font-extrabold text-brand-blue">
-                    Macro &amp; Mechanical Testing
+                    Analyzes the chemical composition of TMT bar
                   </dd>
                 </div>
               </dl>

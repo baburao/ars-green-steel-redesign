@@ -10,7 +10,8 @@ type MetaLeadInput = {
     | "quote_request"
     | "contact_enquiry"
     | "distributor_enquiry"
-    | "steel_testing_enquiry";
+    | "steel_testing_enquiry"
+    | "price_enquiry";
   sourcePage: string;
   email?: string;
   phone: string;

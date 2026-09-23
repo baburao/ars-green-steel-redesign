@@ -22,6 +22,7 @@ import { HomeHero } from "@/components/home-hero";
 import { HomepageImageReveal, HomepageReveal, HomepageSectionMotion } from "@/components/homepage-section-motion";
 import { SectionKicker } from "@/components/section-kicker";
 import { SiteHeader } from "@/components/site-header";
+import { clientLogos } from "@/data/client-logos";
 
 const buyingActions = [
   {
@@ -201,45 +202,6 @@ const certificateCards = [
   {
     label: "NHAI Project Approved",
     detail: "Recognised for use in major highway infrastructure projects through independent engineering approval.",
-  },
-];
-
-const partnerCards = [
-  {
-    name: "Akshaya",
-    logo: "/ars-assets/partners/akshaya.png.webp",
-  },
-  {
-    name: "Baashyaam",
-    logo: "/ars-assets/partners/baashyaam.png.webp",
-  },
-  {
-    name: "Foxconn",
-    logo: "/ars-assets/partners/foxconn.png.webp",
-  },
-  {
-    name: "VGN",
-    logo: "/ars-assets/partners/vgn.png.webp",
-  },
-  {
-    name: "RCCL",
-    logo: "/ars-assets/partners/rccl.png.webp",
-  },
-  {
-    name: "Noah",
-    logo: "/ars-assets/partners/noah.png.webp",
-  },
-  {
-    name: "Rohaan",
-    logo: "/ars-assets/partners/rohaan.png.webp",
-  },
-  {
-    name: "Sathyamoorthy",
-    logo: "/ars-assets/partners/sathyamoorthy.png.webp",
-  },
-  {
-    name: "Casa",
-    logo: "/ars-assets/partners/CASA-2-1.png.webp",
   },
 ];
 
@@ -465,18 +427,21 @@ export default function Home() {
             <HomepageReveal delay={0.68}>
               <div className="mb-5 flex items-center justify-between gap-6">
                 <p className="font-technical text-xs font-bold uppercase tracking-[0.22em] text-brand-blue">Clients</p>
+                <Link href="/clients" className="focus-ring inline-flex min-h-11 items-center gap-2 text-sm font-bold text-brand-blue transition hover:text-brand-red">
+                  View all clients <ArrowRight size={16} aria-hidden="true" />
+                </Link>
               </div>
             </HomepageReveal>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-9">
-              {partnerCards.map((partner, index) => (
-                <HomepageReveal key={partner.name} delay={0.72 + index * 0.04}>
-                  <article className="flex min-h-[76px] items-center justify-center rounded-[12px] border border-ink-900/8 bg-white p-2 text-center">
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+              {clientLogos.map((client, index) => (
+                <HomepageReveal key={client.name} delay={0.72 + index * 0.04}>
+                  <article className="flex h-32 items-center justify-center rounded-[12px] border border-ink-900/8 bg-white p-5 text-center">
                     <Image
-                      src={partner.logo}
-                      alt={`${partner.name} partner logo`}
-                      width={190}
-                      height={76}
-                      className="max-h-16 w-full object-contain"
+                      src={client.src}
+                      alt={`${client.name} logo`}
+                      width={client.width}
+                      height={client.height}
+                      className="max-h-24 max-w-full object-contain"
                     />
                   </article>
                 </HomepageReveal>

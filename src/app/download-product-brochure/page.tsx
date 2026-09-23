@@ -39,6 +39,14 @@ const brochures = [
     logoAlt: "ARS CRS Fe 550D product logo",
   },
   {
+    title: "ARS Binders Brochure",
+    category: "Product brochure",
+    description: "Product information for ARS factory-made reinforcement binders.",
+    href: "/ars-assets/Downloads/Binders.pdf",
+    logo: "/ars-assets/logos/BinderLogo.png",
+    logoAlt: "ARS Binders product logo",
+  },
+  {
     title: "ARS Corporate Booklet",
     category: "Company profile",
     description: "An introduction to ARS Green Steel, its capabilities, and its approach.",

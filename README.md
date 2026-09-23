@@ -24,22 +24,26 @@ Secondary Vercel preview:
 
 See `DEPLOYMENT.md` for the authoritative repository, Hostinger, Vercel, GA4, GTM, and Meta Pixel workflow.
 
-## Latest primary-repository update — 2026-09-05
+The September 2026 client-correction release adds a dedicated `/clients` page using nine supplied high-resolution logos, updates the homepage logos, gates dealer results behind a search/filter choice, enables the approved Binders brochure, updates Quality copy, and adds the Steel Price Today enquiry flow. Primary-repository merges and Hostinger production deployment are separate steps.
 
-- Primary `main` commit `ff74ff0` updates the TMT calculator from the approved `Price - Formula workbook (Regionwise Vs Dia Vs Product) - New.xlsx`. This is pushed to the primary repository but is **not yet live on Hostinger**.
-- `/tmt-steel-calculator` now calculates supported 550 D and CRS orders by state, diameter, and rods/bundles/weight-in-kg input. It returns rods, full bundles, loose rods, calculated weight, GST-inclusive rate/kg, and GST-inclusive cost.
-- `/tmt-steel-price-today` shares the workbook-backed state/product/diameter rate data without a design change.
-- Unsupported prices show an accessible unavailable-price state, never a valid-looking ₹0 rate or total. The calculator includes the supplied GST, 12 m length, BIS tolerance, and delivery/loading exclusion terms.
-- Hostinger release remains pending: sync `SrikanthCh960/ars-green-steel` from primary `main`, wait for Hostinger to deploy `ff74ff0`, then verify the calculator and price routes live.
+## Current primary checkpoint — 2026-09-20
 
-## Latest live update — 2026-09-01
+- Baburao `main` is at `e2a5014` — `Optimize mobile Core Web Vitals delivery` — and the primary remote has been verified at the same commit.
+- The release is not yet confirmed on Srikanth's fork or Hostinger; the last confirmed live Hostinger checkpoint remains `0dd5964`.
+- The release adds 88 mobile blog hero WebPs and 34 responsive hero variants for corporate, product, rod-size, dealer, quality, and sustainability templates.
+- Shared interior and ARS Green Steel hero videos are now desktop-only below the 768 px breakpoint, and dealer-locator filtering uses deferred values to protect interaction responsiveness.
+- Local verification passed across ESLint, TypeScript, 160 routes, 229 local assets, all 88 blog routes, a 180-page production build, and representative 390 px/1440 px browser checks without overflow or console errors.
+- Next release step: sync Srikanth's fork, complete Hostinger deployment, clear the CDN cache, and perform representative live verification before asking the SEO team to start Search Console validation.
+- The SEO workbook currently provides 46 unique example/representative URLs; 73 remaining LCP URLs and 11 remaining INP examples still need to be supplied by the SEO team.
 
-- Hostinger production is running `main` commit `724ae550b2cb5242efc0b575ace17e4d5fbdc386` (`724ae55`).
-- `/our-team` now presents the approved centred, portrait-led Core Team hierarchy and preserves the full MD and ED biographies.
-- `/download-product-brochure` now offers the available ARS 550D, CRS 550D English, CRS 550D Tamil, and Corporate Booklet PDFs with matching logos.
-- `/press-media` now publishes the supplied product-film and press-coverage links; the ARS 550D page also has working brochure downloads.
-- At this live checkpoint, the price calculator intentionally showed only Total Steel and Indicative Cost, without the per-diameter result table. The later workbook-backed calculator update above is pending Hostinger release.
-- Quality-page updates, a Binders brochure, and the Clients logo expansion remain pending approved client material.
+## Latest production release — 2026-09-17
+
+- Hostinger production is running the release through `main` commit `0dd5964` — `Fix blog section navigation` — after Baburao `main` was synced to the Srikanth production fork.
+- The Hostinger CDN cache was cleared after deployment.
+- Blog “On this page” links are live-verified on desktop and mobile, including working direct fragment URLs.
+- The homepage Knowledge Center card “How Green Steel is Produced” now opens `/blog/green-steel-manufacturing-using-clean-energy.html`.
+- The deployed history includes the mobile form improvements (`a4b14da`), Salesforce lead delivery (`609e901`), and workbook-backed calculator update (`ff74ff0`).
+- The calculator supports rods, bundles, and weight-in-kg inputs using the approved workbook. Future prices or formula changes require a newer approved workbook.
 
 ## Latest performance update — 2026-08-27
 
@@ -227,9 +231,11 @@ Full Name | Phone | Email | State | City / Project Location | Requirement | Prod
 
 Do not prefix these variables with `NEXT_PUBLIC_` or commit their values. The lead payload and provider integration are separated so a Salesforce destination can be added later without changing the product forms.
 
-## Salesforce UAT lead delivery
+## Salesforce production lead delivery
 
-The five live form endpoints can deliver every validated lead to both Salesforce and Google Sheets. Keep Google Sheets enabled for digital-marketing reporting. Enable the Salesforce delivery only with rotated, server-only UAT credentials configured in Vercel, Hostinger, or the secure local environment:
+The five live form endpoints deliver validated enquiries to both Salesforce and Google Sheets. Keep Google Sheets enabled for digital-marketing reporting. Sandbox UAT was successfully verified on 2026-09-16, followed by the Hostinger production rollout.
+
+Separate production credentials were entered directly in Hostinger. Live production enquiries reach the Thank You page and Google Sheets, and the Salesforce team confirmed receipt in the Salesforce production dashboard. The variable names remain the same, but their values must stay only in Hostinger:
 
 ```txt
 SALESFORCE_ENABLED=true
@@ -239,7 +245,9 @@ SALESFORCE_CLIENT_SECRET=
 SALESFORCE_API_VERSION=v64.0
 ```
 
-When Salesforce is disabled or not configured, the existing Google Sheets workflow continues. When enabled, the form success response requires both the Salesforce record and Google Sheets row to complete. Do not place Salesforce credentials in browser code, public environment variables, Markdown files, or Git.
+`SALESFORCE_INSTANCE_URL` is the Salesforce base origin, not the token path; the server appends `/services/oauth2/token`. `SALESFORCE_CLIENT_ID` is the Consumer Key and `SALESFORCE_CLIENT_SECRET` is the Consumer Secret. The integration uses OAuth 2.0 Client Credentials Flow and does not require a visitor callback URL, Salesforce user password, security token, or an external ID.
+
+When Salesforce is disabled or not configured, the existing Google Sheets workflow continues. When enabled, the form success response requires both the Salesforce record and Google Sheets row to complete. Do not place Salesforce credentials in browser code, public environment variables, Markdown files, Git, or chat.
 
 Request Quote submissions use a separate `Quote Requests` worksheet in the same spreadsheet. Share the spreadsheet with the same service-account email and add this header row to that worksheet:
 

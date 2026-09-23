@@ -9,6 +9,7 @@ const staticRoutes = [
   "/ars-binders",
   "/become-a-steel-distributor",
   "/bridges-projects-tmt-steel-bars",
+  "/clients",
   "/contact",
   "/embodied-carbon",
   "/green-steel",

@@ -16,40 +16,72 @@ This is the deployment source of truth for the ARS Green Steel redesign.
 
 Hostinger and `arsgroup.in` are the production source of truth. A Vercel deployment can remain available for preview and comparison, but it does not prove that the production website has been updated. Do not disconnect or reconfigure Vercel without explicit approval.
 
-## Latest Hostinger Production Verification — 2026-09-01
+## Primary Repository Client Corrections — 2026-09-23
 
-- Production commit: `724ae550b2cb5242efc0b575ace17e4d5fbdc386` (`724ae55`) — `Add leadership, brochure, and media updates`.
-- Source branch: `main`, after the primary-repository change was synced to the production-connected fork.
-- Hostinger deployment state: **Completed / Current**.
-- Live route verification: `/our-team`, `/download-product-brochure`, and `/press-media` show the released leadership, brochure-library, and press-media content.
-- The abbreviated seven-character Git SHA (`724ae55`) and the eight-character SHA shown by Hostinger (`724ae550`) identify the same commit.
-- Release scope excludes the Quality page, Binders brochure, and Clients logo expansion because the required approved source material has not yet been supplied.
+- The current non-careers change adds the approved nine-logo Clients page and replaces the homepage's small client-logo exports with high-resolution assets derived from the client-supplied files.
+- It also includes the dealer search gate, Quality page wording, ARS Binders brochure actions, and the Steel Price Today enquiry form. The new price enquiry uses the established Salesforce and Google Sheets delivery paths; it does not change the existing forms.
+- Local verification passed with lint, route/asset checks, a production build, and desktop/mobile Clients-page review. Do not submit a production enquiry solely to verify this release without the user's specific approval immediately before that submission.
+- Pushing to the primary repository does not deploy Hostinger. Sync and verify the production-connected fork as a separate release step.
 
-## Pending Hostinger release — workbook-backed TMT calculator
+## Pending Hostinger Release — Mobile Core Web Vitals, 2026-09-20
 
-- Primary-repository commit: `ff74ff0` — **Update workbook-backed TMT calculator pricing** — is pushed to Baburao's `main`; it has not yet been synced to the Hostinger-connected fork or verified in production.
-- Before declaring it live, use **Sync fork → Update branch** in `SrikanthCh960/ars-green-steel`, confirm Hostinger reports `ff74ff0` as **Completed / Current**, then verify `/tmt-steel-calculator`, `/tmt-calculator`, and `/tmt-steel-price-today` on `https://arsgroup.in`.
-- Confirm a supported calculator selection shows its workbook-backed results and an unsupported/unavailable selection shows an unavailable-price message without a displayed ₹0 rate or ₹0 total.
-- The update uses the approved `Price - Formula workbook (Regionwise Vs Dia Vs Product) - New.xlsx` source for the supported state/product/diameter prices, rods/bundles/weight calculations, GST treatment, and order disclaimers. Do not update values manually without a newer approved workbook.
+- Baburao `main` is at commit `e2a50145168cfc82edbf0b762ef32f36f39c56c1` (`e2a5014`) — `Optimize mobile Core Web Vitals delivery` — and the remote branch was verified at the same SHA.
+- This commit has not yet been confirmed on `SrikanthCh960/ars-green-steel` or in Hostinger. The last confirmed Hostinger production checkpoint remains `0dd5964`.
+- Release scope: 88 mobile blog hero WebPs, 34 responsive corporate/product/rod/dealer/sustainability hero WebPs, shared breakpoint-aware hero delivery, mobile suppression of desktop-only hero videos, and deferred dealer filtering.
+- Local verification passed: targeted ESLint, TypeScript, route/asset QA, blog migration parity audit, production build, mobile/desktop browser checks, responsive overflow checks, and browser-console review.
+- Required release sequence:
+  1. Sync Srikanth's fork and confirm its `main` shows `e2a5014`.
+  2. Wait for Hostinger to report the same commit as **Completed / Current**.
+  3. Clear the Hostinger CDN cache after deployment.
+  4. Verify representative production routes on mobile and desktop: homepage, two blog templates including PCC/RCC, `/product-550d`, one rod-size page, `/about-us`, `/our-network`, `/ars-green-steel`, and `/careers`.
+  5. Confirm mobile requests select the new `*-mobile.webp` hero files and that desktop-only hero videos are not requested below 768 px.
+  6. Recheck `/robots.txt`, `/sitemap.xml`, production `index, follow`, and the absence of browser-console errors.
+- No production form submission is required for this release because lead delivery code and form payloads were not changed.
+- After live verification, ask the SEO team to begin Search Console validation and monitor the rolling field-data window. Do not expect the Core Web Vitals report to change immediately after deployment.
 
-## Salesforce UAT configuration
+## Latest Hostinger Production Verification — 2026-09-17
 
-The five server-owned enquiry endpoints can send each validated lead to Salesforce and Google Sheets. Google Sheets remains the digital-marketing reporting destination; Salesforce is the client-operated lead system.
+- Production commit: `0dd59648d7bd4d1d77e4f8a695fafec950543f07` (`0dd5964`) — `Fix blog section navigation`.
+- Source branch: Baburao `main`, synced to the `SrikanthCh960/ars-green-steel` production fork before Hostinger deployment.
+- Hostinger deployment completed, and the Hostinger CDN cache was cleared after release.
+- Live blog verification passed on desktop and mobile: the shared “On this page” links scroll to their matching sections and preserve working fragment URLs.
+- The homepage Knowledge Center card “How Green Steel is Produced” now opens `/blog/green-steel-manufacturing-using-clean-energy.html` as intended.
+- The current production commit also contains the previously released mobile form improvements (`a4b14da`), Salesforce lead delivery (`609e901`), and workbook-backed calculator update (`ff74ff0`).
 
-Set these **server-only** values in the UAT environment only after Salesforce has rotated the credentials previously exposed in a document. Never commit them, add a `NEXT_PUBLIC_` prefix, or send them from browser code:
+## Workbook-backed TMT calculator — deployed
+
+- Commit `ff74ff0` is included in the current Hostinger production history; it is no longer pending fork synchronization.
+- The calculator supports the approved state/product/diameter prices and rods, bundles, and weight-in-kg calculations from `Price - Formula workbook (Regionwise Vs Dia Vs Product) - New.xlsx`.
+- Supported selections show workbook-backed results; unavailable rates remain withheld instead of appearing as a valid ₹0 rate or total.
+- Do not update calculator values manually without a newer approved workbook.
+
+## Salesforce production delivery — verified 2026-09-17
+
+The five server-owned enquiry endpoints can deliver each validated lead to Salesforce and Google Sheets. Google Sheets remains the digital-marketing reporting destination; Salesforce is the client-operated lead system. Sandbox UAT was completed on 2026-09-16, followed by the production rollout on Hostinger.
+
+Separate production credentials were entered directly in Hostinger and are not recorded in source or documentation. Live production enquiries now reach the Thank You page, appear in Google Sheets, and have been confirmed in the Salesforce production dashboard. Keep these values **server-only**; never commit them, add a `NEXT_PUBLIC_` prefix, or send them from browser code:
 
 ```txt
 SALESFORCE_ENABLED=true
-SALESFORCE_INSTANCE_URL=https://your-salesforce-uat-instance
+SALESFORCE_INSTANCE_URL=
 SALESFORCE_CLIENT_ID=
 SALESFORCE_CLIENT_SECRET=
 SALESFORCE_API_VERSION=v64.0
 ```
 
+- `SALESFORCE_INSTANCE_URL` must be the Salesforce base origin only (for example, `https://your-instance.my.salesforce.com`), not the `/services/oauth2/token` endpoint. The server appends that path.
+- `SALESFORCE_CLIENT_ID` is the Salesforce External Client App Consumer Key, and `SALESFORCE_CLIENT_SECRET` is its Consumer Secret. The current integration uses OAuth 2.0 Client Credentials Flow; it does not use a user password, security token, callback URL, or Authorization Code Flow.
 - When `SALESFORCE_ENABLED` is not exactly `true`, Salesforce is skipped and the existing Google Sheets delivery remains unchanged.
 - When enabled, a form must create its Salesforce `Website_Enquiry__c` record before its Google Sheets row is appended. The visitor sees success only after both destination calls complete.
-- The website does not currently rely on a Salesforce external ID. For UAT, reconcile the two destinations by form type, source route, submission time, and the Salesforce record created. Request a unique external ID before production if Salesforce wants retry-safe duplicate handling.
+- The website does not currently rely on a Salesforce external ID. A unique external ID remains optional future duplicate/retry protection, not a production blocker.
 - Do not use the OAuth access-token request in a URL query string. The server posts credentials to Salesforce's token endpoint and sends the returned access token only in the server-side Authorization header.
+
+### Production operating notes
+
+1. Rotate or replace production credentials only through Hostinger's environment-variable controls; never place the values in chat, Markdown, Git, logs, or browser code.
+2. Retain `SALESFORCE_ENABLED=true` and `SALESFORCE_API_VERSION=v64.0` unless a controlled integration change requires otherwise.
+3. After any future Salesforce configuration or mapping change, obtain explicit approval immediately before sending a production test submission.
+4. Confirm both the Google Sheets row and Salesforce record before treating a future integration change as verified.
 
 ## Search Indexing Policy
 
@@ -146,6 +178,14 @@ Performance release checks for the affected calculator and price pages:
 1. Verify the new responsive WebP hero image is requested on `/tmt-steel-price-today` and `/tmt-steel-calculator`.
 2. Confirm the calculator loads without a React hydration error in the browser console.
 3. Keep GTM and Google Ads configuration unchanged until the SEO team confirms the tag strategy.
+
+Performance release checks for commit `e2a5014`:
+
+1. Confirm `/blog/tmt-steel-bar-weight.html` and `/blog/difference-between-pcc-and-rcc.html` request their `/ars-assets/cwv/blog/*-mobile.webp` hero on a mobile viewport.
+2. Confirm representative product, rod-size, corporate, dealer, sustainability, quality, and careers routes request `/ars-assets/cwv/heroes/*-mobile.webp` below 768 px and the desktop variant above that breakpoint.
+3. Confirm the shared `/videos/ars-intro.mp4` interior hero and the `/ars-green-steel` desktop hero video are not requested on mobile.
+4. Confirm `/our-network` search and state/city filters respond normally, with no horizontal overflow or browser errors.
+5. Keep GA4, GTM, Google Ads, Meta Pixel, Salesforce, and Google Sheets configuration unchanged; this release does not modify those integrations.
 
 ### Meta Conversions API (CAPI)
 
@@ -250,7 +290,8 @@ Use the primary repository's `main` branch for approved releases. A push to Babu
 
 Current caution:
 
-- The native `/blog` archive work may be local-only until committed and pushed.
+- The native `/blog` archive, shared article template, and repaired section navigation are committed and live through `0dd5964`.
+- The Core Web Vitals implementation is committed and pushed through `e2a5014`, but must not be called live until Srikanth fork sync, Hostinger completion, CDN clearing, and production verification are confirmed.
 - Do not include accidental package-manager files such as `pnpm-lock.yaml` or `pnpm-workspace.yaml` unless the package-manager strategy is intentionally changing.
 
 ### 1. Run Local Site
@@ -293,7 +334,7 @@ npm run qa:routes
 ### 3. Commit And Push
 
 ```bash
-git add .
+git add <reviewed-files>
 git commit -m "Describe the update"
 git push origin main
 ```

@@ -8,14 +8,16 @@ type LeadFormType =
   | "quote_request"
   | "contact_enquiry"
   | "distributor_enquiry"
-  | "steel_testing_enquiry";
+  | "steel_testing_enquiry"
+  | "price_enquiry";
 
 type LeadFormId =
   | "product_lead_capture"
   | "quote_request"
   | "contact_enquiry"
   | "distributor_enquiry"
-  | "steel_testing_enquiry";
+  | "steel_testing_enquiry"
+  | "price_enquiry";
 
 type GenerateLeadEvent = {
   formType: LeadFormType;

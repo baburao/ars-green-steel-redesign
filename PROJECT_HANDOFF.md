@@ -2,23 +2,50 @@
 
 Read this file first when continuing the ARS content migration in a new chat.
 
-## Salesforce UAT integration — 2026-09-08
+## Client corrections — 2026-09-23
 
-- The five server-owned website lead endpoints have a server-only Salesforce delivery path alongside their established Google Sheets delivery. This implementation is committed to primary `main`; the next Vercel deployment will make it available for UAT.
-- Salesforce delivery is disabled unless `SALESFORCE_ENABLED=true` and all required non-public UAT settings are installed. Google Sheets remains the digital-marketing reporting destination.
-- When enabled, each validated lead is created in Salesforce `Website_Enquiry__c` first and then appended to Google Sheets. Visitor success requires both deliveries. No Salesforce external ID is required for UAT; Salesforce record IDs, form type, source route, and submission time will be used for reconciliation.
-- Do not use credentials present in the Salesforce requirement PDF. They were exposed in the source document and must be rotated before secure UAT configuration. Never write Salesforce credentials into source, Markdown, Git, or browser code.
-- Build and diff checks pass. Salesforce UAT settings are configured securely in Vercel's Production environment; no external UAT submission has been sent. Next step: confirm the Vercel deployment from this commit, verify field permissions/picklist values, and explicitly authorise five labelled UAT submissions.
+- The Clients page uses all nine newly supplied client logos. Optimized high-resolution versions are shared with the homepage through `src/data/client-logos.ts`; the page is indexed in the sitemap.
+- The dealer list remains hidden until a query or state/city choice is made. The requested Quality wording and Binders brochure link are in place.
+- The Steel Price Today selection has a name, phone, quantity, and inline kg/tonnes selector. Its new endpoint follows the existing Salesforce-then-Google-Sheets delivery pattern, without changing the other form endpoints.
+- Lint, route/asset checks, the production build, and desktop/mobile visual checks passed. Hostinger remains a separate deployment from the primary Git repository.
 
-## Latest primary-repository update — 2026-09-05
+## Mobile Core Web Vitals release — committed 2026-09-20, production pending
 
-- Commit `ff74ff0` — **Update workbook-backed TMT calculator pricing** — is pushed to Baburao's primary `main` branch. It is not yet a Hostinger production release.
+- Commit `e2a5014` — **Optimize mobile Core Web Vitals delivery** — is on Baburao `main` and has been pushed to `baburao/ars-green-steel-redesign`.
+- This commit is **not yet confirmed on Srikanth's production fork or Hostinger**. Do not describe it as live until the fork shows the same SHA, Hostinger reports **Completed / Current**, the CDN cache is cleared, and production verification passes.
+- The implementation adds 88 mobile WebP blog hero variants plus 34 mobile/desktop WebP variants for shared corporate, product, rod-size, dealer, quality, and sustainability heroes.
+- `ResponsiveHeroImage` provides breakpoint-aware above-the-fold image delivery without re-enabling the Next.js runtime image optimizer. The shared blog template now covers all 88 migrated article routes.
+- The shared interior hero and ARS Green Steel hero no longer load their large desktop hero videos below the 768 px breakpoint. Dealer-locator filtering now uses deferred values so typing and filter controls remain responsive while the 1,566-record list is recalculated.
+- Verification passed before commit: targeted ESLint, TypeScript, `npm run qa:routes` (160 routes and 229 local assets), `npm run audit:blog-migration` (88 routes and zero parity issues), `npm run build` (180 pages), `git diff --check`, and browser QA at 390 px and 1440 px with no horizontal overflow, Next.js error overlay, or console errors.
+- The SEO workbook contains four sheets and exposes 46 unique example/representative affected URLs. The SEO team still needs to supply the unlisted affected URLs: 73 remaining LCP URLs and 11 remaining INP examples, together with first-detected dates, current 75th-percentile values, and URL-level versus origin-level CrUX classification.
+- After production verification, ask the SEO team to start Search Console validation. Field-data improvement is not immediate and must be monitored over the subsequent CrUX/Search Console reporting window.
+
+## Latest production release — 2026-09-17
+
+- Production commit `0dd5964` — **Fix blog section navigation** — was pushed to Baburao `main`, synced to Srikanth's production fork, deployed by Hostinger, and verified live after the CDN cache was cleared.
+- Shared blog “On this page” links now work on desktop and mobile, scroll to matching headings, and preserve direct fragment URLs.
+- The homepage Knowledge Center card “How Green Steel is Produced” now opens the intended migrated blog article instead of the ARS Green Steel landing page.
+- Commit `a4b14da` — **Improve mobile lead form experience** — is included in the deployed history.
+- No further production test submission is required for this release.
+
+## Salesforce production lead delivery — verified 2026-09-17
+
+- Commit `609e901` — **Add Salesforce UAT lead delivery** — is included in the current Hostinger production deployment. The five server-owned lead endpoints deliver validated enquiries to Salesforce and Google Sheets.
+- Sandbox UAT passed on 2026-09-16. Separate production credentials were subsequently entered directly in Hostinger; their values must never be written into source, documentation, Git, logs, browser code, or chat.
+- Live production enquiries reach the Thank You page and Google Sheets, and the Salesforce team confirmed that the corresponding enquiries are present in the Salesforce production dashboard.
+- Delivery order remains Salesforce first, then Google Sheets. Visitor success requires both destinations.
+- No Salesforce external ID is required for production operation. It remains an optional future duplicate/retry safeguard.
+- Do not conduct another production test form submission unless the user explicitly approves that exact submission immediately before it is sent.
+
+## Workbook-backed calculator update — deployed in current production history
+
+- Commit `ff74ff0` — **Update workbook-backed TMT calculator pricing** — is included in the current Hostinger production history.
 - The approved source workbook is `Price - Formula workbook (Regionwise Vs Dia Vs Product) - New.xlsx`. It now drives supported 550 D and CRS pricing for Tamil Nadu, Andhra Pradesh, Kerala, and Karnataka across 8, 10, 12, 16, 20, 25, and 32 mm.
 - `/tmt-steel-calculator` supports workbook-faithful rods, bundles, and weight-in-kg inputs. Its detailed results show rods, full bundles, loose rods, calculated weight, GST-inclusive rate/kg, and GST-inclusive total.
 - The shared rate data also updates `/tmt-steel-price-today` without redesigning that page. Prices unavailable for an unsupported selection are deliberately withheld rather than presented as a valid zero-value quote.
 - The workbook terms now cover GST-inclusive pricing, 12 m pieces, BIS tolerances, and delivery/transport/loading/unloading exclusions. City/town remains optional quote context only and does not change the state-level rate.
 - Validation passed: all 56 supported state × product × diameter rate combinations matched the workbook formula; `npm run build` and `git diff --check` passed. A source-level responsive/accessibility review passed, including an accessible polite unavailable-price status. A normal browser rendering review remains recommended before Hostinger release.
-- Next release steps: sync Srikanth's fork `main`, wait for Hostinger to deploy `ff74ff0`, then verify `/tmt-steel-calculator`, `/tmt-calculator`, and `/tmt-steel-price-today` live. Do not describe this change as live until those checks pass.
+- Future price or formula changes still require a newer approved workbook and a controlled release.
 
 ## Latest Hostinger release — 2026-09-01
 
@@ -26,7 +53,7 @@ Read this file first when continuing the ARS content migration in a new chat.
 - `/our-team` now uses the approved portrait-led Core Team hierarchy: equal MD and ED entries, smaller centred supporting profiles, a red divider, and name/designation text outside the portrait surface. The two original leadership biographies are no longer clipped.
 - `/download-product-brochure` is a public brochure library with ARS 550D, CRS 550D English, CRS 550D Tamil, and the ARS Corporate Booklet. Each available brochure has a direct download action and matching product/corporate logo.
 - `/press-media` now contains the supplied product-film links and published press-coverage links. The ARS 550D product page download actions now point to its available brochure.
-- `/price-calculator` then presented only Total Steel and Indicative Cost; it was superseded in primary `main` by the workbook-backed calculator update recorded above and remains pending Hostinger release.
+- `/price-calculator` then presented only Total Steel and Indicative Cost; it was later superseded by the workbook-backed calculator update now included in the current Hostinger production history.
 - Production checks confirmed the above public routes after the Hostinger deployment completed.
 - Intentionally pending client inputs: approved Quality-page technical claims, an approved Binders brochure, and a verified complete client-logo set/list for the Clients page. Do not infer or publish any of these without those inputs.
 
@@ -65,11 +92,21 @@ Read this file first when continuing the ARS content migration in a new chat.
 /Users/baburao/Documents/Codex/2026-05-30/hey-act-as-an-experienced-ui/ars-redesign
 ```
 
-- Branch: `codex/metadata-seo`
-- Current committed checkpoint: `79a3438`
-- Latest production deployment: `dpl_E1w66Nt94QfCwQsRqnvPU7jMTmaN` — Ready
+- Branch: `main`
+- Current committed checkpoint: `e2a5014` — pushed to Baburao `main`; production release pending
+- Latest Hostinger production checkpoint: `0dd5964` — deployed and live-verified
 - Production preview alias: https://ars-green-steel.vercel.app/
 - Latest commits:
+  - `e2a5014 Optimize mobile Core Web Vitals delivery`
+  - `006d5ae Clarify steel price update date`
+  - `de06d58 Improve Green Steel emissions comparison`
+  - `3377b7c Redesign steel price today page`
+  - `5a6e430 Redesign TMT steel bar weight guide`
+  - `f910640 Add press media destination pages`
+  - `0dd5964 Fix blog section navigation`
+  - `a4b14da Improve mobile lead form experience`
+  - `609e901 Add Salesforce UAT lead delivery`
+  - `ff74ff0 Update workbook-backed TMT calculator pricing`
   - `ec65569 Refresh Home Owners guide`
   - `9c22607 Add Embodied Carbon page`
   - `712f33b Add SGBC sustainability page`
@@ -101,7 +138,7 @@ Read this file first when continuing the ARS content migration in a new chat.
 ## Deployment and SEO safety
 
 - Testing alias: https://ars-green-steel.vercel.app/
-- Production domain: `https://arsgroup.in` — **not assigned or launch-approved**.
+- Production domain: `https://arsgroup.in` — active on Hostinger and indexable under the production indexing policy.
 - Do not deploy, push, switch domains, or declare production-ready without explicit user approval.
 - Preview/testing must remain `noindex, nofollow`.
 - Production indexing is enabled by `NEXT_PUBLIC_INDEXING_ENABLED=true`; a non-Vercel production build also falls back to indexable because Hostinger may not expose its saved public flag during Next.js compilation.
@@ -193,16 +230,9 @@ Read this file first when continuing the ARS content migration in a new chat.
 
 ## Current worktree — preserve and do not stage by default
 
-The following are currently untracked research/handoff materials or package-manager files:
+At the 2026-09-20 handoff update, the documentation files `DEPLOYMENT.md`, `PROJECT_HANDOFF.md`, `README.md`, and `TASKS.md` contain intentional local notes. The unrelated `deliverables/`, `output/`, and `tmp/` directories remain untracked.
 
-- `docs/content-migration/README.md`
-- `docs/content-migration/road-projects/`
-- `docs/content-migration/bridges-flyovers/`
-- `docs/content-migration/institutional-projects/`
-- `pnpm-lock.yaml`
-- `pnpm-workspace.yaml`
-
-Do not use `git add .`. Do not commit either pnpm file. Never overwrite or delete unrelated working-tree changes.
+Do not use `git add .`. Stage documentation explicitly only after review, and never overwrite or delete unrelated working-tree content.
 
 ## SGBC standalone page — implemented, verification pending
 

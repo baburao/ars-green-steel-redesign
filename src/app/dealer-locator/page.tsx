@@ -14,25 +14,6 @@ export const metadata = createPageMetadata({
   path: "/our-network",
 });
 
-const dealerStats = [
-  {
-    value: dealers.length.toLocaleString("en-IN"),
-    label: "Dealer records",
-  },
-  {
-    value: new Set(dealers.map((dealer) => dealer.city).filter(Boolean)).size.toLocaleString("en-IN"),
-    label: "City entries",
-  },
-  {
-    value: new Set(dealers.map((dealer) => dealer.district).filter(Boolean)).size.toLocaleString("en-IN"),
-    label: "Districts",
-  },
-  {
-    value: dealers.filter((dealer) => dealer.phone).length.toLocaleString("en-IN"),
-    label: "Mobile contacts",
-  },
-];
-
 export default function DealerLocatorPage() {
   return (
     <main className="min-h-screen overflow-x-clip bg-background text-ink-900">
@@ -48,7 +29,7 @@ export default function DealerLocatorPage() {
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,30,0.92)_0%,rgba(6,13,30,0.72)_42%,rgba(6,13,30,0.34)_100%)]" />
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(222,18,26,0.22),transparent_28%),linear-gradient(180deg,rgba(6,13,30,0.1),rgba(6,13,30,0.5))]" />
 
-        <div className="ars-page-hero-content h-full ars-container relative z-10 grid items-center gap-10 py-16 lg:grid-cols-[0.9fr_0.75fr] lg:py-20">
+        <div className="ars-page-hero-content h-full ars-container relative z-10 flex items-center py-16 lg:py-20">
           <div className="max-w-4xl">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/16 bg-white/10 px-4 py-2 text-sm font-bold text-white/82 backdrop-blur">
               <MapPin size={16} className="text-brand-red" />
@@ -77,22 +58,6 @@ export default function DealerLocatorPage() {
             </div>
           </div>
 
-          <div className="rounded-[24px] border border-white/16 bg-white/10 p-5 shadow-[0_26px_90px_rgba(0,0,0,0.26)] backdrop-blur-md lg:p-6">
-            <p className="font-technical text-xs font-bold uppercase tracking-[0.22em] text-white/58">
-              Dealer sheet summary
-            </p>
-            <div className="mt-5 grid gap-3 sm:grid-cols-2">
-              {dealerStats.map((stat) => (
-                <article key={stat.label} className="rounded-[16px] border border-white/14 bg-white/9 p-5">
-                  <p className="font-display text-4xl font-bold text-white">{stat.value}</p>
-                  <p className="mt-2 text-sm font-semibold text-white/64">{stat.label}</p>
-                </article>
-              ))}
-            </div>
-            <p className="mt-5 text-sm leading-6 text-white/58">
-              Final public phone numbers and addresses should be verified by ARS before launch.
-            </p>
-          </div>
         </div>
       </section>
 

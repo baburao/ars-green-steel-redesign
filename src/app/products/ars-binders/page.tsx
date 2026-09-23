@@ -148,22 +148,6 @@ const faqs = [
   ],
 ] as const;
 
-function DisabledBrochureAction({ dark = false }: { dark?: boolean }) {
-  return (
-    <span
-      aria-disabled="true"
-      title="Download Brochure is unavailable until the approved brochure is supplied."
-      className={`inline-flex min-h-12 cursor-not-allowed items-center justify-center gap-2.5 rounded-full px-6 py-3 text-[14px] font-bold ${
-        dark
-          ? "border border-white/30 text-white/60"
-          : "border border-brand-blue/20 text-brand-blue/55"
-      }`}
-    >
-      <FileText size={15} /> Download Brochure
-    </span>
-  );
-}
-
 export default function ArsBindersPage() {
   return (
     <main className="min-h-screen overflow-x-clip bg-surface-50 text-ink-900">
@@ -244,7 +228,7 @@ export default function ArsBindersPage() {
                 </div>
               ))}
             </dl>
-            <div className="border-t border-surface-100 p-5"><DisabledBrochureAction /></div>
+            <div className="border-t border-surface-100 p-5"><a href="/ars-assets/Downloads/Binders.pdf" download className="focus-ring inline-flex min-h-12 items-center justify-center gap-2.5 rounded-full border border-brand-blue/20 px-6 py-3 text-[14px] font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue hover:text-white"><FileText size={15} aria-hidden="true" /> Download Brochure</a></div>
           </div>
         </div>
       </MotionSection>

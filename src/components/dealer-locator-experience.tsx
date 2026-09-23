@@ -55,6 +55,7 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
 
   const filteredDealers = useMemo(() => {
     const normalizedQuery = deferredQuery.trim().toLowerCase();
+    if (!normalizedQuery && !deferredCity && !deferredState) return [];
 
     return dealers.filter((dealer) => {
       const matchesQuery = !normalizedQuery || dealer.searchText.includes(normalizedQuery);
@@ -65,8 +66,9 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
     });
   }, [dealers, deferredCity, deferredQuery, deferredState]);
 
-  const visibleDealers = filteredDealers.slice(0, visibleCount);
-  const hasActiveFilters = Boolean(query || city || state);
+  const hasActiveFilters = Boolean(query.trim() || city || state);
+  const isFiltering = query !== deferredQuery || city !== deferredCity || state !== deferredState;
+  const visibleDealers = hasActiveFilters && !isFiltering ? filteredDealers.slice(0, visibleCount) : [];
 
   const resetFilters = () => {
     setQuery("");
@@ -179,14 +181,14 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
           </div>
         </motion.div>
 
-        <div className="mt-8 flex flex-col gap-3 border-b border-brand-blue/10 pb-5 sm:flex-row sm:items-center sm:justify-between">
+        {hasActiveFilters ? <div className="mt-8 flex flex-col gap-3 border-b border-brand-blue/10 pb-5 sm:flex-row sm:items-center sm:justify-between">
           <div>
             <p className="font-display text-2xl font-bold text-ink-900">
-              {filteredDealers.length.toLocaleString("en-IN")} dealer records found
+              {isFiltering ? "Searching dealers…" : `${filteredDealers.length.toLocaleString("en-IN")} dealer records found`}
             </p>
-            <p className="mt-1 text-sm font-medium text-steel-700">
+            {!isFiltering ? <p className="mt-1 text-sm font-medium text-steel-700">
               Showing {visibleDealers.length.toLocaleString("en-IN")} records. Contact details should be verified before final launch.
-            </p>
+            </p> : null}
           </div>
           <Link
             className="focus-ring inline-flex h-12 items-center justify-center gap-2 rounded-full bg-brand-red px-6 text-sm font-bold text-white transition hover:bg-brand-red-dark"
@@ -194,9 +196,9 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
           >
             Need ARS help? <ArrowRight size={17} />
           </Link>
-        </div>
+        </div> : <div className="mt-8 border-t border-brand-blue/10 pt-6 text-steel-700" role="status">Enter a pincode or dealer name, or choose a state or city to see matching dealers.</div>}
 
-        {visibleDealers.length > 0 ? (
+        {hasActiveFilters && !isFiltering && visibleDealers.length > 0 ? (
           <div className="mt-8 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
             {visibleDealers.map((dealer) => (
               <article
@@ -244,7 +246,7 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
               </article>
             ))}
           </div>
-        ) : (
+        ) : hasActiveFilters && !isFiltering ? (
           <div className="mt-8 rounded-[22px] border border-brand-blue/10 bg-surface-50 p-8 text-center shadow-[var(--shadow-soft)]">
             <h3 className="font-display text-3xl font-bold text-ink-900">No matching dealer found.</h3>
             <p className="mx-auto mt-3 max-w-2xl text-base leading-7 text-steel-700">
@@ -257,9 +259,9 @@ export function DealerLocatorExperience({ dealers }: DealerLocatorExperienceProp
               Request support <ArrowRight size={17} />
             </Link>
           </div>
-        )}
+        ) : null}
 
-        {visibleCount < filteredDealers.length ? (
+        {hasActiveFilters && !isFiltering && visibleCount < filteredDealers.length ? (
           <div className="mt-10 flex justify-center">
             <button
               className="focus-ring inline-flex h-13 items-center justify-center rounded-full border border-brand-blue/15 bg-white px-8 text-base font-bold text-brand-blue shadow-[var(--shadow-soft)] transition hover:border-brand-blue/35 hover:bg-[#edf5ff]"
