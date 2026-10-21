@@ -26,7 +26,14 @@ The existing chart, other article content, URL, title, description, H1, canonica
 - [x] Confirm the chart, metadata, H1, canonical, links, indexing and enquiry paths retain their previous values in source and the local rendered page.
 - [x] Run the blog migration audit, route check, TypeScript, lint, and a production build; review the rendered article on desktop.
 - [x] Review the rendered article at mobile (427 px) and tablet (768 px) widths; the two replacement paragraphs remain separate and readable beneath the unchanged chart.
-- [ ] Record the primary commit, ARS merge commit, Hostinger **Completed / Current** deployment reference, and live publication time in IST.
-- [ ] Verify the live page shows the new text and retains the chart and surrounding content. Send before/after evidence and any unresolved issue to the ARS owner for the SEO team.
+- [x] Record the primary commit, ARS merge commit, Hostinger **Completed / Current** deployment reference, and live publication time in IST.
+- [x] Verify the live page shows the new text and retains the chart and surrounding content. Share this before/after record and [live screenshot](evidence/ars-cor01-live-2026-10-21.png) with the ARS owner for the SEO team. No issue was found in the corrected block.
+
+Release evidence (21 October 2026, IST):
+
+- Development `main` commit: [`62a9a7c`](https://github.com/baburao/ars-green-steel-redesign/commit/62a9a7cc8c41d7360eea87f5c5686c4de4f2f3f9). The focused production branch was rebased on ARS `main` as `0c143d1` to exclude an unrelated prior build-setting commit.
+- ARS production: [PR #2](https://github.com/Arsgroup476/ars-green-steel/pull/2), rebased and merged as [`02a4d82`](https://github.com/Arsgroup476/ars-green-steel/commit/02a4d82e886367eb6a593ce8c2ef11bdea668758) at 11:54 IST.
+- Hostinger: [deployment `01a15d22-683c-7059-a385-d9a89f709c1d`](https://hpanel.hostinger.com/websites/arsgroup.in/node/deployments/01a15d22-683c-7059-a385-d9a89f709c1d/details) became **Completed / Current** at 11:57 IST, publishing `02a4d82` from `Arsgroup476/ars-green-steel:main`.
+- Live check: at approximately 11:58 IST, the public route showed both approved paragraphs directly below the unchanged chart. The 12 mm row still reads `0.844 / 0.888 / 0.932`; the article H1, route, surrounding content, and next-step links remain present. The old square-metre and blanket `±7%` wording was absent.
 
 This record does not authorize the paused Revision 2 changes or a bulk metadata update.
