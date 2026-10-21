@@ -2,6 +2,12 @@
 
 Read this file first when continuing the ARS content migration in a new chat.
 
+## 12 mm rod weight correction — COR01, 2026-10-21
+
+- The SEO team's Revision 3 authorizes only a calculation-text correction beneath the existing chart on `/blog/12mm-rod-weight-chart.html`. The exact two replacement paragraphs are now in the blog migration registry, with an approved editorial-improvement record. The original legacy extraction remains unchanged.
+- The corrected text uses `kg/m`, distinguishes the table's `0.888 kg/m` from the formula's rounded `0.889 kg/m`, calculates `0.888 × 12 = 10.656 kg`, and removes the generalized `±7%` claim. The article's title, metadata, H1, table, route, canonical, links, design, and other content are outside this change. Earlier Revision 2 SEO requests remain paused.
+- Verification and publication status are tracked in [the COR01 record](docs/content-migration/12mm-rod-weight-correction.md). Do not call it live until Hostinger reaches **Completed / Current** and the public article is checked.
+
 ## Client logo refresh — 2026-09-28
 
 - The updated client folder contains 15 numbered PNGs plus four existing WebP logos, for 19 clients total. The four existing logos match the site assets exactly.
