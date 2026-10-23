@@ -280,7 +280,8 @@ export function TmtSteelBarWeightGuide() {
         <p className="mt-5">Bar weight is the weight of one individual TMT bar. Bundle weight is the combined weight of all the bars packed in one ARS bundle.</p>
         <div className="mt-6 rounded-[8px] border border-brand-blue/12 bg-surface-50 p-6">
           <p>For example, the nominal weight of one 10mm ARS bar is 7.527 kg. A 10mm ARS bundle contains seven bars:</p>
-          <p className="mt-4 font-technical text-lg font-bold tabular-nums text-ink-900">7.527 × 7 = 52.692 kg</p>
+          <p className="mt-4 font-technical text-lg font-bold tabular-nums text-ink-900">0.617 kg/m × 12.2 m × 7 = 52.6918 kg, or approximately 52.692 kg</p>
+          <p className="mt-4">This example uses the nominal unit weight and the approximately 40 ft length represented in the ARS chart, then rounds the bundle total. The displayed per-bar weight is rounded separately.</p>
           <p className="mt-4">Therefore, the nominal weight of a 10mm ARS bundle is 52.692 kg.</p>
         </div>
         <p className="mt-6">The number of bars in a bundle differs according to bar diameter. Always use the approved ARS pieces-per-bundle value for the required diameter.</p>

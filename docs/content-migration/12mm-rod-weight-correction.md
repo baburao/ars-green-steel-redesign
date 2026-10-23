@@ -4,7 +4,7 @@
 
 - Change ID: `COR01`; authorized on 2026-10-21 from `/Users/baburao/Downloads/ARS_Developer_Confirmed_Correction_v3.docx`.
 - Public route: `https://arsgroup.in/blog/12mm-rod-weight-chart.html`.
-- The SEO team's Revision 3 supersedes the earlier Revision 2 and week-one implementation requests. Only the calculation text below the existing TMT weight chart is approved for change. Earlier metadata, H1, introduction, price-page explanation, and contextual-link requests remain paused.
+- At the time of the 21 October COR01 release, Revision 3 superseded the earlier Revision 2 and week-one requests and approved only the calculation text below the chart. The later consolidated packet authorizes the separate COR02–COR05 corrections; broad metadata, H1, and introduction rewrites remain outside the work order.
 - The article's published body is sourced from its `fullContentHtml` entry in `src/data/blog-migration-registry.json`. The original WordPress extraction in `src/data/legacy-pages.json` remains unchanged as migration evidence.
 
 ## Before and approved after
@@ -36,4 +36,4 @@ Release evidence (21 October 2026, IST):
 - Hostinger: [deployment `01a15d22-683c-7059-a385-d9a89f709c1d`](https://hpanel.hostinger.com/websites/arsgroup.in/node/deployments/01a15d22-683c-7059-a385-d9a89f709c1d/details) became **Completed / Current** at 11:57 IST, publishing `02a4d82` from `Arsgroup476/ars-green-steel:main`.
 - Live check: at approximately 11:58 IST, the public route showed both approved paragraphs directly below the unchanged chart. The 12 mm row still reads `0.844 / 0.888 / 0.932`; the article H1, route, surrounding content, and next-step links remain present. The old square-metre and blanket `±7%` wording was absent.
 
-This record does not authorize the paused Revision 2 changes or a bulk metadata update.
+This record covered only the 21 October COR01 release. The later consolidated COR01–COR05 packet authorizes four additional limited corrections, recorded in [the SEO recovery ticket record](seo-recovery-tickets-2026-10-23.md). It does not authorize a bulk metadata update.
