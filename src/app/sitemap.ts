@@ -3,6 +3,7 @@ import { getBlogMigrationRegistry } from "@/lib/blog-migration";
 import { editorialBlogPosts } from "@/lib/editorial-blog";
 import { getLegacyTopLevelPages } from "@/lib/legacy-content";
 import { productionDomain } from "@/lib/site-metadata";
+import { cityServiceAreaPaths } from "@/data/city-service-areas";
 
 const staticRoutes = [
   "",
@@ -39,6 +40,7 @@ const staticRoutes = [
   "/32-mm-steel-rod",
   "/projects",
   "/request-quote",
+  "/service-areas",
   "/sgbc",
   "/services",
   "/steel-testing",
@@ -61,6 +63,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticRoutes,
+    ...cityServiceAreaPaths,
     ...getLegacyTopLevelPages().map((page) => page.path),
     ...approvedBlogRoutes,
     ...editorialBlogPosts.map((post) => `/blog/${post.slug}`),

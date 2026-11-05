@@ -69,6 +69,7 @@ const sustainability: BreadcrumbItem = { label: "Sustainability", href: "/ars-gr
 const solutions: BreadcrumbItem = { label: "Solutions", href: "/industries" };
 const resources: BreadcrumbItem = { label: "Resources", href: "/blog" };
 const pressMedia: BreadcrumbItem = { label: "Press Media", href: "/press-media" };
+const serviceAreas: BreadcrumbItem = { label: "Service Areas", href: "/service-areas" };
 
 const routeDefinitions: Record<string, BreadcrumbDefinition> = {
   "/about-us": { label: "ARS Group", parents: [home, about] },
@@ -108,6 +109,15 @@ const routeDefinitions: Record<string, BreadcrumbDefinition> = {
   "/institutions-projects-tmt-steel-bars": { label: "Institutional Projects", parents: [home, solutions, { label: "Project Types", href: "/projects" }] },
   "/steel-distributors-dealers": { label: "Dealers & Distributors", parents: [home, solutions] },
   "/our-network": { label: "Dealer Locator", parents: [home, solutions] },
+  "/service-areas": { label: "Service Areas", parents: [home, solutions] },
+  "/tmt-bars-coimbatore": { label: "TMT Bars in Coimbatore", parents: [home, serviceAreas] },
+  "/tmt-bars-madurai": { label: "TMT Bars in Madurai", parents: [home, serviceAreas] },
+  "/tmt-bars-salem": { label: "TMT Bars in Salem", parents: [home, serviceAreas] },
+  "/tmt-bars-tiruppur": { label: "TMT Bars in Tiruppur", parents: [home, serviceAreas] },
+  "/tmt-bars-vellore": { label: "TMT Bars in Vellore", parents: [home, serviceAreas] },
+  "/tmt-bars-kochi": { label: "TMT Bars in Kochi (Ernakulam)", parents: [home, serviceAreas] },
+  "/tmt-bars-puducherry": { label: "TMT Bars in Puducherry", parents: [home, serviceAreas] },
+  "/tmt-bars-nellore": { label: "TMT Bars in Nellore", parents: [home, serviceAreas] },
   "/become-a-steel-distributor": { label: "Become a Steel Distributor", parents: [home, solutions] },
   "/steel-testing": { label: "Steel Testing", parents: [home, products] },
   "/blog": { label: "Blog", parents: [home, resources] },

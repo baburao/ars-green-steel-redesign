@@ -6,6 +6,12 @@ import { ArrowRight, Phone } from "lucide-react";
 import { FormEvent, useState } from "react";
 import { verifiedContactDetails } from "@/data/business-verification";
 import { trackGenerateLead, trackMetaLead } from "@/lib/analytics";
+import {
+  QUOTE_PRODUCT_TYPES,
+  QUOTE_PROJECT_TYPES,
+  QUOTE_REQUEST_STATES,
+  type QuoteRequestSourcePage,
+} from "@/lib/quote-request-options";
 
 export type QuoteRequestPrefill = {
   state?: string;
@@ -19,12 +25,10 @@ type QuoteRequestFormProps = {
   prefill?: QuoteRequestPrefill;
   idPrefix?: string;
   presentation?: "card" | "plain";
+  sourcePage?: QuoteRequestSourcePage;
 };
 type FormStatus = { tone: "idle" | "success" | "error"; message: string };
 
-const states = ["Tamil Nadu", "Kerala", "Karnataka", "Andhra Pradesh"];
-const projectTypes = ["Residential", "Commercial", "Road / Infrastructure", "Dealer Enquiry"];
-const productTypes = ["ARS CRS Fe 550D", "ARS Fe 550D", "Binders"];
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const fieldOrder = ["fullName", "phone", "email", "state", "city", "projectType", "productType", "requirement"];
 
@@ -38,6 +42,7 @@ export function QuoteRequestForm({
   prefill,
   idPrefix = "quote",
   presentation = "card",
+  sourcePage = "/request-quote",
 }: QuoteRequestFormProps) {
   const router = useRouter();
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -87,11 +92,11 @@ export function QuoteRequestForm({
     else if (fullName.length > 100) nextErrors.fullName = "Full name must be 100 characters or fewer.";
     if (!/^[6-9]\d{9}$/.test(localPhone)) nextErrors.phone = "Please enter a valid Indian mobile number.";
     if (!emailPattern.test(email) || email.length > 254) nextErrors.email = "Please enter a valid email address.";
-    if (!states.includes(state)) nextErrors.state = "Please select a state.";
+    if (!QUOTE_REQUEST_STATES.includes(state as (typeof QUOTE_REQUEST_STATES)[number])) nextErrors.state = "Please select a state or Union Territory.";
     if (city.length < 2) nextErrors.city = "Please enter the city or project location.";
     else if (city.length > 120) nextErrors.city = "City or project location must be 120 characters or fewer.";
-    if (!projectTypes.includes(projectType)) nextErrors.projectType = "Please select a project type.";
-    if (!productTypes.includes(productType)) nextErrors.productType = "Please select a product.";
+    if (!QUOTE_PROJECT_TYPES.includes(projectType as (typeof QUOTE_PROJECT_TYPES)[number])) nextErrors.projectType = "Please select a project type.";
+    if (!QUOTE_PRODUCT_TYPES.includes(productType as (typeof QUOTE_PRODUCT_TYPES)[number])) nextErrors.productType = "Please select a product.";
     if (requirement.length > 1000) nextErrors.requirement = "Requirement must be 1,000 characters or fewer.";
 
     setErrors(nextErrors);
@@ -110,7 +115,7 @@ export function QuoteRequestForm({
         headers: { "content-type": "application/json" },
         body: JSON.stringify({
           fullName, phone: phoneInput, email, state, city, projectType, productType, requirement,
-          sourcePage: "/request-quote", website: String(data.get("website") ?? ""), submissionId,
+          sourcePage, website: String(data.get("website") ?? ""), submissionId,
         }),
       });
       const result = await response.json() as { ok?: boolean; message?: string; errors?: Record<string, string> };
@@ -154,7 +159,7 @@ export function QuoteRequestForm({
       </div> : null}
 
       <form className="grid min-w-0 gap-5" data-lead-form onSubmit={handleSubmit} noValidate aria-busy={isSubmitting}>
-        <input type="hidden" name="sourcePage" value="/request-quote" />
+        <input type="hidden" name="sourcePage" value={sourcePage} />
         <div className="absolute -left-[10000px] h-px w-px overflow-hidden" aria-hidden="true"><label htmlFor={fieldId("website")}>Website</label><input id={fieldId("website")} name="website" tabIndex={-1} autoComplete="off" /></div>
 
         <div className="grid gap-5 md:grid-cols-2">
@@ -165,13 +170,13 @@ export function QuoteRequestForm({
         <label className={labelClass} htmlFor={fieldId("email")}><RequiredLabel>Email</RequiredLabel><input id={fieldId("email")} name="email" type="email" inputMode="email" autoComplete="email" required maxLength={254} className={`${controlClass} ${errors.email ? "border-brand-red" : "border-ink-900/12"}`} aria-invalid={Boolean(errors.email)} aria-describedby={describedBy("email")} onChange={() => clearFieldError("email")} />{errorMessage("email")}</label>
 
         <div className="grid gap-5 md:grid-cols-2">
-          <label className={labelClass} htmlFor={fieldId("state")}><RequiredLabel>State</RequiredLabel><select id={fieldId("state")} name="state" defaultValue={prefill?.state ?? ""} required className={`${controlClass} ${errors.state ? "border-brand-red" : "border-ink-900/12"}`} aria-invalid={Boolean(errors.state)} aria-describedby={describedBy("state")} onChange={() => clearFieldError("state")}><option value="" disabled>Select state</option>{states.map((state) => <option key={state} value={state}>{state}</option>)}</select>{errorMessage("state")}</label>
+          <label className={labelClass} htmlFor={fieldId("state")}><RequiredLabel>State / Union Territory</RequiredLabel><select id={fieldId("state")} name="state" defaultValue={prefill?.state ?? ""} required className={`${controlClass} ${errors.state ? "border-brand-red" : "border-ink-900/12"}`} aria-invalid={Boolean(errors.state)} aria-describedby={describedBy("state")} onChange={() => clearFieldError("state")}><option value="" disabled>Select state or Union Territory</option>{QUOTE_REQUEST_STATES.map((state) => <option key={state} value={state}>{state}</option>)}</select>{errorMessage("state")}</label>
           <label className={labelClass} htmlFor={fieldId("city")}><RequiredLabel>City / Project Location</RequiredLabel><input id={fieldId("city")} name="city" autoComplete="address-level2" required maxLength={120} defaultValue={prefill?.city ?? ""} className={`${controlClass} ${errors.city ? "border-brand-red" : "border-ink-900/12"}`} aria-invalid={Boolean(errors.city)} aria-describedby={describedBy("city")} onChange={() => clearFieldError("city")} />{errorMessage("city")}</label>
         </div>
 
         <div className="grid gap-5 md:grid-cols-2">
-          <label className={labelClass} htmlFor={fieldId("projectType")}><RequiredLabel>Project Type</RequiredLabel><select id={fieldId("projectType")} name="projectType" defaultValue="" required className={`${controlClass} ${errors.projectType ? "border-brand-red" : "border-ink-900/12"}`} aria-invalid={Boolean(errors.projectType)} aria-describedby={describedBy("projectType")} onChange={() => clearFieldError("projectType")}><option value="" disabled>Select project type</option>{projectTypes.map((type) => <option key={type} value={type}>{type}</option>)}</select>{errorMessage("projectType")}</label>
-          <label className={labelClass} htmlFor={fieldId("productType")}><RequiredLabel>Product Type</RequiredLabel><select id={fieldId("productType")} name="productType" defaultValue={prefill?.productType ?? ""} required className={`${controlClass} ${errors.productType ? "border-brand-red" : "border-ink-900/12"}`} aria-invalid={Boolean(errors.productType)} aria-describedby={describedBy("productType")} onChange={() => clearFieldError("productType")}><option value="" disabled>Select product</option>{productTypes.map((type) => <option key={type} value={type}>{type}</option>)}</select>{errorMessage("productType")}</label>
+          <label className={labelClass} htmlFor={fieldId("projectType")}><RequiredLabel>Project Type</RequiredLabel><select id={fieldId("projectType")} name="projectType" defaultValue="" required className={`${controlClass} ${errors.projectType ? "border-brand-red" : "border-ink-900/12"}`} aria-invalid={Boolean(errors.projectType)} aria-describedby={describedBy("projectType")} onChange={() => clearFieldError("projectType")}><option value="" disabled>Select project type</option>{QUOTE_PROJECT_TYPES.map((type) => <option key={type} value={type}>{type}</option>)}</select>{errorMessage("projectType")}</label>
+          <label className={labelClass} htmlFor={fieldId("productType")}><RequiredLabel>Product Type</RequiredLabel><select id={fieldId("productType")} name="productType" defaultValue={prefill?.productType ?? ""} required className={`${controlClass} ${errors.productType ? "border-brand-red" : "border-ink-900/12"}`} aria-invalid={Boolean(errors.productType)} aria-describedby={describedBy("productType")} onChange={() => clearFieldError("productType")}><option value="" disabled>Select product</option>{QUOTE_PRODUCT_TYPES.map((type) => <option key={type} value={type}>{type}</option>)}</select>{errorMessage("productType")}</label>
         </div>
 
         <label className={labelClass} htmlFor={fieldId("requirement")}>Requirement <span className="font-normal text-steel-700">(optional)</span><textarea id={fieldId("requirement")} name="requirement" maxLength={1000} defaultValue={prefill?.requirement ?? ""} className={`focus-ring min-h-32 w-full min-w-0 max-w-full rounded-[6px] border bg-[#f8f9fb] px-4 py-3 text-base font-normal outline-none transition focus:border-brand-blue ${errors.requirement ? "border-brand-red" : "border-ink-900/12"}`} placeholder="Share size, quantity, delivery location, project stage, or other details." aria-invalid={Boolean(errors.requirement)} aria-describedby={describedBy("requirement")} onChange={() => clearFieldError("requirement")} />{errorMessage("requirement")}</label>

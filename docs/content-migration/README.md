@@ -4,6 +4,7 @@ This directory contains the evidence-backed migration planning artifacts request
 
 ## Recent implementation records
 
+- [City service-area pages — implementation and launch audit](city-service-areas-implementation.md)
 - [12 mm rod weight calculation correction — COR01](12mm-rod-weight-correction.md)
 - [SEO recovery tickets COR01–COR05](seo-recovery-tickets-2026-10-23.md)
 - Four new SEO blog posts are live as of the 28 September 2026 production check. Their source-parity records, exact URLs, and open editorial/technical follow-ups are linked below. The 88 migrated blog routes remain separate and unchanged.

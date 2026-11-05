@@ -56,6 +56,7 @@ const footerGroups = [
       { label: "Steel Price Today", href: "/tmt-steel-price-today" },
       { label: "TMT Calculator", href: "/tmt-steel-calculator" },
       { label: "Dealer Locator", href: "/our-network" },
+      { label: "Service Areas", href: "/service-areas" },
       { label: "Become a Distributor", href: "/become-a-steel-distributor" },
       { label: "Blog & Articles", href: "/blog" },
       { label: "Videos", href: "/video" },

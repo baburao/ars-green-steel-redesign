@@ -1,25 +1,29 @@
 import "server-only";
 
 import { appendGoogleSheetRow } from "@/lib/google-sheets";
+import {
+  QUOTE_PRODUCT_TYPES,
+  QUOTE_PROJECT_TYPES,
+  QUOTE_REQUEST_SOURCE_PAGES,
+  QUOTE_REQUEST_STATES,
+  type QuoteProductType,
+  type QuoteProjectType,
+  type QuoteRequestSourcePage,
+  type QuoteRequestState,
+} from "@/lib/quote-request-options";
 
-export const QUOTE_REQUEST_STATES = ["Tamil Nadu", "Kerala", "Karnataka", "Andhra Pradesh"] as const;
-export const QUOTE_PROJECT_TYPES = ["Residential", "Commercial", "Road / Infrastructure", "Dealer Enquiry"] as const;
-export const QUOTE_PRODUCT_TYPES = ["ARS CRS Fe 550D", "ARS Fe 550D", "Binders"] as const;
-
-type QuoteState = (typeof QUOTE_REQUEST_STATES)[number];
-type QuoteProjectType = (typeof QUOTE_PROJECT_TYPES)[number];
-type QuoteProductType = (typeof QUOTE_PRODUCT_TYPES)[number];
+export { QUOTE_PRODUCT_TYPES, QUOTE_PROJECT_TYPES, QUOTE_REQUEST_STATES } from "@/lib/quote-request-options";
 
 export type QuoteRequest = {
   fullName: string;
   phone: string;
   email: string;
-  state: QuoteState;
+  state: QuoteRequestState;
   city: string;
   projectType: QuoteProjectType;
   productType: QuoteProductType;
   requirement: string;
-  sourcePage: "/request-quote";
+  sourcePage: QuoteRequestSourcePage;
   submittedDate: string;
   submittedTime: string;
   timezone: "Asia/Kolkata";
@@ -117,7 +121,7 @@ export function validateQuoteRequest(value: unknown, now = new Date()): QuoteReq
   if (!isAllowed(QUOTE_PROJECT_TYPES, projectType)) errors.projectType = "Please select an approved project type.";
   if (!isAllowed(QUOTE_PRODUCT_TYPES, productType)) errors.productType = "Please select an approved product.";
   if (requirement.length > 1000) errors.requirement = "Requirement must be 1,000 characters or fewer.";
-  if (sourcePage !== "/request-quote") errors.form = "The quote request source is not supported.";
+  if (!isAllowed(QUOTE_REQUEST_SOURCE_PAGES, sourcePage)) errors.form = "The quote request source is not supported.";
   if (!/^[a-zA-Z0-9-]{16,80}$/.test(submissionId)) errors.form = "Please refresh the page and try again.";
 
   if (Object.keys(errors).length) return { ok: false, errors };
@@ -131,12 +135,12 @@ export function validateQuoteRequest(value: unknown, now = new Date()): QuoteReq
       fullName,
       phone,
       email,
-      state: state as QuoteState,
+      state: state as QuoteRequestState,
       city,
       projectType: projectType as QuoteProjectType,
       productType: productType as QuoteProductType,
       requirement,
-      sourcePage: "/request-quote",
+      sourcePage: sourcePage as QuoteRequestSourcePage,
       submittedDate,
       submittedTime,
       timezone: indiaTimeZone,
