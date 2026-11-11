@@ -52,6 +52,8 @@ ARS approved `Price - Formula workbook (Regionwise Vs  Dia Vs Product) - New Up 
 
 ## Intentional editorial changes
 
+- On 11 November 2026, ARS approved a first-load Tamil Nadu ARS Fe 550D 12 mm reference-rate block directly below the existing H1, with links to the grade/size price table and the existing per-12-metre-rod section. The reference block reuses the workbook-backed price source and the existing automatic three-day Tamil Nadu date display; no selector, quotation, route, canonical, SEO title, H1, or pricing-formula behaviour changed.
+- The same approval corrected only the existing “TMT steel prices” and “TMT steel bar price” link destinations in two migrated blog posts from `/our-network` to `/tmt-steel-price-today`. Their anchor text, surrounding article copy, routes, metadata, H1s, and other links remain unchanged. Both corrections are recorded as approved editorial improvements in `src/data/blog-migration-registry.json`.
 - On 7 October 2026, ARS approved the new price workbook for all 56 region/grade/diameter combinations. The shared pricing formula and workbook source date changed; the site retains the same page structure and migrated editorial content. The old formula is recorded above.
 - On 5 October 2026, ARS requested that “Price updated on” remain the label while its displayed Tamil Nadu date advances every three days to the previous day of each refresh (for example, on 10 October it shows 9 October). The schedule starts on 7 October; until then the displayed date remains 5 October. The date is calculated in India time at request time. This display cadence does not modify rates, which still require ARS confirmation.
 - On 5 October 2026, ARS requested that the “2 ARS grades” price-coverage strip appear immediately after the hero, followed by the complete “Today's ARS TMT steel prices by bar size” section. Only their positions changed; the price lookup, migrated copy, supporting sections, links, FAQs, and metadata remain intact.
@@ -66,6 +68,7 @@ ARS approved `Price - Formula workbook (Regionwise Vs  Dia Vs Product) - New Up 
 
 ## Local verification completed
 
+- For the 11 November first-load reference block, the displayed ₹78.50/kg and ₹78,500/tonne values were verified against the existing Tamil Nadu ARS Fe 550D 12 mm source row while retaining `getPriceUpdatedOnLabel()`. Both fragment links landed below the sticky header, both corrected blog links resolved to the canonical price URL, and the route, canonical, SEO title, and H1 remained unchanged. ESLint, TypeScript through the production build, route/asset QA, blog migration audit, `git diff --check`, and the production build passed. The 390 px mobile and 1440 px desktop layouts had no horizontal overflow; the mobile rate card kept the region, grade, size, rate, and update date together below the H1.
 - For the 7 October workbook, all 56 site rates matched the workbook's cached GST-inclusive prices to floating-point tolerance. The Tamil Nadu 10 mm one-rod calculator total matched the workbook example; the new approval-date floor and three-day display cadence passed boundary checks. ESLint on the changed pricing source, route/asset QA, `git diff --check`, and the production build passed. No page component or migrated editorial copy changed.
 - TypeScript, ESLint on changed source files, production build, route/asset QA, and `git diff --check` passed.
 - Desktop and 390 px mobile layouts were reviewed locally. After the ARS-requested removal, the rendered page has no “Detailed Order Planning” section or horizontal overflow.
@@ -79,4 +82,4 @@ ARS approved `Price - Formula workbook (Regionwise Vs  Dia Vs Product) - New Up 
 - Check the rendered steel-price page and TMT calculator on desktop and mobile after deployment, including the new values, date label and price-enquiry summary. The browser automation session was blocked by its URL policy during this local review.
 - After deployment, verify the production page and compare indexed/crawlable content with the legacy inventory. Content restoration alone cannot guarantee a ranking recovery.
 
-No blog page was edited as part of this restoration. The migration parity rule in `AGENTS.md` applies to future page and blog edits.
+No blog page was edited as part of the original restoration. The later 11 November 2026 approved internal-link corrections are recorded above and in the migration registry. The migration parity rule in `AGENTS.md` continues to apply to future page and blog edits.

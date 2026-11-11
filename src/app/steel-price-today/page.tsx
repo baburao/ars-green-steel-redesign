@@ -215,6 +215,17 @@ const tamilNaduPriceTables = calculatorProducts.map((product) => ({
 }));
 
 const perRodRows = getWorkbookPriceRows("Tamil Nadu", "ARS Fe 550D");
+function getTamilNaduReferenceRate() {
+  const referenceRate = perRodRows.find((row) => row.size === "12mm");
+
+  if (!referenceRate) {
+    throw new Error("Missing Tamil Nadu ARS Fe 550D 12mm reference rate");
+  }
+
+  return referenceRate;
+}
+
+const tamilNaduReferenceRate = getTamilNaduReferenceRate();
 
 const structuredData = {
   "@context": "https://schema.org",
@@ -312,7 +323,7 @@ export default async function SteelPriceTodayPage() {
     <main className="min-h-screen bg-surface-50 text-ink-900">
       <SiteHeader />
 
-      <section className="ars-page-hero relative flex min-h-[500px] items-end overflow-hidden bg-ink-950 md:min-h-[560px] lg:min-h-[600px]">
+      <section className="relative flex min-h-[760px] items-end overflow-hidden bg-ink-950 md:min-h-[720px] lg:min-h-[740px]">
         <picture className="absolute inset-0">
           <source media="(max-width: 767px)" srcSet="/ars-assets/SteelPriceHeroBanner-mobile.webp" type="image/webp" />
           <source srcSet="/ars-assets/SteelPriceHeroBanner-desktop.webp" type="image/webp" />
@@ -333,13 +344,32 @@ export default async function SteelPriceTodayPage() {
             <h1 className="mt-5 font-display text-[clamp(2.55rem,6vw,4.4rem)] font-extrabold leading-[1.02] tracking-[-0.03em] text-white">
               Latest Steel Price Today Per Kg in India | Current Steel Rates
             </h1>
+            <div className="mt-6 rounded-xl border border-white/20 bg-white p-5 text-ink-900 shadow-[var(--shadow-soft)] md:p-6">
+              <p className="font-technical text-[11px] font-bold uppercase tracking-[0.12em] text-brand-blue">
+                Tamil Nadu ARS TMT steel reference rate
+              </p>
+              <p className="mt-2 font-display text-xl font-extrabold leading-tight text-ink-900 md:text-2xl">
+                <span className="block text-brand-blue sm:inline">ARS Fe 550D, 12 mm</span>
+                <span className="mt-1 block text-brand-blue sm:ml-2 sm:mt-0 sm:inline">
+                  · {perKgCurrency.format(tamilNaduReferenceRate.perKg)} per kg · {wholeCurrency.format(tamilNaduReferenceRate.perTon)} per tonne
+                </span>
+              </p>
+              <p className="mt-3 max-w-2xl text-sm leading-6 text-steel-700">
+                Price updated {priceUpdatedOnLabel}. GST included. Freight, transport, loading and unloading are extra. Chennai deliveries use the Tamil Nadu reference rate. ARS confirms the final price by quotation.
+              </p>
+            </div>
+            <nav className="mt-4 flex flex-col gap-2 text-sm font-bold sm:flex-row sm:gap-6" aria-label="Steel price page shortcuts">
+              <a className="focus-ring inline-flex min-h-10 items-center gap-2 text-white underline decoration-white/35 underline-offset-4 transition-colors hover:text-white/75" href="#price-table">
+                View prices by grade and size <ArrowRight className="size-4" aria-hidden="true" />
+              </a>
+              <a className="focus-ring inline-flex min-h-10 items-center gap-2 text-white underline decoration-white/35 underline-offset-4 transition-colors hover:text-white/75" href="#price-per-12m-bar">
+                View estimated price per 12 m rod <ArrowRight className="size-4" aria-hidden="true" />
+              </a>
+            </nav>
             <p className="mt-5 max-w-2xl text-[15px] leading-7 text-white/76 md:text-base">
               Compare indicative ARS Fe 550D and CRS Fe 550D rates by region and diameter, then request a confirmed quotation for your quantity and delivery location.
             </p>
             <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-              <a className="focus-ring inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-brand-red px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white hover:text-brand-blue" href="#price-table">
-                Check prices <ArrowRight className="size-4" aria-hidden="true" />
-              </a>
               <Link className="focus-ring inline-flex min-h-12 items-center justify-center rounded-md border border-white/45 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white hover:text-brand-blue" href="/request-quote">
                 Request a quotation
               </Link>
@@ -364,7 +394,7 @@ export default async function SteelPriceTodayPage() {
         </div>
       </section>
 
-      <MotionSection className="bg-white py-16 md:py-24" id="price-table">
+      <MotionSection className="scroll-mt-24 bg-white py-16 md:py-24" id="price-table">
         <div className="ars-container min-w-0">
           <div className="grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
             <div>
@@ -495,7 +525,7 @@ export default async function SteelPriceTodayPage() {
         </div>
       </MotionSection>
 
-      <MotionSection className="border-y border-brand-blue/10 bg-surface-50 py-16 md:py-24">
+      <MotionSection className="scroll-mt-24 border-y border-brand-blue/10 bg-surface-50 py-16 md:py-24" id="price-per-12m-bar">
         <div className="ars-container">
           <div className="grid gap-8 lg:grid-cols-[1fr_0.72fr] lg:items-end">
             <div>
