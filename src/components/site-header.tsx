@@ -76,11 +76,12 @@ const megaMenus: Record<MenuKey, MegaMenuDefinition> = {
     links: [
       { label: "ARS CRS Fe 550D", href: "/product-crs-550d" },
       { label: "ARS Fe 550D", href: "/product-550d" },
+      { label: "ARS 550 SM+ TMT Bars", href: "/product-550-sm-plus" },
       { label: "ARS Binders", href: "/ars-binders" },
       { label: "550D Vs CRS 550D", href: "/products#comparison" },
       { label: "Steel Testing", href: "/steel-testing" },
     ],
-    proof: ["550D ductility", "CRS corrosion resistance", "Residential to infrastructure use"],
+    proof: ["550D ductility", "SM+ bendability", "CRS corrosion resistance"],
   },
   sustainability: {
     eyebrow: "Sustainability",

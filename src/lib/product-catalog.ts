@@ -33,6 +33,17 @@ export const productCatalog = [
     overviewPoints: ["Secure connections", "Accurate alignment", "Faster installation"],
     image: "/ars-assets/logos/BinderLogo.png",
   },
+  {
+    slug: "ars-550-sm-plus",
+    name: "ARS 550 SM+ TMT Bars",
+    route: "/product-550-sm-plus",
+    homeEyebrow: "High-manganese TMT bars",
+    overviewTag: "Flexibility-focused grade",
+    description: "Developed for greater ductility and bendability, with 16% minimum elongation and a 1.15+ TS/YS ratio.",
+    homePoints: ["Greater bendability", "16% minimum elongation", "1.15+ TS/YS ratio"],
+    overviewPoints: ["High ductility", "High manganese", "550 MPa minimum yield strength"],
+    image: "/ars-assets/products/ars-550-sm-plus/product-bars.webp",
+  },
 ] as const;
 
 export const productComparisonRows = [

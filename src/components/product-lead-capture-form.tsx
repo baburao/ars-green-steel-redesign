@@ -8,7 +8,7 @@ import { verifiedContactDetails } from "@/data/business-verification";
 import { trackGenerateLead, trackMetaLead } from "@/lib/analytics";
 
 type ProductLeadCaptureFormProps = {
-  product: "ARS Fe 550D" | "ARS CRS Fe 550D" | "ARS Binders";
+  product: "ARS Fe 550D" | "ARS CRS Fe 550D" | "ARS Binders" | "ARS 550 SM+ TMT Bars";
   trustItems: string[];
   showCallSales?: boolean;
 };
@@ -20,6 +20,7 @@ const sourcePages: Record<ProductLeadCaptureFormProps["product"], string> = {
   "ARS Fe 550D": "/product-550d",
   "ARS CRS Fe 550D": "/product-crs-550d",
   "ARS Binders": "/ars-binders",
+  "ARS 550 SM+ TMT Bars": "/product-550-sm-plus",
 };
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 

@@ -1,13 +1,14 @@
 type PropertyRow = readonly [property: string, unit: string, standard: string, ars: string];
 
 type PhysicalChemicalPropertiesTableProps = {
-  grade: "Fe 550D" | "Fe 550D CRS";
+  grade: "Fe 550D" | "Fe 550D CRS" | "550 SM+";
   chemicalRows: readonly PropertyRow[];
   physicalRows: readonly PropertyRow[];
 };
 
 const presentationRows = {
   "Fe 550D": {
+    benchmarkLabel: "IS 1786 – 2008",
     chemical: [
       ["Carbon", "%", "0.25 Max", "0.25 Max"],
       ["Phosphorous", "%", "0.04 Max", "0.04 Max"],
@@ -23,6 +24,7 @@ const presentationRows = {
     ],
   },
   "Fe 550D CRS": {
+    benchmarkLabel: "IS 1786 – 2008",
     chemical: [
       ["Carbon", "%", "0.25 Max", "0.25 Max"],
       ["Phosphorous", "%", "0.04 Max", "0.04 Max"],
@@ -37,20 +39,42 @@ const presentationRows = {
       ["Elongation", "%", "14.5 Min", "16 Min"],
     ],
   },
-} as const satisfies Record<PhysicalChemicalPropertiesTableProps["grade"], { chemical: readonly PropertyRow[]; physical: readonly PropertyRow[] }>;
+  "550 SM+": {
+    benchmarkLabel: "Fe 550 Benchmark",
+    chemical: [
+      ["Carbon (C), Max.", "%", "0.30", "0.20"],
+      ["Manganese (Mn), Min.", "%", "—", "0.75"],
+      ["Phosphorus (P), Max.", "%", "0.055", "0.055"],
+      ["Sulphur (S), Max.", "%", "0.055", "0.035"],
+      ["Sulphur + Phosphorus (S+P), Max.", "%", "0.100", "0.090"],
+      ["Nitrogen (N), Max.", "%", "0.012", "0.012"],
+    ],
+    physical: [
+      ["Yield Strength (Min.)", "MPa", "550", "550"],
+      ["Tensile Strength (Min.)", "MPa", "585", "635"],
+      ["Elongation (Min.)", "%", "10", "16"],
+      ["TS/YS Ratio (Min.)", "—", "1.06", "1.15+"],
+    ],
+  },
+} as const satisfies Record<PhysicalChemicalPropertiesTableProps["grade"], { benchmarkLabel: string; chemical: readonly PropertyRow[]; physical: readonly PropertyRow[] }>;
 
 function PropertiesTable({
   label,
   grade,
+  benchmarkLabel,
   rows,
 }: {
   label: "CHEMICAL PROPERTIES" | "PHYSICAL PROPERTIES";
   grade: PhysicalChemicalPropertiesTableProps["grade"];
+  benchmarkLabel: string;
   rows: readonly PropertyRow[];
 }) {
   return (
     <div className="min-w-0 overflow-hidden rounded-[10px] border border-brand-blue/15 bg-white">
-      <div className="overflow-x-auto">
+      <p className="border-b border-brand-blue/10 bg-surface-50 px-4 py-2 text-xs font-medium text-steel-700 sm:hidden">
+        Swipe horizontally to view the full comparison.
+      </p>
+      <div className="overflow-x-auto" role="region" aria-label={`${label.toLowerCase()} comparison table`} tabIndex={0}>
         <table className="w-full min-w-[560px] border-collapse text-left text-ink-900">
           <caption className="border-b border-white/10 bg-brand-blue px-5 py-4 text-left font-technical text-[11px] font-bold uppercase tracking-[0.16em] text-white">
             {label}
@@ -59,7 +83,7 @@ function PropertiesTable({
             <tr className="align-middle font-technical text-[10px] font-bold uppercase leading-[1.35] tracking-[0.08em] text-brand-blue sm:text-[11px]">
               <th scope="col" className="w-[36%] px-4 py-4 sm:px-5">Properties</th>
               <th scope="col" className="w-[13%] px-3 py-4 text-center">Unit</th>
-              <th scope="col" className="w-[22%] px-3 py-4 text-center">IS 1786 – 2008</th>
+              <th scope="col" className="w-[22%] px-3 py-4 text-center">{benchmarkLabel}</th>
               <th scope="col" className="w-[29%] border-l border-brand-blue/15 bg-[#EAF0FF] px-3 py-4 text-center">ARS {grade}</th>
             </tr>
           </thead>
@@ -97,8 +121,8 @@ export function PhysicalChemicalPropertiesTable({ grade }: Pick<PhysicalChemical
       </header>
       <div className="p-4 sm:p-6 lg:p-8">
         <div className="grid gap-5 xl:grid-cols-2">
-          <PropertiesTable label="CHEMICAL PROPERTIES" grade={grade} rows={rows.chemical} />
-          <PropertiesTable label="PHYSICAL PROPERTIES" grade={grade} rows={rows.physical} />
+          <PropertiesTable label="CHEMICAL PROPERTIES" grade={grade} benchmarkLabel={rows.benchmarkLabel} rows={rows.chemical} />
+          <PropertiesTable label="PHYSICAL PROPERTIES" grade={grade} benchmarkLabel={rows.benchmarkLabel} rows={rows.physical} />
         </div>
         {grade === "Fe 550D CRS" ? (
           <p className="mt-5 border-t border-brand-blue/10 pt-4 text-xs font-medium leading-6 text-steel-700">

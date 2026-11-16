@@ -159,7 +159,7 @@ const homepageJsonLd = {
 
 const homepageJsonLdString = JSON.stringify(homepageJsonLd).replace(/</g, "\\u003c");
 
-const products = [productCatalog[0], productCatalog[1], productCatalog[2]];
+const products = [...productCatalog];
 
 const certificateCards = [
   {

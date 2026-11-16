@@ -29,6 +29,7 @@ const staticRoutes = [
   "/our-certification",
   "/our-network",
   "/product-550d",
+  "/product-550-sm-plus",
   "/product-crs-550d",
   "/steel-distributors-dealers",
   "/8-mm-steel-rod",

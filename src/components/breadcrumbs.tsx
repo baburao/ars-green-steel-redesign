@@ -83,6 +83,7 @@ const routeDefinitions: Record<string, BreadcrumbDefinition> = {
   "/our-express": { label: "Our Express", parents: [home, about] },
   "/products": { label: "Products", parents: [home] },
   "/product-550d": { label: "ARS Fe 550D", parents: [home, products] },
+  "/product-550-sm-plus": { label: "ARS 550 SM+ TMT Bars", parents: [home, products] },
   "/product-crs-550d": { label: "ARS CRS Fe 550D", parents: [home, products] },
   "/ars-binders": { label: "ARS Binders", parents: [home, products] },
   "/crs-qr-code-view-html": { label: "CRS Product Verification", parents: [home, products] },

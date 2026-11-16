@@ -16,6 +16,7 @@ export const QUOTE_PROJECT_TYPES = [
 export const QUOTE_PRODUCT_TYPES = [
   "ARS CRS Fe 550D",
   "ARS Fe 550D",
+  "ARS 550 SM+ TMT Bars",
   "Binders",
 ] as const;
 

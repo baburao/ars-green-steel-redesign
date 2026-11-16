@@ -6,6 +6,7 @@ export const PRODUCT_SOURCE_PAGES = {
   "ARS CRS Fe 550D": "/product-crs-550d",
   "ARS Fe 550D": "/product-550d",
   "ARS Binders": "/ars-binders",
+  "ARS 550 SM+ TMT Bars": "/product-550-sm-plus",
 } as const;
 
 export const PRODUCT_ENQUIRY_STATES = ["Tamil Nadu", "Kerala", "Karnataka", "Andhra Pradesh"] as const;
