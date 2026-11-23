@@ -4,6 +4,7 @@ This directory contains the evidence-backed migration planning artifacts request
 
 ## Recent implementation records
 
+- [ARS 550 SM+ product page revision](ars-550-sm-plus/implementation-qa-report.md)
 - [City service-area pages — implementation and launch audit](city-service-areas-implementation.md)
 - [12 mm rod weight calculation correction — COR01](12mm-rod-weight-correction.md)
 - [SEO recovery tickets COR01–COR05](seo-recovery-tickets-2026-10-23.md)

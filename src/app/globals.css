@@ -679,6 +679,11 @@ main h1.blog-editorial-title {
 }
 
 @media (prefers-reduced-motion: reduce) {
+  [data-product-detail-motion] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
   .hero-word-item {
     animation: none !important;
   }

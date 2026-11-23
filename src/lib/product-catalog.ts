@@ -1,3 +1,8 @@
+export const ars550SmPlusSpecifications = {
+  diametersMm: [8, 10, 12, 16],
+  tsYsRatio: "above 1.15",
+} as const;
+
 export const productCatalog = [
   {
     slug: "ars-crs-550d",
@@ -39,8 +44,8 @@ export const productCatalog = [
     route: "/product-550-sm-plus",
     homeEyebrow: "High-manganese TMT bars",
     overviewTag: "Flexibility-focused grade",
-    description: "Developed for greater ductility and bendability, with 16% minimum elongation and a 1.15+ TS/YS ratio.",
-    homePoints: ["Greater bendability", "16% minimum elongation", "1.15+ TS/YS ratio"],
+    description: `Developed for greater ductility and bendability, with 16% minimum elongation and a TS/YS ratio ${ars550SmPlusSpecifications.tsYsRatio}.`,
+    homePoints: ["Greater bendability", "16% minimum elongation", `TS/YS ratio ${ars550SmPlusSpecifications.tsYsRatio}`],
     overviewPoints: ["High ductility", "High manganese", "550 MPa minimum yield strength"],
     image: "/ars-assets/products/ars-550-sm-plus/product-bars.webp",
   },

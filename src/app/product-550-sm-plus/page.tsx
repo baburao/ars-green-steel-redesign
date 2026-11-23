@@ -2,9 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   Activity,
-  BadgeCheck,
   Building2,
-  CheckCircle2,
   Download,
   Factory,
   FileText,
@@ -22,16 +20,20 @@ import { ProductLeadCaptureForm } from "@/components/product-lead-capture-form";
 import { ResponsiveHeroImage } from "@/components/responsive-hero-image";
 import { SectionKicker } from "@/components/section-kicker";
 import { SiteHeader } from "@/components/site-header";
+import { ars550SmPlusSpecifications } from "@/lib/product-catalog";
 import { createPageMetadata, productionDomain } from "@/lib/site-metadata";
 import { serializeJsonLd } from "@/lib/product-page-schema";
 
 const path = "/product-550-sm-plus";
 const pageUrl = `${productionDomain}${path}`;
 const heroImage = "/ars-assets/products/ars-550-sm-plus/hero-desktop.webp";
+const productLogo = "/ars-assets/products/ars-550-sm-plus/product-logo.webp";
 const brochureUrl = "/ars-assets/Downloads/ars-550-sm-plus-brochure.pdf";
 const title = "ARS 550 SM+ TMT Bars | ARS Green Steel";
+const { diametersMm, tsYsRatio } = ars550SmPlusSpecifications;
+const availableSizes = diametersMm.map((diameter) => `${diameter} mm`);
 const description =
-  "Explore ARS 550 SM+ TMT Bars with 550 MPa minimum yield strength, 16% minimum elongation and a 1.15+ TS/YS ratio for RCC construction.";
+  `Explore ARS 550 SM+ TMT Bars with 550 MPa minimum yield strength, 16% minimum elongation and a TS/YS ratio ${tsYsRatio} for RCC construction.`;
 
 export const metadata = createPageMetadata({
   title,
@@ -44,16 +46,16 @@ const trustItems = [
   { value: "550 MPa", label: "Yield Strength" },
   { value: "635 MPa", label: "Tensile Strength" },
   { value: "16%", label: "Elongation" },
-  { value: "1.15+", label: "TS/YS Ratio" },
+  { value: tsYsRatio, label: "TS/YS Ratio" },
 ] as const;
 
 const technicalOverview = [
   { label: "Grade", value: "Fe 550 SM+ TMT Reinforcement Bars" },
-  { label: "Available Sizes", value: "8 mm • 10 mm • 12 mm • 16 mm • 20 mm • 25 mm • 32 mm" },
+  { label: "Available Sizes", value: availableSizes.join(" • ") },
   { label: "Applications", value: "Residential • Commercial • Industrial • Infrastructure • RCC Construction" },
   { label: "Key Properties", value: "High Ductility • Greater Bendability • High Tensile Strength • Earthquake Resistance" },
   { label: "Manufacturing", value: "Thermo-Mechanically Treated (TMT) • High Manganese Composition • Controlled Chemical Composition" },
-  { label: "Technical Highlights", value: "550 MPa Minimum Yield Strength • 635 MPa Minimum Tensile Strength • 16% Minimum Elongation • 1.15+ TS/YS Ratio" },
+  { label: "Technical Highlights", value: `550 MPa Minimum Yield Strength • 635 MPa Minimum Tensile Strength • 16% Minimum Elongation • TS/YS ratio ${tsYsRatio}` },
 ] as const;
 
 const benefits = [
@@ -79,7 +81,7 @@ const benefits = [
   },
   {
     title: "Higher TS/YS Ratio",
-    description: "A specified ratio of 1.15+ provides a greater margin between yield strength and ultimate tensile strength.",
+    description: `A TS/YS ratio ${tsYsRatio} provides a greater margin between yield strength and ultimate tensile strength.`,
     icon: SlidersHorizontal,
   },
   {
@@ -111,9 +113,9 @@ const performanceItems = [
     description: "The tensile strength specification for ARS 550 SM+ is 635 MPa. This is the maximum tensile stress the steel is required to withstand in the specified test.",
   },
   {
-    value: "1.15+",
+    value: tsYsRatio,
     title: "TS/YS Ratio",
-    description: "There is a difference between the point at which steel starts yielding and the maximum stress it can withstand. ARS 550 SM+ specifies a TS/YS ratio of at least 1.15, giving engineers another parameter to consider when assessing its mechanical performance.",
+    description: `There is a difference between the point at which steel starts yielding and the maximum stress it can withstand. ARS 550 SM+ specifies a TS/YS ratio ${tsYsRatio}, giving engineers another parameter to consider when assessing its mechanical performance.`,
   },
   {
     value: "16%",
@@ -129,15 +131,6 @@ const applications = [
   { title: "Slabs", icon: Factory },
 ] as const;
 
-const certificationBadges = [
-  "BIS Certified",
-  "Green Steel Certified",
-  "TN PWD Approved",
-  "SGBC Leader (4-Star)",
-  "GRIHA",
-  "EPD Verified",
-] as const;
-
 const faqs = [
   {
     question: "What is ARS 550 SM+ TMT steel?",
@@ -149,7 +142,7 @@ const faqs = [
   },
   {
     question: "How is ARS 550 SM+ different from regular Fe 550 TMT bars?",
-    answer: "ARS 550 SM+ offers 16% minimum elongation and a TS/YS ratio of 1.15+, compared with the Fe 550 benchmark figures of 10% and 1.06 respectively.",
+    answer: `ARS 550 SM+ offers 16% minimum elongation and a TS/YS ratio ${tsYsRatio}, compared with the Fe 550 benchmark figures of 10% and 1.06 respectively.`,
   },
   {
     question: "Is ARS 550 SM+ suitable for earthquake-resistant construction?",
@@ -157,7 +150,7 @@ const faqs = [
   },
   {
     question: "What are the mechanical properties of ARS 550 SM+?",
-    answer: "The key mechanical specifications are: Yield Strength: 550 MPa minimum; Tensile Strength: 635 MPa minimum; Elongation: 16% minimum; TS/YS Ratio: 1.15+ minimum.",
+    answer: `The minimum yield strength is 550 MPa, the minimum tensile strength is 635 MPa, and the minimum elongation is 16%. The TS/YS ratio is ${tsYsRatio}.`,
   },
   {
     question: "Where can ARS 550 SM+ TMT bars be used?",
@@ -196,7 +189,7 @@ const jsonLd = {
       "@id": webpageId,
       url: pageUrl,
       name: title,
-      description,
+      description: metadata.description,
       inLanguage: "en-IN",
       primaryImageOfPage: {
         "@type": "ImageObject",
@@ -221,7 +214,7 @@ const jsonLd = {
       "@type": "Product",
       "@id": productId,
       name: "ARS 550 SM+ TMT Bars",
-      description,
+      description: metadata.description,
       image: [`${productionDomain}${heroImage}`, `${productionDomain}/ars-assets/products/ars-550-sm-plus/product-bars.webp`],
       category: "TMT Reinforcement Bars",
       material: "Steel",
@@ -231,9 +224,9 @@ const jsonLd = {
         { "@type": "PropertyValue", name: "Minimum Yield Strength", value: "550 MPa" },
         { "@type": "PropertyValue", name: "Minimum Tensile Strength", value: "635 MPa" },
         { "@type": "PropertyValue", name: "Minimum Elongation", value: "16%" },
-        { "@type": "PropertyValue", name: "Minimum TS/YS Ratio", value: "1.15+" },
+        { "@type": "PropertyValue", name: "TS/YS Ratio", value: tsYsRatio },
         { "@type": "PropertyValue", name: "Minimum Manganese Content", value: "0.75%" },
-        { "@type": "PropertyValue", name: "Available Sizes", value: "8 mm, 10 mm, 12 mm, 16 mm, 20 mm, 25 mm, 32 mm" },
+        { "@type": "PropertyValue", name: "Available Sizes", value: availableSizes.join(", ") },
       ],
       url: pageUrl,
     },
@@ -258,24 +251,25 @@ export default function Ars550SmPlusPage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLdString }} />
       <SiteHeader />
 
-      <section className="ars-page-hero relative flex min-h-[620px] items-end overflow-hidden bg-ink-950 md:min-h-[640px] lg:h-[700px] lg:min-h-[700px]">
+      <section className="ars-page-hero relative flex min-h-[620px] overflow-hidden bg-ink-950 md:min-h-[640px] lg:h-[700px] lg:min-h-[700px]">
         <div className="absolute inset-0">
+          {/* Frame the bar above the logo baked into the desktop artwork. */}
           <ResponsiveHeroImage
             desktopSrc={heroImage}
             mobileSrc="/ars-assets/products/ars-550-sm-plus/hero-mobile.webp"
             alt="ARS 550 SM+ TMT reinforcement bar against a construction setting"
-            className="object-cover object-center"
+            className="object-cover object-center md:h-[140%]! md:object-[right_top]"
           />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,30,0.91)_0%,rgba(6,13,30,0.74)_46%,rgba(6,13,30,0.22)_100%)] md:bg-[linear-gradient(90deg,rgba(6,13,30,0.88)_0%,rgba(6,13,30,0.60)_48%,rgba(6,13,30,0.10)_100%)]" />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(6,13,30,0.91)_0%,rgba(6,13,30,0.74)_46%,rgba(6,13,30,0.50)_100%)] xl:bg-[linear-gradient(90deg,rgba(6,13,30,0.88)_0%,rgba(6,13,30,0.60)_48%,rgba(6,13,30,0.10)_100%)]" />
           <div className="absolute inset-x-0 bottom-0 h-[62%] bg-[linear-gradient(0deg,rgba(6,13,30,0.72)_0%,rgba(6,13,30,0.12)_62%,transparent_100%)] md:h-[48%]" />
         </div>
-        <div className="ars-container relative z-10 w-full pb-14 pt-40 md:pb-20">
+        <div className="ars-container relative z-10 w-full pb-14 pt-12 md:pb-16 md:pt-16 lg:pt-20">
           <div className="max-w-4xl">
+            <div className="mb-6 inline-flex rounded-[8px] bg-white px-3 py-2 sm:px-4">
+              <Image src={productLogo} alt="" width={432} height={243} loading="eager" className="h-auto w-28 sm:w-32" />
+            </div>
             <ProductDetailReveal y={14}>
-              <div className="mb-7 flex items-center gap-3 text-[11px] font-bold uppercase tracking-[0.18em] text-white/75">
-                <span className="h-px w-10 bg-brand-red" aria-hidden="true" />
-                High-Manganese TMT Reinforcement
-              </div>
+              <SectionKicker variant="light">High-Manganese TMT Reinforcement</SectionKicker>
             </ProductDetailReveal>
             <ProductDetailReveal delay={0.08} y={22}>
               <h1 className="max-w-[900px] font-display text-[clamp(2.65rem,6vw,4.5rem)] font-extrabold leading-[1] tracking-[-0.025em] text-white">
@@ -287,7 +281,7 @@ export default function Ars550SmPlusPage() {
                 More Flexibility. Greater Bendability. Built for Strength.
               </p>
               <p className="mt-5 max-w-3xl text-base leading-7 text-white/80 md:text-lg md:leading-8">
-                ARS 550 SM+ is developed with a focus on greater ductility and bendability, supporting structural performance under seismic conditions. With 16% minimum elongation, 550 MPa minimum yield strength and a TS/YS ratio of 1.15+, it brings together flexibility and strength for reinforced concrete construction.
+                ARS 550 SM+ is developed with a focus on greater ductility and bendability, supporting structural performance under seismic conditions. With 16% minimum elongation, 550 MPa minimum yield strength and a TS/YS ratio {tsYsRatio}, it brings together flexibility and strength for reinforced concrete construction.
               </p>
             </ProductDetailReveal>
             <ProductDetailReveal delay={0.26}>
@@ -331,7 +325,7 @@ export default function Ars550SmPlusPage() {
               <h2 className="font-display text-[clamp(2rem,3.4vw,2.5rem)] font-bold leading-[1.08] tracking-[-0.025em] text-white">When flexibility matters, the difference is in the steel.</h2>
               <div className="mt-5 space-y-4 text-[15px] leading-[1.75] text-white/80">
                 <p>Reinforcement bars undergo considerable bending and shaping before they are placed inside concrete structures. Their ability to accommodate deformation while retaining the required mechanical properties is an important consideration, particularly in regions exposed to seismic activity.</p>
-                <p>ARS 550 SM+ is developed with this requirement in mind. Its high-manganese composition, 16% minimum elongation and TS/YS ratio above 1.15 give the product its distinct focus on ductility, flexibility and earthquake-resistant performance.</p>
+                <p>ARS 550 SM+ is developed with this requirement in mind. Its high-manganese composition, 16% minimum elongation and TS/YS ratio {tsYsRatio} give the product its distinct focus on ductility, flexibility and earthquake-resistant performance.</p>
                 <p className="font-semibold text-white">S stands for Strength. M+ stands for High Manganese.</p>
               </div>
             </div>
@@ -445,32 +439,28 @@ export default function Ars550SmPlusPage() {
         </div>
       </MotionSection>
 
-      <MotionSection className="bg-white py-20 md:py-24" id="trust">
-        <div className="ars-container grid gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-center">
-          <div>
-            <SectionKicker variant="brand">TRUST</SectionKicker>
-            <h2 className="font-display text-[clamp(2rem,3.4vw,2.5rem)] font-bold leading-[1.08] tracking-[-0.025em] text-ink-900">Tested. Certified. Trusted.</h2>
-            <p className="mt-5 text-[15px] leading-[1.8] text-steel-700">Review ARS product information together with the company’s certification and sustainability credentials.</p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <a href={brochureUrl} download className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-full bg-brand-blue px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-blue-dark"><Download size={15} aria-hidden="true" /> Download Brochure</a>
-              <Link href="/our-certification" className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-full border border-brand-blue/20 px-5 py-2.5 text-sm font-bold text-brand-blue transition hover:border-brand-blue"><BadgeCheck size={15} aria-hidden="true" /> View all certificates</Link>
+      <MotionSection className="bg-white py-16 md:py-20" id="trust" aria-labelledby="bis-standard-title">
+        <div className="ars-container">
+          <div className="flex flex-col items-start gap-6 rounded-[12px] border border-brand-blue/12 bg-surface-50 p-6 lg:flex-row lg:items-center lg:justify-between lg:p-8">
+            <div>
+              <SectionKicker variant="brand">BIS Standard</SectionKicker>
+              <h2 id="bis-standard-title" className="font-display text-[clamp(2rem,3.4vw,2.5rem)] font-bold leading-[1.08] tracking-[-0.025em] text-ink-900">IS 1786:2008</h2>
+              <p className="mt-4 max-w-2xl text-[15px] leading-[1.8] text-steel-700">Bureau of Indian Standards specification for high-strength deformed steel bars and wires for concrete reinforcement.</p>
             </div>
+            <a href={brochureUrl} download className="focus-ring inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-brand-blue px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-blue-dark"><Download size={15} aria-hidden="true" /> Download Brochure</a>
           </div>
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {certificationBadges.map((badge) => (
-              <li key={badge} className="flex min-h-28 flex-col justify-between rounded-[8px] border border-brand-blue/12 bg-surface-50 p-5">
-                <CheckCircle2 size={20} className="text-brand-red" aria-hidden="true" />
-                <span className="mt-6 text-sm font-bold leading-5 text-brand-blue">{badge}</span>
-              </li>
-            ))}
-          </ul>
         </div>
       </MotionSection>
 
       <div id="enquire" className="scroll-mt-24">
         <ProductLeadCaptureForm
           product="ARS 550 SM+ TMT Bars"
-          trustItems={["550 MPa minimum yield strength", "16% minimum elongation", "1.15+ TS/YS ratio", "Sizes from 8 mm to 32 mm"]}
+          trustItems={[
+            "550 MPa minimum yield strength",
+            "16% minimum elongation",
+            `TS/YS ratio ${tsYsRatio}`,
+            `Available sizes ${availableSizes.join(", ")}`,
+          ]}
         />
       </div>
 

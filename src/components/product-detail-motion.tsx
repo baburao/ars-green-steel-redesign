@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { motion, type HTMLMotionProps, useReducedMotion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 const viewport = { once: true, amount: 0.18 } as const;
@@ -9,23 +9,33 @@ const viewport = { once: true, amount: 0.18 } as const;
 type SectionProps = Omit<HTMLMotionProps<"section">, "initial" | "whileInView" | "viewport" | "transition">;
 type RevealProps = { children: ReactNode; className?: string; delay?: number; y?: number };
 
-function reveal(reduceMotion: boolean | null, delay = 0, y = 18) {
+function reveal(delay = 0, y = 18) {
   return {
-    initial: reduceMotion ? false : { opacity: 0, y },
+    initial: { opacity: 0, y },
     whileInView: { opacity: 1, y: 0 },
     viewport,
-    transition: reduceMotion ? { duration: 0 } : { duration: 0.58, delay, ease },
+    transition: { duration: 0.58, delay, ease },
   };
 }
 
 /** Shared, opt-in editorial motion for the three ARS product-detail pages. */
 export function ProductDetailSectionMotion({ children, className = "", ...props }: SectionProps) {
-  const shouldReduceMotion = useReducedMotion();
-  return <motion.section {...props} className={className} data-product-detail-motion="section" initial={shouldReduceMotion ? false : { opacity: 0, y: 20 }} whileInView={shouldReduceMotion ? undefined : { opacity: 1, y: 0 }} viewport={{ once: true, margin: "-72px" }} transition={shouldReduceMotion ? undefined : { duration: 0.64, ease }}>{children}</motion.section>;
+  return (
+    <motion.section
+      {...props}
+      className={className}
+      data-product-detail-motion="section"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-72px" }}
+      transition={{ duration: 0.64, ease }}
+    >
+      {children}
+    </motion.section>
+  );
 }
 
 /** Content layer reveal for headings, copy, actions, and grouped proof. */
 export function ProductDetailReveal({ children, className, delay = 0, y = 18 }: RevealProps) {
-  const shouldReduceMotion = useReducedMotion();
-  return <motion.div className={className} data-product-detail-motion="content" {...reveal(shouldReduceMotion, delay, y)}>{children}</motion.div>;
+  return <motion.div className={className} data-product-detail-motion="content" {...reveal(delay, y)}>{children}</motion.div>;
 }

@@ -1,3 +1,5 @@
+import { ars550SmPlusSpecifications } from "@/lib/product-catalog";
+
 type PropertyRow = readonly [property: string, unit: string, standard: string, ars: string];
 
 type PhysicalChemicalPropertiesTableProps = {
@@ -53,7 +55,7 @@ const presentationRows = {
       ["Yield Strength (Min.)", "MPa", "550", "550"],
       ["Tensile Strength (Min.)", "MPa", "585", "635"],
       ["Elongation (Min.)", "%", "10", "16"],
-      ["TS/YS Ratio (Min.)", "—", "1.06", "1.15+"],
+      ["TS/YS Ratio", "—", "1.06 minimum", ars550SmPlusSpecifications.tsYsRatio],
     ],
   },
 } as const satisfies Record<PhysicalChemicalPropertiesTableProps["grade"], { benchmarkLabel: string; chemical: readonly PropertyRow[]; physical: readonly PropertyRow[] }>;
