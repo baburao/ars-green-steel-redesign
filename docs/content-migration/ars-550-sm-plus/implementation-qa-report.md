@@ -19,3 +19,13 @@ The existing benefits, applications, properties, FAQs, brochure and contact link
 - Verified the title, description, social tags, canonical, preview robots directives and single sitemap entry. All six displayed questions and answers matched the FAQPage data. The Product data matched the displayed sizes and ratio.
 - Opened the quote enquiry from the hero, checked keyboard focus on an invalid submission, and exercised the existing success redirect with a mocked local response.
 - The production build, lint on changed code, route and asset checks, and diff whitespace check passed.
+
+## November 25 production release
+
+[PR #8](https://github.com/Arsgroup476/ars-green-steel/pull/8) brought the approved Vercel snapshot into ARS `main` as `ae477269`. Hostinger lists that deployment as Current and Completed at 13:03 IST on 25 November 2026. The public product page and brochure returned HTTP 200. The product title, canonical, ratio wording and `index, follow` directive were verified. [Hostinger deployment record](https://hpanel.hostinger.com/websites/arsgroup.in/node/deployments/01a2119c-a21b-71a9-ac26-c8996ad1cba9/details)
+
+## November 26 thumbnail and brochure follow-up
+
+- The homepage product card and product catalogue use the approved ARS 550 SM+ logo for the thumbnail. The homepage card adds a Download brochure link to the approved PDF.
+- The homepage card and all three product-page brochure links open the PDF viewer in a new tab. The link names announce the new tab to screen readers.
+- The local production build, targeted lint, route and asset checks, and desktop, tablet and mobile review passed. The homepage card and hero links each opened a separate tab with the PDF.

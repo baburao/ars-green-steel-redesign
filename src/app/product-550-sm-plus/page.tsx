@@ -20,15 +20,19 @@ import { ProductLeadCaptureForm } from "@/components/product-lead-capture-form";
 import { ResponsiveHeroImage } from "@/components/responsive-hero-image";
 import { SectionKicker } from "@/components/section-kicker";
 import { SiteHeader } from "@/components/site-header";
-import { ars550SmPlusSpecifications } from "@/lib/product-catalog";
+import { ars550SmPlusMedia, ars550SmPlusSpecifications } from "@/lib/product-catalog";
 import { createPageMetadata, productionDomain } from "@/lib/site-metadata";
 import { serializeJsonLd } from "@/lib/product-page-schema";
 
 const path = "/product-550-sm-plus";
 const pageUrl = `${productionDomain}${path}`;
 const heroImage = "/ars-assets/products/ars-550-sm-plus/hero-desktop.webp";
-const productLogo = "/ars-assets/products/ars-550-sm-plus/product-logo.webp";
-const brochureUrl = "/ars-assets/Downloads/ars-550-sm-plus-brochure.pdf";
+const brochureLinkProps = {
+  href: ars550SmPlusMedia.brochureHref,
+  target: "_blank",
+  rel: "noopener noreferrer",
+  "aria-label": "Download Brochure (PDF, opens in a new tab)",
+} as const;
 const title = "ARS 550 SM+ TMT Bars | ARS Green Steel";
 const { diametersMm, tsYsRatio } = ars550SmPlusSpecifications;
 const availableSizes = diametersMm.map((diameter) => `${diameter} mm`);
@@ -266,7 +270,7 @@ export default function Ars550SmPlusPage() {
         <div className="ars-container relative z-10 w-full pb-14 pt-12 md:pb-16 md:pt-16 lg:pt-20">
           <div className="max-w-4xl">
             <div className="mb-6 inline-flex rounded-[8px] bg-white px-3 py-2 sm:px-4">
-              <Image src={productLogo} alt="" width={432} height={243} loading="eager" className="h-auto w-28 sm:w-32" />
+              <Image src={ars550SmPlusMedia.logo} alt="" width={432} height={243} loading="eager" className="h-auto w-28 sm:w-32" />
             </div>
             <ProductDetailReveal y={14}>
               <SectionKicker variant="light">High-Manganese TMT Reinforcement</SectionKicker>
@@ -289,7 +293,7 @@ export default function Ars550SmPlusPage() {
                 <a href="#enquire" className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full bg-brand-red px-6 py-3 text-sm font-bold text-white transition hover:bg-[#c90f16]">
                   <FileText size={15} aria-hidden="true" /> Get a Quote
                 </a>
-                <a href={brochureUrl} download className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full border-[1.5px] border-white/35 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
+                <a {...brochureLinkProps} className="focus-ring inline-flex min-h-12 items-center gap-2.5 rounded-full border-[1.5px] border-white/35 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10">
                   <Download size={15} aria-hidden="true" /> Download Brochure
                 </a>
               </div>
@@ -344,7 +348,7 @@ export default function Ars550SmPlusPage() {
               ))}
             </dl>
             <div className="border-t border-surface-100 p-5">
-              <a href={brochureUrl} download className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-full border border-brand-blue/20 px-5 py-2.5 text-[13px] font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue hover:text-white">
+              <a {...brochureLinkProps} className="focus-ring inline-flex min-h-11 items-center gap-2 rounded-full border border-brand-blue/20 px-5 py-2.5 text-[13px] font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue hover:text-white">
                 <Download size={14} aria-hidden="true" /> Download Brochure
               </a>
             </div>
@@ -447,7 +451,7 @@ export default function Ars550SmPlusPage() {
               <h2 id="bis-standard-title" className="font-display text-[clamp(2rem,3.4vw,2.5rem)] font-bold leading-[1.08] tracking-[-0.025em] text-ink-900">IS 1786:2008</h2>
               <p className="mt-4 max-w-2xl text-[15px] leading-[1.8] text-steel-700">Bureau of Indian Standards specification for high-strength deformed steel bars and wires for concrete reinforcement.</p>
             </div>
-            <a href={brochureUrl} download className="focus-ring inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-brand-blue px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-blue-dark"><Download size={15} aria-hidden="true" /> Download Brochure</a>
+            <a {...brochureLinkProps} className="focus-ring inline-flex min-h-11 shrink-0 items-center gap-2 rounded-full bg-brand-blue px-5 py-2.5 text-sm font-bold text-white transition hover:bg-brand-blue-dark"><Download size={15} aria-hidden="true" /> Download Brochure</a>
           </div>
         </div>
       </MotionSection>

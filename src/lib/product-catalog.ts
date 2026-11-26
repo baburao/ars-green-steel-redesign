@@ -3,6 +3,11 @@ export const ars550SmPlusSpecifications = {
   tsYsRatio: "above 1.15",
 } as const;
 
+export const ars550SmPlusMedia = {
+  logo: "/ars-assets/products/ars-550-sm-plus/product-logo.webp",
+  brochureHref: "/ars-assets/Downloads/ars-550-sm-plus-brochure.pdf",
+} as const;
+
 export const productCatalog = [
   {
     slug: "ars-crs-550d",
@@ -14,6 +19,7 @@ export const productCatalog = [
     homePoints: ["Corrosion resistance", "High salinity protection", "Longer structural life"],
     overviewPoints: ["Corrosion resistance", "Durability focus", "Fe-550D · IS 1786:2008"],
     image: "/ars-assets/logos/ARSCRS550D.png",
+    brochureHref: "/ars-assets/Downloads/CRS-brochure-English.pdf",
   },
   {
     slug: "ars-550d",
@@ -25,6 +31,7 @@ export const productCatalog = [
     homePoints: ["Earthquake-resistant performance", "Superior bendability & ductility", "High-strength TMT bars"],
     overviewPoints: ["High ductility", "Strong bendability", "Fe-550D · IS 1786:2008"],
     image: "/ars-assets/logos/ARS550D.png",
+    brochureHref: "/ars-assets/Downloads/ARS-550D.pdf",
   },
   {
     slug: "ars-binders",
@@ -37,6 +44,7 @@ export const productCatalog = [
     homePoints: ["Secure reinforcement connections", "Accurate bar alignment", "Faster on-site installation"],
     overviewPoints: ["Secure connections", "Accurate alignment", "Faster installation"],
     image: "/ars-assets/logos/BinderLogo.png",
+    brochureHref: "/ars-assets/Downloads/Binders.pdf",
   },
   {
     slug: "ars-550-sm-plus",
@@ -47,7 +55,8 @@ export const productCatalog = [
     description: `Developed for greater ductility and bendability, with 16% minimum elongation and a TS/YS ratio ${ars550SmPlusSpecifications.tsYsRatio}.`,
     homePoints: ["Greater bendability", "16% minimum elongation", `TS/YS ratio ${ars550SmPlusSpecifications.tsYsRatio}`],
     overviewPoints: ["High ductility", "High manganese", "550 MPa minimum yield strength"],
-    image: "/ars-assets/products/ars-550-sm-plus/product-bars.webp",
+    image: ars550SmPlusMedia.logo,
+    brochureHref: ars550SmPlusMedia.brochureHref,
   },
 ] as const;
 

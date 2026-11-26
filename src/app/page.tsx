@@ -343,24 +343,15 @@ export default function Home() {
                   >
                     View product <ArrowRight size={17} />
                   </Link>
-                  {product.slug === "ars-crs-550d" || product.slug === "ars-550d" || product.slug === "ars-binders" ? (
-                    <a
-                      className="focus-ring inline-flex h-12 items-center justify-center gap-2 rounded-[6px] border border-brand-blue/20 bg-surface-50 px-5 text-sm font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue hover:text-white"
-                      href={product.slug === "ars-crs-550d" ? "/ars-assets/Downloads/CRS-brochure-English.pdf" : product.slug === "ars-550d" ? "/ars-assets/Downloads/ARS-550D.pdf" : "/ars-assets/Downloads/Binders.pdf"}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      Download brochure <ArrowRight size={17} />
-                    </a>
-                  ) : (
-                    <span
-                      aria-disabled="true"
-                      className="inline-flex h-12 cursor-not-allowed items-center justify-center gap-2 rounded-[6px] border border-brand-blue/20 bg-surface-50 px-5 text-sm font-bold text-steel-500"
-                      title="The approved product leaflet is not yet available for download."
-                    >
-                      Product leaflet pending
-                    </span>
-                  )}
+                  <a
+                    className="focus-ring inline-flex h-12 items-center justify-center gap-2 rounded-[6px] border border-brand-blue/20 bg-surface-50 px-5 text-sm font-bold text-brand-blue transition hover:border-brand-blue hover:bg-brand-blue hover:text-white"
+                    href={product.brochureHref}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Download brochure <ArrowRight size={17} aria-hidden="true" />
+                    <span className="sr-only"> for {product.name} (PDF, opens in a new tab)</span>
+                  </a>
                 </div>
                 </article>
               </HomepageReveal>
