@@ -29,3 +29,10 @@ The existing benefits, applications, properties, FAQs, brochure and contact link
 - The homepage product card and product catalogue use the approved ARS 550 SM+ logo for the thumbnail. The homepage card adds a Download brochure link to the approved PDF.
 - The homepage card and all three product-page brochure links open the PDF viewer in a new tab. The link names announce the new tab to screen readers.
 - The local production build, targeted lint, route and asset checks, and desktop, tablet and mobile review passed. The homepage card and hero links each opened a separate tab with the PDF.
+
+## November 26 quote delivery and brochure v6
+
+- Hostinger recorded `SALESFORCE_RECORD_CREATE_FAILED_400` for a product enquiry. The deployed adapter logged the HTTP status, so the exact Salesforce validation error remains unconfirmed. [Hostinger runtime logs](https://hpanel.hostinger.com/websites/arsgroup.in/runtime-logs)
+- The website submits the full ARS 550 SM+ TMT Bars value to Salesforce first. If Salesforce specifically rejects that product picklist value, the adapter retries once with the full product name and visitor's original requirement together in the requirement field. Google Sheets keeps the exact product name in its Product column. Other Salesforce errors are reported as failures with the provider error code when available.
+- Replaced the existing public brochure PDF with the supplied `ARS_550_SM_Brochure_A4_3_Pages_v6.pdf`. All three pages rendered and the served PDF matched the attachment byte for byte. The homepage and product brochure actions opened the viewer in separate tabs.
+- Verified the product form's required-field feedback, focus and thank-you redirect locally. Isolated Salesforce and Google Sheets responses verified the retry, existing product handling, error states and the shared Request Quote form. The form fit at 1440, 820 and 390 px. The production build and route checks passed. Live Salesforce and Google Sheets receipt still needs verification after release.

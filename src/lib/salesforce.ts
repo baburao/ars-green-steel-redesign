@@ -21,7 +21,14 @@ type SalesforceCreateResponse = {
   success?: unknown;
 };
 
+type SalesforceCreateError = {
+  errorCode?: unknown;
+  fields?: unknown;
+  message?: unknown;
+};
+
 const requestTimeoutMs = 12_000;
+const smPlusProductName = "ARS 550 SM+ TMT Bars";
 
 function getSalesforceConfig(): SalesforceConfig | null {
   if (process.env.SALESFORCE_ENABLED !== "true") return null;
@@ -101,6 +108,27 @@ async function getSalesforceAccessToken(config: SalesforceConfig) {
   }
 }
 
+async function readCreateError(response: Response): Promise<SalesforceCreateError | undefined> {
+  if (response.status !== 400) return;
+
+  const errors: unknown = await response.json().catch(() => null);
+  if (!Array.isArray(errors) || errors.length !== 1) return;
+
+  const error: unknown = errors[0];
+  if (error && typeof error === "object") return error as SalesforceCreateError;
+}
+
+function isSmPlusPicklistRejection(error: SalesforceCreateError | undefined) {
+  if (error?.errorCode !== "INVALID_OR_NULL_FOR_RESTRICTED_PICKLIST") return false;
+
+  if (Array.isArray(error.fields) && error.fields.length > 0) {
+    return error.fields.length === 1 && error.fields[0] === "Product_Type__c";
+  }
+
+  // Salesforce can omit the field name and identify the rejected value in the message.
+  return typeof error.message === "string" && error.message.trimEnd().endsWith(`: ${smPlusProductName}`);
+}
+
 /**
  * Creates the Salesforce record when the server-only integration is enabled.
  * Returns without a network call until the secure Salesforce UAT configuration is installed.
@@ -110,23 +138,40 @@ export async function createSalesforceWebsiteEnquiry(enquiry: SalesforceWebsiteE
   if (!config) return { enabled: false as const, recordId: null };
 
   const { accessToken, instanceUrl } = await getSalesforceAccessToken(config);
+  const createUrl = `${instanceUrl}/services/data/${config.apiVersion}/sobjects/Website_Enquiry__c/`;
   const timeout = withTimeout();
 
-  try {
-    const response = await fetch(
-      `${instanceUrl}/services/data/${config.apiVersion}/sobjects/Website_Enquiry__c/`,
-      {
-        method: "POST",
-        headers: {
-          authorization: `Bearer ${accessToken}`,
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(enquiry),
-        signal: timeout.signal,
-        cache: "no-store",
+  function createRecord(fields: SalesforceWebsiteEnquiry) {
+    return fetch(createUrl, {
+      method: "POST",
+      headers: {
+        authorization: `Bearer ${accessToken}`,
+        "content-type": "application/json",
       },
-    );
-    if (!response.ok) throw new Error(`SALESFORCE_RECORD_CREATE_FAILED_${response.status}`);
+      body: JSON.stringify(fields),
+      signal: timeout.signal,
+      cache: "no-store",
+    });
+  }
+
+  try {
+    let response = await createRecord(enquiry);
+    let failure = await readCreateError(response);
+
+    if (enquiry.Product_Type__c === smPlusProductName && isSmPlusPicklistRejection(failure)) {
+      const { Product_Type__c: product, Requirement__c: requirement, ...fields } = enquiry;
+      response = await createRecord({
+        ...fields,
+        Requirement__c: [`Product: ${product}`, requirement].filter(Boolean).join("\n\n"),
+      });
+      failure = await readCreateError(response);
+    }
+
+    if (!response.ok) {
+      const code = failure?.errorCode;
+      const reason = typeof code === "string" && /^[A-Z0-9_]{1,80}$/.test(code) ? `_${code}` : "";
+      throw new Error(`SALESFORCE_RECORD_CREATE_FAILED_${response.status}${reason}`);
+    }
 
     const payload = await response.json() as SalesforceCreateResponse;
     if (payload.success !== true || typeof payload.id !== "string") {
